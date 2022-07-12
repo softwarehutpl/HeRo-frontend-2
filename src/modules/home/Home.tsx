@@ -5,8 +5,8 @@ import Sidebar from "../common/components/sidebar/Sidebar";
 function Home() {
   return (
     <div>
-      <Sidebar />
       <Navbar />
+      <Sidebar />
     </div>
   );
 }
