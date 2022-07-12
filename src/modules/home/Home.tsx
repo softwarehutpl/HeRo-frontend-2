@@ -1,13 +1,14 @@
 import React from "react";
+import Navbar from "../common/components/navbar/Navbar";
 import Sidebar from "../common/components/sidebar/Sidebar";
 
 function Home() {
-    return (
-      <div>
-        <h1>This is the home page</h1>
-        <Sidebar />
-      </div>
-    );
-  }
-  
+  return (
+    <div>
+      <Sidebar />
+      <Navbar />
+    </div>
+  );
+}
+
 export default Home;
