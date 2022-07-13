@@ -5,8 +5,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import HomeIcon from '@mui/icons-material/Home';
 import PeopleIcon from '@mui/icons-material/People';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
-import { StyledBox } from './styled/StyledBox';
 import { useNavigate } from "react-router-dom";
+
+import { StyledBox } from './SidebarStyles';
 
 export default function Sidebar() {
   const navigate = useNavigate();

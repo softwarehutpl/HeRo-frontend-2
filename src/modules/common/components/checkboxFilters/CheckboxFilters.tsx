@@ -1,17 +1,27 @@
 import * as React from "react";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+// import FormGroup from "@mui/material/FormGroup";
+import CheckboxRow from "./CheckboxRow";
+import { StyledHeading } from "./CheckboxStyles";
+import { CustomFormGroup } from "./CheckboxStyles";
 
 const CheckboxFilters = () => {
+
+  const [checked, setChecked] = React.useState(false);
+
+  const handleOnClick = (value: boolean) => {
+    setChecked(value);
+    // go to parent
+  };
+
   return (
-    <FormGroup>
-      <h3>Status</h3>
-      <FormControlLabel control={<Checkbox />} label="New" />
-      <FormControlLabel control={<Checkbox />} label="In processing" />
-      <FormControlLabel control={<Checkbox />} label="Dropped out" />
-      <FormControlLabel control={<Checkbox />} label="Hired" />
-    </FormGroup>
+    <CustomFormGroup>
+      <StyledHeading>Status</StyledHeading>
+      <CheckboxRow
+        isChecked={checked}
+        handleOnClick={handleOnClick}
+        label="New"
+      />
+    </CustomFormGroup>
   );
 };
 
