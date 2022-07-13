@@ -1,10 +1,10 @@
 import { TypographyTypeMap } from '@mui/material';
-import { useNavigate } from "react-router-dom";
 
-import {HeaderBox} from "./TableHeaderStyles";
+import {HeaderBox, HeaderDiv} from "./TableHeaderStyles";
 import {HeaderTypography} from "./TableHeaderStyles";
+import {HeaderIconButton} from "../headerTableIconButton/IconButton";
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
-import IconButton from "@mui/material/IconButton";
+import BorderAllIcon from '@mui/icons-material/BorderAll';
 
 
 
@@ -21,19 +21,23 @@ interface TextProps {
 
 
 
-export default function TableHeader({title, route, component = "div" }:  React.PropsWithChildren<TextProps>) {
+export default function TableHeader({title, component = "div" }:  React.PropsWithChildren<TextProps>) {
 
-  const navigate = useNavigate();
+
 
   return (
     <HeaderBox >
       <HeaderTypography variant="h4" component={component} >
         {title}
       </HeaderTypography>
-      
-    <IconButton color="primary" onClick={() => navigate(`${route}`)}>
+      <HeaderDiv>
+    <HeaderIconButton  route="*">
         <FormatListBulletedIcon />
-    </IconButton>
+    </HeaderIconButton>
+    <HeaderIconButton  route="*">
+        <BorderAllIcon />
+    </HeaderIconButton>
+    </HeaderDiv>
     </HeaderBox>
   );
 }
