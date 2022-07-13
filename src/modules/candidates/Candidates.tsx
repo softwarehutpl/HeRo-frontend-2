@@ -1,11 +1,12 @@
 import React from "react";
+import CheckboxFilters from "../common/components/checkboxFilters/CheckboxFilters";
 
 function Candidates() {
-    return (
-      <div>
-        <h1>This is the candidates page</h1>
-      </div>
-    );
-  }
-  
+  return (
+    <div>
+      <CheckboxFilters />
+    </div>
+  );
+}
+
 export default Candidates;

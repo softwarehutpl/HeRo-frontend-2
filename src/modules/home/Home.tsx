@@ -1,15 +1,13 @@
-import React from "react";
-import Navbar from "../common/components/navbar/Navbar";
-import Sidebar from "../common/components/sidebar/Sidebar";
-import { Outlet } from "react-router-dom";
+import InfoBox from "../common/components/infobox/InfoBox";
+import { StyledBox } from "./styled/StyledBox";
+
 
 function Home() {
   return (
-    <div>
-      <Navbar />
-      <Sidebar />
-      <Outlet />
-    </div>
+        <StyledBox >
+          <InfoBox title="New Candidates" value={5} name="Show" route="/candidates"/>
+          <InfoBox title="Interviews this week" value={8} name="Show" route="/projects"/>
+        </StyledBox>
   );
 }
 
