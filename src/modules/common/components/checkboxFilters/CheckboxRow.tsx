@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import react, { FunctionComponent } from "react";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 
