@@ -1,6 +1,8 @@
 import * as React from "react";
-import FormGroup from "@mui/material/FormGroup";
+// import FormGroup from "@mui/material/FormGroup";
 import CheckboxRow from "./CheckboxRow";
+import { StyledHeading } from "./CheckboxStyles";
+import { CustomFormGroup } from "./CheckboxStyles";
 
 const CheckboxFilters = () => {
 
@@ -12,14 +14,14 @@ const CheckboxFilters = () => {
   };
 
   return (
-    <FormGroup>
-      <h3>Status</h3>
+    <CustomFormGroup>
+      <StyledHeading>Status</StyledHeading>
       <CheckboxRow
         isChecked={checked}
         handleOnClick={handleOnClick}
         label="New"
       />
-    </FormGroup>
+    </CustomFormGroup>
   );
 };
 
