@@ -12,16 +12,17 @@ import BorderAllIcon from '@mui/icons-material/BorderAll';
 
 interface TextProps {
     title: string,
-    route: string,
     variant?: TypographyTypeMap["props"]["variant"];
     component?: React.ElementType;
     // onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+    routeOne: string;
+    routeTwo?: string;
   }
 
 
 
 
-export default function CandidatesTableHeader({title, component = "div" }:  React.PropsWithChildren<TextProps>) {
+export default function CandidatesTableHeader({title, component = "div", routeOne, routeTwo }:  React.PropsWithChildren<TextProps>) {
 
 
 
@@ -31,10 +32,10 @@ export default function CandidatesTableHeader({title, component = "div" }:  Reac
         {title}
       </HeaderTypography>
       <HeaderDiv>
-        <HeaderIconButton  route="*">
+        <HeaderIconButton  route={`${routeOne}`}>
           <FormatListBulletedIcon />
         </HeaderIconButton>
-        <HeaderIconButton  route="*">
+        <HeaderIconButton  route={`${routeTwo}`}>
           <BorderAllIcon />
         </HeaderIconButton>
       </HeaderDiv>
