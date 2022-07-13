@@ -31,13 +31,13 @@ export default function TableHeader({title, component = "div" }:  React.PropsWit
         {title}
       </HeaderTypography>
       <HeaderDiv>
-    <HeaderIconButton  route="*">
-        <FormatListBulletedIcon />
-    </HeaderIconButton>
-    <HeaderIconButton  route="*">
-        <BorderAllIcon />
-    </HeaderIconButton>
-    </HeaderDiv>
+        <HeaderIconButton  route="*">
+          <FormatListBulletedIcon />
+        </HeaderIconButton>
+        <HeaderIconButton  route="*">
+          <BorderAllIcon />
+        </HeaderIconButton>
+      </HeaderDiv>
     </HeaderBox>
   );
 }
