@@ -9,14 +9,15 @@ import { useNavigate } from "react-router-dom";
 interface InfoBoxTypes{
   title: string,
   value: number,
-  name: string
+  name: string,
+  route: string
 };
 
 const CustomizedBox = styled(Box)`
   max-width: 600px;
-  max-height: 300px;
+  max-height: 220px;
   background-color: #F4F4F4;
-  margin-left: 60px;
+  margin-right: 60px;
 `;
 
 const CustomizedButton = styled(Button)`
@@ -28,7 +29,7 @@ const CustomizedButton = styled(Button)`
 `;
 
 
-export default function InfoBox({title, value, name}: InfoBoxTypes) {
+export default function InfoBox({title, value, name, route}: InfoBoxTypes) {
 
   const navigate = useNavigate();
   return (
@@ -46,7 +47,7 @@ export default function InfoBox({title, value, name}: InfoBoxTypes) {
         {value}
       </Typography>
       {/* <Link to="/candidates"> */}
-        <CustomizedButton variant="outlined" onClick={() => navigate("/candidates")}>
+        <CustomizedButton variant="outlined" onClick={() => navigate(`${route}`)}>
           {name}
         </CustomizedButton>
       {/* </Link> */}

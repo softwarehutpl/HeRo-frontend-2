@@ -1,32 +1,34 @@
 import * as React from 'react';
 import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
-import Paper from '@mui/material/Paper';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import HomeIcon from '@mui/icons-material/Home';
 import PeopleIcon from '@mui/icons-material/People';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import { StyledBox } from './styled/StyledBox';
+import { useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
+  const navigate = useNavigate();
   return (
-    <Paper elevation={0} sx={{ width: 50, height: 300 }}>
+    <StyledBox>
       <MenuList>
-        <MenuItem>
+        <MenuItem onClick={() => navigate("/")}>
           <ListItemIcon>
-            <HomeIcon fontSize="small" />
+            <HomeIcon style={{color: 'black'}} fontSize="small" />
           </ListItemIcon>
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={() => navigate("candidates")}>
           <ListItemIcon>
-            <PeopleIcon fontSize="small" />
+            <PeopleIcon style={{color: 'black'}} fontSize="small" />
           </ListItemIcon>
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={() => navigate("projects")}>
           <ListItemIcon>
-            <FormatListBulletedIcon fontSize="small" />
+            <FormatListBulletedIcon style={{color: 'black'}} fontSize="small" />
           </ListItemIcon>
         </MenuItem>
       </MenuList>
-    </Paper>
+      </StyledBox>
   );
 }
