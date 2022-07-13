@@ -1,0 +1,16 @@
+{
+  "label": {
+    "new": "New",
+    "inProcessing": "In processing",
+    "droppedOut": "Dropped out",
+    "hired": "Hired"
+  },
+  "stage": {
+    "evaluation": "Evaluation",
+    "interView": "Interview",
+    "phoneInterview": "Phone interview",
+    "techInterview": "Tech interview",
+    "offer": "Offer"
+  },
+  "checked": "true"
+}
