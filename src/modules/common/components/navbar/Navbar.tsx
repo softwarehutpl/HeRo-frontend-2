@@ -10,7 +10,7 @@ import PersonIcon from "@mui/icons-material/Person";
 
 export default function Navbar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, mb: 5}}>
       <AppBar position="static">
         <Toolbar sx={{ backgroundColor: "black" }}>
           <IconButton
