@@ -2,7 +2,6 @@ import Navbar from "../common/components/navbar/Navbar";
 import Sidebar from "../common/components/sidebar/Sidebar";
 import { Outlet } from "react-router-dom";
 import Box from "@mui/material/Box";
-import InfoBox from "../common/components/infobox/InfoBox";
 import { styled } from '@mui/material/styles';
 
 
@@ -12,16 +11,26 @@ const InfoBoxWrapper = styled(Box)`
   justify-content: flex-start;
 `;
 
+const CustomDiv = styled('div')`
+  display: flex;
+  flex-direction: column;
+`;
+
+const RowDiv = styled('div')`
+  display: flex;
+  flex-direction: row;
+`;
+
 
 function Wrapper() {
   return (
-    <div>
+    <CustomDiv>
       <Navbar />
-      <div>
+      <RowDiv>
         <Sidebar />
-      </div>
-      <Outlet/>
-    </div>
+        <Outlet />
+      </RowDiv>
+    </CustomDiv>
   );
 }
 
