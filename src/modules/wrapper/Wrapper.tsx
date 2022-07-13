@@ -13,15 +13,16 @@ const InfoBoxWrapper = styled(Box)`
 `;
 
 
-
-function Home() {
+function Wrapper() {
   return (
-        <InfoBoxWrapper >
-          <InfoBox title="New Candidates" value={5} name="Show"/>
-          <InfoBox title="Interviews this week" value={8} name="Show"/>
-          <InfoBox title="New vodkas this month" value={4} name="Show"/>
-        </InfoBoxWrapper>
+    <div>
+      <Navbar />
+      <div>
+        <Sidebar />
+      </div>
+      <Outlet/>
+    </div>
   );
 }
 
-export default Home;
+export default Wrapper;
