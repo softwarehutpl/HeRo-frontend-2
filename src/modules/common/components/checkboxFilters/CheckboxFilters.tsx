@@ -3,6 +3,7 @@ import FormGroup from "@mui/material/FormGroup";
 import CheckboxRow from "./CheckboxRow";
 
 const CheckboxFilters = () => {
+
   const [checked, setChecked] = React.useState(false);
 
   const handleOnClick = (value: boolean) => {
