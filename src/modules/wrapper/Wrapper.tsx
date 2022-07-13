@@ -6,7 +6,6 @@ import { styled } from '@mui/material/styles';
 
 
 
-
 const InfoBoxWrapper = styled(Box)`
   display: flex;
   justify-content: flex-start;
