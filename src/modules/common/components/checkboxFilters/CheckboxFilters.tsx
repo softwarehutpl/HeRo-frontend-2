@@ -3,12 +3,16 @@ import FormGroup from "@mui/material/FormGroup";
 import CheckboxRow from "./CheckboxRow";
 
 const CheckboxFilters = () => {
-  const [checked, setChecked] = React.useState([true, false]);
+  const [checked, setChecked] = React.useState(true);
+
+  const handleCheckedbox = () => {
+    setChecked((prevState) => !prevState);
+  };
 
   return (
     <FormGroup>
       <h3>Status</h3>
-      <CheckboxRow isChecked={checked[0]} label="New" />
+      <CheckboxRow isChecked={checked} label="New" />
     </FormGroup>
   );
 };
