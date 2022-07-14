@@ -1,24 +1,20 @@
-import { TypographyTypeMap } from '@mui/material';
+
 import {HeaderBox, HeaderDiv} from "../../common/components/tableHeader/TableHeaderStyles";
 import {HeaderTypography} from "../../common/components/tableHeader/TableHeaderStyles";
-import {HeaderIconButton} from "../../common/components/headerTableIconButton/IconButton";
+import {HeaderIconButton, CandidateDisplayType} from "../../common/components/headerTableIconButton/IconButton";
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import BorderAllIcon from '@mui/icons-material/BorderAll';
 import { useState } from 'react';
 
 interface TextProps {
     title: string,
-    variant?: TypographyTypeMap["props"]["variant"];
     component?: React.ElementType;
-    onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
-    routeOne?: string;
-    routeTwo?: string;
+    onClick?: () => void;
   }
 
-export default function CandidatesTableHeader({title, component = "div", routeOne, routeTwo }:  React.PropsWithChildren<TextProps>) {
+export default function CandidatesTableHeader({title, component = "div"}:  React.PropsWithChildren<TextProps>) {
 
-  const [tableContent, setTableContent] = useState(true);
-
+  const [activeView, setActiveView] = useState<CandidateDisplayType>(CandidateDisplayType.TABLE);
 
   return (
     <HeaderBox >
@@ -26,10 +22,10 @@ export default function CandidatesTableHeader({title, component = "div", routeOn
         {title}
       </HeaderTypography>
       <HeaderDiv>
-        <HeaderIconButton  route={`${routeOne}`}>
+        <HeaderIconButton active={activeView === CandidateDisplayType.TABLE} onClick={setActiveView} type={CandidateDisplayType.TABLE}>
           <FormatListBulletedIcon />
         </HeaderIconButton>
-        <HeaderIconButton  route={`${routeTwo}`}>
+        <HeaderIconButton active={activeView === CandidateDisplayType.KABAN} onClick={setActiveView} type={CandidateDisplayType.KABAN}>
           <BorderAllIcon />
         </HeaderIconButton>
       </HeaderDiv>
