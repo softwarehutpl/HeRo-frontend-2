@@ -10,7 +10,7 @@ function Candidates() {
   return (
     <CustomDiv>
       <CheckboxFilters />
-        <div>
+        <div style={{ width: '100%' }}>
          <CandidatesTableHeader title="Candidates"/>
             {whichTable === 0 ? <StickyHeadTable /> : <div style={{ fontSize: "200px" }}>Kaban</div>}
         </div>
