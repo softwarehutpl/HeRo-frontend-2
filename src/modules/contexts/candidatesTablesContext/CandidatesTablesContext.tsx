@@ -1,6 +1,6 @@
 import { useReducer, createContext, useContext, useState, Dispatch, SetStateAction, FC, PropsWithChildren } from "react";
 
-let isListValue = true;
+let isLogged = true;
 
 
 
@@ -24,9 +24,23 @@ const TablesContext = createContext<boolean>(true);
 //     return [ctx, Provider] as const; // alternatively, [typeof ctx, typeof Provider]
 //   }
 
+const tableReducer = (state, action) => {
+  switch (action.type) {
+    case "LOGGED":
+      return (state = true);
+    case "UNLOGGED":
+      return (state = false);
+
+    default:
+      throw new Error("Something went wrong admin!");
+  }
+};
+
+
 
 const TablesProvider: FC= ( {children} ) => {
-  const [state, update] = useState(isListValue)
+  const [state, update] = useReducer(tableReducer, isLogged);
+
 
   return (
     <TablesContext.Provider value={{state, update}}>
