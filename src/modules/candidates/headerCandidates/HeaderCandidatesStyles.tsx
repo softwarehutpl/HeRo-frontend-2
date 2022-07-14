@@ -3,8 +3,6 @@ import Box from "@mui/material/Box";
 import { Typography} from '@mui/material';
 import IconButton from "@mui/material/IconButton";
 
-
-
 export const HeaderBox = styled(Box)`
   display: flex;
   justify-content: space-between;
@@ -14,7 +12,6 @@ export const HeaderBox = styled(Box)`
   background-color: #F4F4F4;
   margin-right: 60px;
 `;
-
 
 export const HeaderTypography = styled(Typography)({
   padding: "0 50px 0 20px",
@@ -41,4 +38,3 @@ export const HeaderIconButton = styled(IconButton)`
     background-color: #0000ff;
   }
 `;
-
