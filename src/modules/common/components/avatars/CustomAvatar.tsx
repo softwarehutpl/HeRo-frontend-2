@@ -14,6 +14,6 @@ function stringAvatar(name: string) {
 
 export default function CustomAvatar() {
   return (
-      <Avatar {...stringAvatar('Tim Neutkens')} />
+      <Avatar {...stringAvatar('John Doe')} />
   );
 }

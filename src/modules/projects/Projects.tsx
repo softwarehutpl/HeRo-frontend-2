@@ -1,6 +1,7 @@
 import * as React from "react";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import ProjectsTableHaeder from "./headerProjects/HeaderProjects";
+import { CustomDiv } from "./ProjectsStyles";
 
 const columns: GridColDef[] = [
   { field: "name", headerName: "Name", width: 200 },
@@ -49,7 +50,7 @@ const rows = [
 
 export default function Projects() {
   return (
-    <div>
+    <CustomDiv>
       <ProjectsTableHaeder title="Projects" routeOne="/candidates" />
       <div style={{ height: 400, width: "100%" }}>
         <DataGrid
@@ -60,6 +61,6 @@ export default function Projects() {
           // checkboxSelection
         />
       </div>
-    </div>
+    </CustomDiv>
   );
 }
