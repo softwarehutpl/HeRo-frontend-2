@@ -1,5 +1,5 @@
-
-import { DataGrid, GridColDef} from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import CheckboxFilters from "../common/components/checkboxFilters/CheckboxFilters";
 import ProjectsTableHaeder from "./headerProjects/HeaderProjects";
 import { CustomDiv } from "./ProjectsStyles";
 
@@ -22,7 +22,7 @@ const rows = [
   {
     id: "1",
     name: "JavaScript Developer",
-    creator: "Jon",
+    creator: "Jonh Doe",
     from: "01.07.2022",
     to: "30.07.2022",
     resume: "14",
@@ -31,7 +31,7 @@ const rows = [
   {
     id: "2",
     name: "React Developer",
-    creator: "Jon",
+    creator: "Jonh Doe",
     from: "01.07.2022",
     to: "30.07.2022",
     resume: "3",
@@ -40,7 +40,7 @@ const rows = [
   {
     id: "3",
     name: "Angular Developer",
-    creator: "Jon",
+    creator: "Jonh Doe",
     from: "01.07.2022",
     to: "30.07.2022",
     resume: "1",
@@ -51,15 +51,18 @@ const rows = [
 export default function Projects() {
   return (
     <CustomDiv>
-      <ProjectsTableHaeder title="Projects" />
-      <div style={{ height: 400, width: "100%" }}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-          // checkboxSelection
-        />
+      <CheckboxFilters />
+      <div style={{ width: "100%" }}>
+        <ProjectsTableHaeder title="Projects" />
+        <div style={{ height: 400, width: "100%" }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+            // checkboxSelection
+          />
+        </div>
       </div>
     </CustomDiv>
   );
