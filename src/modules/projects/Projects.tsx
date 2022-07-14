@@ -24,7 +24,7 @@ const rows = [
     creator: "Jon",
     from: "01.07.2022",
     to: "30.07.2022",
-    field: "14",
+    resume: "14",
     hired: "4",
   },
   {
@@ -33,7 +33,7 @@ const rows = [
     creator: "Jon",
     from: "01.07.2022",
     to: "30.07.2022",
-    field: "3",
+    resume: "3",
     hired: "2",
   },
   {
@@ -42,7 +42,7 @@ const rows = [
     creator: "Jon",
     from: "01.07.2022",
     to: "30.07.2022",
-    field: "1",
+    resume: "1",
     hired: "0",
   },
 ];
