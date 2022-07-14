@@ -7,9 +7,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import CustomAvatar from '../avatars/CustomAvatar';
 
 interface Column {
-  id: 'name' | 'source' | 'project' | 'position' | 'status' | 'stage' | 'assignee' | 'profile';
+  id: 'avatar' | 'name' | 'source' | 'project' | 'position' | 'status' | 'stage' | 'assignee' | 'profile';
   label: string;
   minWidth?: number;
   align?: 'right';
@@ -17,47 +18,19 @@ interface Column {
 }
 
 const columns: readonly Column[] = [
+  { id: 'avatar', label: '', minWidth: 40 },
   { id: 'name', label: 'Name', minWidth: 80 },
   { id: 'source', label: 'Source', minWidth: 80 },
-  {
-    id: 'project',
-    label: 'Project',
-    minWidth: 80,
-    align: 'right',
-  },
-  {
-    id: 'position',
-    label: 'Position',
-    minWidth: 80,
-    align: 'right',
-  },
-  {
-    id: 'status',
-    label: 'Status',
-    minWidth: 80,
-    align: 'right',
-  },
-  {
-    id: 'stage',
-    label: 'Stage',
-    minWidth: 80,
-    align: 'right',
-  },
-  {
-    id: 'assignee',
-    label: 'Assignee',
-    minWidth: 80,
-    align: 'right',
-  },
-  {
-    id: 'profile',
-    label: 'Profile',
-    minWidth: 80,
-    align: 'right',
-  },
+  { id: 'project', label: 'Project', minWidth: 80, },
+  { id: 'position', label: 'Position', minWidth: 80, },
+  { id: 'status', label: 'Status', minWidth: 80, },
+  { id: 'stage', label: 'Stage', minWidth: 80, },
+  { id: 'assignee', label: 'Assignee', minWidth: 80, },
+  { id: 'profile', label: 'Profile', minWidth: 80, }
 ];
 
 interface Data {
+  avatar: React.ReactElement;
   name: string;
   source: string;
   project: string;
@@ -69,6 +42,7 @@ interface Data {
 }
 
 function createData(
+  avatar: React.ReactElement,
   name: string,
   source: string,
   project: string,
@@ -78,24 +52,12 @@ function createData(
   assignee: string,
   profile: string
 ): Data {
-  return { name, source, project, position, status, stage, assignee, profile };
+  return { avatar, name, source, project, position, status, stage, assignee, profile };
 }
 
 const rows = [
-  createData('John Doe', 'Internal', 'React Developer', 'React Developer', 'Qualified', 'Interview', 'Peter Ditter', 'See Profile'),
-  createData('John Doe', 'Internal', 'React Developer', 'React Developer', 'Qualified', 'Interview', 'Peter Ditter', 'See Profile'),
-  createData('John Doe', 'Internal', 'React Developer', 'React Developer', 'Qualified', 'Interview', 'Peter Ditter', 'See Profile'),
-  createData('John Doe', 'Internal', 'React Developer', 'React Developer', 'Qualified', 'Interview', 'Peter Ditter', 'See Profile'),
-  createData('John Doe', 'Internal', 'React Developer', 'React Developer', 'Qualified', 'Interview', 'Peter Ditter', 'See Profile'),
-  createData('John Doe', 'Internal', 'React Developer', 'React Developer', 'Qualified', 'Interview', 'Peter Ditter', 'See Profile'),
-  createData('John Doe', 'Internal', 'React Developer', 'React Developer', 'Qualified', 'Interview', 'Peter Ditter', 'See Profile'),
-  createData('John Doe', 'Internal', 'React Developer', 'React Developer', 'Qualified', 'Interview', 'Peter Ditter', 'See Profile'),
-  createData('John Doe', 'Internal', 'React Developer', 'React Developer', 'Qualified', 'Interview', 'Peter Ditter', 'See Profile'),
-  createData('John Doe', 'Internal', 'React Developer', 'React Developer', 'Qualified', 'Interview', 'Peter Ditter', 'See Profile'),
-  createData('John Doe', 'Internal', 'React Developer', 'React Developer', 'Qualified', 'Interview', 'Peter Ditter', 'See Profile'),
-  createData('John Doe', 'Internal', 'React Developer', 'React Developer', 'Qualified', 'Interview', 'Peter Ditter', 'See Profile'),
-  createData('John Doe', 'Internal', 'React Developer', 'React Developer', 'Qualified', 'Interview', 'Peter Ditter', 'See Profile'),
-  createData('John Doe', 'Internal', 'React Developer', 'React Developer', 'Qualified', 'Interview', 'Peter Ditter', 'See Profile'),
+  createData( <CustomAvatar/>, 'John Doe', 'Internal', 'React Developer', 'React Developer', 'Qualified', 'Interview', 'Peter Ditter', 'See Profile'),
+  createData( <CustomAvatar/>, 'John Doe', 'Internal', 'React Developer', 'React Developer', 'Qualified', 'Interview', 'Peter Ditter', 'See Profile'),
 ];
 
 export default function StickyHeadTable() {
