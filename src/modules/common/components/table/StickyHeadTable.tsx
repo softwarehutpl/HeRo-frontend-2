@@ -57,6 +57,7 @@ function createData(
 
 const rows = [
   createData( <CustomAvatar/>, 'John Doe', 'Internal', 'React Developer', 'React Developer', 'Qualified', 'Interview', 'Peter Ditter', 'See Profile'),
+  createData( <CustomAvatar/>, 'John Doe', 'Internal', 'React Developer', 'React Developer', 'Qualified', 'Interview', 'Peter Ditter', 'See Profile'),
 ];
 
 export default function StickyHeadTable() {
