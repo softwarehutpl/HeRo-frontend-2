@@ -11,7 +11,7 @@ function Candidates() {
     <CustomDiv>
       <CheckboxFilters />
         <div>
-         <CandidatesTableHeader title="Candidates" routeOne="/candidates" routeTwo="/projects"/>
+         <CandidatesTableHeader title="Candidates"/>
             {whichTable === 0 ? <StickyHeadTable /> : <div style={{ fontSize: "200px" }}>Kaban</div>}
         </div>
     </CustomDiv>

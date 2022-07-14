@@ -1,5 +1,5 @@
-import * as React from "react";
-import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+
+import { DataGrid, GridColDef} from "@mui/x-data-grid";
 import ProjectsTableHaeder from "./headerProjects/HeaderProjects";
 import { CustomDiv } from "./ProjectsStyles";
 
@@ -51,7 +51,7 @@ const rows = [
 export default function Projects() {
   return (
     <CustomDiv>
-      <ProjectsTableHaeder title="Projects" routeOne="/candidates" />
+      <ProjectsTableHaeder title="Projects" />
       <div style={{ height: 400, width: "100%" }}>
         <DataGrid
           rows={rows}
