@@ -23,7 +23,7 @@ export const HeaderTypography = styled(Typography)({
 
 export const HeaderDiv = styled(Box)`
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   align-items: center;
   width: 100px
 `;
