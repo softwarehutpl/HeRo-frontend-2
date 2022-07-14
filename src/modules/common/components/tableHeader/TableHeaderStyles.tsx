@@ -11,7 +11,6 @@ export const HeaderBox = styled(Box)`
   align-items: center;
   width: 100%;
   height: 120px;
-  background-color: #F4F4F4;
   margin-right: 60px;
 `;
 
@@ -25,7 +24,7 @@ export const HeaderDiv = styled(Box)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100px
+  width: 110px
 `;
 
 export const HeaderIconButton = styled(IconButton)`

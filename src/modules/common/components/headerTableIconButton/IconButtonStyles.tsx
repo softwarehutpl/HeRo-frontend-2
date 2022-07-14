@@ -14,5 +14,8 @@ export const StyledIconButton = styled(IconButton)<IconButtonProps>`
   height: 40px;
   color: #ffffff;
   border-radius: 0;
-  background-color: ${props => props.active ? "#1976d280" : "black"};
+  background-color: ${props => props.active ? "#0F62FE" : "#525252"};
+  &:hover {
+    background-color: #6699ff;
+  }
 `;

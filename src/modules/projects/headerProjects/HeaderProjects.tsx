@@ -1,6 +1,7 @@
 import { TypographyTypeMap } from '@mui/material';
 
-import {HeaderBox, HeaderDiv} from "../../common/components/tableHeader/TableHeaderStyles";
+import {HeaderBox } from "../../common/components/tableHeader/TableHeaderStyles";
+import { HeaderDiv } from "./HeaderProjectsStyles";
 import {HeaderTypography} from "../../common/components/tableHeader/TableHeaderStyles";
 import {HeaderIconButton, CandidateDisplayType} from "../../common/components/headerTableIconButton/IconButton";
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
@@ -21,7 +22,7 @@ export default function ProjectsTableHaeder({title, component = "div" }:  React.
       <HeaderTypography variant="h4" component={component} >
         {title}
       </HeaderTypography>
-      <HeaderDiv>
+      <HeaderDiv >
         <HeaderIconButton  active onClick={()=>{}} type={CandidateDisplayType.PLUS}>
           <AddBoxOutlinedIcon />
         </HeaderIconButton>
