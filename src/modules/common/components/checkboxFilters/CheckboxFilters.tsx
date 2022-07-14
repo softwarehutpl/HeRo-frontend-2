@@ -32,16 +32,18 @@ const CheckboxFilters = () => {
     // go to parent
   };
 
-  const listOfStatus = data.status.data.map((value: string) => (
+  const listOfStatus = data.status.data.map((value: string, index: number) => (
     <CheckboxRow
+      key={index}
       isChecked={checked}
       handleOnClick={handleOnClick}
       label={value}
     />
   ));
 
-  const listOfStage = data.stage.data.map((value: string) => (
+  const listOfStage = data.stage.data.map((value: string, index: number) => (
     <CheckboxRow
+      key={index}
       isChecked={checked}
       handleOnClick={handleOnClick}
       label={value}
