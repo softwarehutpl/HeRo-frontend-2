@@ -48,10 +48,12 @@ const rows = [
   },
 ];
 
+const statusesList = ["Open", "Closed"];
+
 export default function Projects() {
   return (
     <CustomDiv>
-      <CheckboxFilters />
+      <CheckboxFilters header="Status" filtersList={statusesList} />
       <div style={{ width: "100%" }}>
         <ProjectsTableHaeder title="Projects" />
         <div style={{ height: 400, width: "100%" }}>
