@@ -1,4 +1,4 @@
-import React from 'react';
+import Provider from "./provider/Provider";
 import { Routes, Route } from 'react-router-dom';
 
 import Candidates from './modules/candidates/Candidates';
@@ -10,6 +10,7 @@ import Home from './modules/home/Home';
 
 function App() {
   return (
+    <Provider>
     <div className="App">
       <Routes>
         <Route path="/" element={<Wrapper />}>
@@ -20,6 +21,7 @@ function App() {
         </Route>
       </Routes>
     </div>
+    </Provider>
   );
 }
 

@@ -1,22 +1,25 @@
-import { useNavigate } from "react-router-dom";
+import {useTables } from "../../../contexts/CandidatesTablesContext"
 import { StyledIconButton } from './IconButtonStyles';
 
 
 interface TextProps {
     route?: string,
-    onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
     children?: any;
   }
 
 
 
+export function HeaderIconButton({ children }: React.PropsWithChildren<TextProps>) {
 
-export function HeaderIconButton({ onClick, children }: React.PropsWithChildren<TextProps>) {
+  const setTableState = useTables().setValue;
+  const tableValue = useTables().value;
 
- 
+  const handleClick = ()=> {
+    tableValue === 0 ? setTableState(1) : setTableState(0);
+  }
 
   return (
-    <StyledIconButton color="primary" >
+    <StyledIconButton color="primary" onClick={() => handleClick()}>
         {children}
     </StyledIconButton>
   

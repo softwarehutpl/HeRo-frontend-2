@@ -3,6 +3,7 @@ import CheckboxFilters from "../common/components/checkboxFilters/CheckboxFilter
 import StickyHeadTable from "../common/components/table/StickyHeadTable";
 import { CustomDiv } from "./CandidatesStyles";
 import CandidatesTableHeader from "./headerCandidates/HeaderCandidates";
+import {useTables } from "../contexts/CandidatesTablesContext"
 
 
 
@@ -12,6 +13,9 @@ import CandidatesTableHeader from "./headerCandidates/HeaderCandidates";
 
 function Candidates() {
 
+  const whichTable = useTables().value;
+
+  console.log(whichTable);
 
 
   return (
@@ -19,8 +23,7 @@ function Candidates() {
       <CheckboxFilters />
       <div>
       <CandidatesTableHeader title="Candidates" routeOne="/candidates" routeTwo="/projects"/>
-      <StickyHeadTable />
-      <div>Kaban</div>
+      {whichTable === 0 ? <StickyHeadTable /> : <div style={{ fontSize: "200px" }}>Kaban</div>}
       </div>
     </CustomDiv>
   );
