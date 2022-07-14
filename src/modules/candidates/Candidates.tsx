@@ -11,12 +11,16 @@ import CandidatesTableHeader from "./headerCandidates/HeaderCandidates";
 
 
 function Candidates() {
+
+
+
   return (
     <CustomDiv>
       <CheckboxFilters />
       <div>
       <CandidatesTableHeader title="Candidates" routeOne="/candidates" routeTwo="/projects"/>
       <StickyHeadTable />
+      <div>Kaban</div>
       </div>
     </CustomDiv>
   );
