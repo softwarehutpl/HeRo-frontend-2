@@ -1,7 +1,6 @@
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 
-export const CustomDiv = styled('div')`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+export const CustomDiv = styled("div")`
+  display: flex;
+  width: 100%;
 `;
