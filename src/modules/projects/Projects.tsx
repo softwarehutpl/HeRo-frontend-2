@@ -1,6 +1,6 @@
-
 import * as React from "react";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+import ProjectsTableHaeder from "./headerProjects/HeaderProjects";
 
 const columns: GridColDef[] = [
   { field: "name", headerName: "Name", width: 200 },
@@ -49,17 +49,17 @@ const rows = [
 
 export default function Projects() {
   return (
-  <div>
-    <ProjectsTableHaeder title="Projects" routeOne="/candidates"/>
-    <div style={{ height: 400, width: "100%" }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        // checkboxSelection
-      />
+    <div>
+      <ProjectsTableHaeder title="Projects" routeOne="/candidates" />
+      <div style={{ height: 400, width: "100%" }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
+          // checkboxSelection
+        />
+      </div>
     </div>
-   </div>
   );
 }
