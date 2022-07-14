@@ -34,6 +34,7 @@ const CheckboxFilters = () => {
 
   const listOfStatus = data.status.data.map((value: string) => (
     <CheckboxRow
+      key={value.toString()}
       isChecked={checked}
       handleOnClick={handleOnClick}
       label={value}
@@ -42,6 +43,7 @@ const CheckboxFilters = () => {
 
   const listOfStage = data.stage.data.map((value: string) => (
     <CheckboxRow
+      key={value.toString()}
       isChecked={checked}
       handleOnClick={handleOnClick}
       label={value}
