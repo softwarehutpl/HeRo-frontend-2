@@ -16,8 +16,9 @@ const CheckboxFilters: React.FC<CheckboxValue> = ({ header, filtersList }) => {
     // go to parent
   };
 
-  const listOfCheckbox = filtersList.map((value: string) => (
+  const listOfCheckbox = filtersList.map((value: string, id: number) => (
     <CheckboxRow
+      key={id}
       isChecked={checked}
       handleOnClick={handleOnClick}
       label={value}
