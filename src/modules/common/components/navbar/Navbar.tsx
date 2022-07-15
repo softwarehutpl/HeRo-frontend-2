@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -9,8 +10,13 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import PersonIcon from "@mui/icons-material/Person";
 
 export default function Navbar() {
+  let navigate = useNavigate();
+  const GoToSignIn = () => {
+    navigate("/signin", { replace: true });
+  };
+
   return (
-    <Box sx={{ flexGrow: 1, mb: 5}}>
+    <Box sx={{ flexGrow: 1, mb: 5 }}>
       <AppBar position="static">
         <Toolbar sx={{ backgroundColor: "black" }}>
           <IconButton
@@ -25,6 +31,8 @@ export default function Navbar() {
           </Typography>
           <Button color="inherit">
             <NotificationsNoneIcon />
+          </Button>
+          <Button color="inherit" onClick={GoToSignIn}>
             <PersonIcon sx={{ paddingLeft: "20px" }} />
           </Button>
         </Toolbar>
