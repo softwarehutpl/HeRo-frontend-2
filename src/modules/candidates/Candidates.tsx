@@ -4,7 +4,6 @@ import StickyHeadTable from "../common/components/table/StickyHeadTable";
 import { CustomDiv, CheckboxDiv } from "./CandidatesStyles";
 import CandidatesTableHeader from "./headerCandidates/HeaderCandidates";
 import { useTables } from "../contexts/CandidatesTablesContext";
-import { Link } from "react-router-dom";
 import { CustomKanbanDiv} from "../common/components/kanban/KanbanTableStyles"
 import KanbanTable from "../common/components/kanban/KanbanTable";
 
