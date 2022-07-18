@@ -5,14 +5,13 @@ import { CustomDiv } from "./ProjectsStyles";
 import EditIcon from "@mui/icons-material/Edit";
 import { IconButton } from "@mui/material";
 import axios from "axios";
-
+import { Link } from "react-router-dom";
 
 const EditDataButton = ({ index }: any) => {
   const handleEditClick = () => {
     console.log(`editDataButton clicked ${index}`);
 
     // go to ...candidates?projrctId=1&status=hired filet
-
   };
 
   return (

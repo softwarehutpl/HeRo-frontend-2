@@ -1,70 +1,77 @@
-
 import React, { useState } from "react";
-import { DragDropContext, Draggable, Droppable,  DropResult } from "react-beautiful-dnd";
-import { v4 as uuidv4 } from 'uuid';
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+  DropResult,
+} from "react-beautiful-dnd";
+import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from 'uuid';
 
-import {KanbanColumn, TableWrapper, DroppableDiv, DraggableDiv} from "./KanbanTableStyles";
+import {
+  KanbanColumn,
+  TableWrapper,
+  DroppableDiv,
+  DraggableDiv,
+} from "./KanbanTableStyles";
 
-
-
-
-
-type SetColumnsType = React.Dispatch<React.SetStateAction<{
-  [x: number]: {
+type SetColumnsType = React.Dispatch<
+  React.SetStateAction<{
+    [x: number]: {
       name: string;
       items: {
-          id: any;
-          content: string;
+        id: any;
+        content: string;
       }[];
-  };
-}>>
-
+    };
+  }>
+>;
 
 const itemsFromBackend = [
   { id: uuidv4(), content: "Krzysztof Kononowitz" },
   { id: uuidv4(), content: "Grzegorz Szeszko" },
   { id: uuidv4(), content: "Jakub Sosnowski" },
   { id: uuidv4(), content: "John Dalton" },
-  { id: uuidv4(), content: "Filip Mackiewicz" }
+  { id: uuidv4(), content: "Filip Mackiewicz" },
 ];
-
-
-
-
 
 const columnsFromBackend = {
   [uuidv4()]: {
     name: "New",
-    items: itemsFromBackend
+    items: itemsFromBackend,
   },
   [uuidv4()]: {
     name: "Evaluation",
-    items: []
+    items: [],
   },
   [uuidv4()]: {
     name: "Phone Interview",
-    items: []
+    items: [],
   },
   [uuidv4()]: {
     name: "Interview",
-    items: []
+    items: [],
   },
   [uuidv4()]: {
     name: "Offer",
-    items: []
+    items: [],
   },
   [uuidv4()]: {
     name: "Hired",
-    items: []
-  }
+    items: [],
+  },
 };
 
-const onDragEnd = (result:  DropResult, columns: any, setColumns: SetColumnsType) => {
+const onDragEnd = (
+  result: DropResult,
+  columns: any,
+  setColumns: SetColumnsType
+) => {
   if (!result.destination) return;
   const { source, destination } = result;
 
   if (source.droppableId !== destination.droppableId) {
-    const sourceColumn = columns[source.droppableId] ;
+    const sourceColumn = columns[source.droppableId];
     const destColumn = columns[destination.droppableId];
     const sourceItems = [...sourceColumn.items];
     const destItems = [...destColumn.items];
@@ -74,12 +81,12 @@ const onDragEnd = (result:  DropResult, columns: any, setColumns: SetColumnsType
       ...columns,
       [source.droppableId]: {
         ...sourceColumn,
-        items: sourceItems
+        items: sourceItems,
       },
       [destination.droppableId]: {
         ...destColumn,
-        items: destItems
-      }
+        items: destItems,
+      },
     });
   } else {
     const column = columns[source.droppableId];
@@ -90,27 +97,24 @@ const onDragEnd = (result:  DropResult, columns: any, setColumns: SetColumnsType
       ...columns,
       [source.droppableId]: {
         ...column,
-        items: copiedItems
-      }
+        items: copiedItems,
+      },
     });
   }
 };
-
-
-
 
 function KanbanTable() {
   const [columns, setColumns] = useState(columnsFromBackend);
   return (
     <TableWrapper>
       <DragDropContext
-        onDragEnd={result => onDragEnd(result, columns, setColumns)}
+        onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
       >
         {Object.entries(columns).map(([columnId, column], index) => {
           return (
             <KanbanColumn
               style={{
-                borderRight: index ===5 ? "" : "1px solid gray",
+                borderRight: index === 5 ? "" : "1px solid gray",
               }}
               key={columnId}
             >
@@ -142,12 +146,11 @@ function KanbanTable() {
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                     style={{
-                                      
                                       backgroundColor: snapshot.isDragging
                                         ? "#263B4A"
                                         : "#456C86",
                                       color: "white",
-                                      ...provided.draggableProps.style
+                                      ...provided.draggableProps.style,
                                     }}
                                   >
                                     {item.content}
@@ -172,5 +175,3 @@ function KanbanTable() {
 }
 
 export default KanbanTable;
-
-
