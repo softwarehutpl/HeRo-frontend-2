@@ -1,19 +1,22 @@
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
 
 
-function stringAvatar(name: string) {
-  return {
-    sx: {
-      bgcolor: '#dd0000',
-    },
-    children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
-  };
-}
 
-export default function CustomAvatar() {
+
+export default function CustomAvatar({ name }: {
+  name: string;
+}) {
+
+  function stringAvatar(name: string) {
+    return {
+      sx: {
+        bgcolor: '#ff8533',
+      },
+      children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+    };
+  }
   return (
-      <Avatar {...stringAvatar('John Doe')} />
+      <Avatar {...stringAvatar(name)} />
   );
 }
