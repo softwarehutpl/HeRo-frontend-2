@@ -4,10 +4,15 @@ import ProjectsTableHaeder from "./headerProjects/HeaderProjects";
 import { CustomDiv } from "./ProjectsStyles";
 import EditIcon from "@mui/icons-material/Edit";
 import { IconButton } from "@mui/material";
+import { Link } from "react-router-dom";
+
 
 const EditDataButton = ({ index }: any) => {
   const handleEditClick = () => {
     console.log(`editDataButton clicked ${index}`);
+
+    // go to ...candidates?projrctId=1&status=hired filet
+
   };
 
   return (
@@ -29,7 +34,16 @@ const columns: GridColDef[] = [
     //   `${params.row.firstName || ""} ${params.row.lastName || ""}`,
   },
   { field: "resume", headerName: "Resume", width: 120 },
-  { field: "hired", headerName: "Hired", width: 120 },
+
+  {
+    field: "hired",
+    headerName: "Hired",
+    width: 120,
+    renderCell: (params) => {
+      return <Link to="/candidates">{params.row.hired}</Link>;
+    },
+  },
+
   {
     field: "edit",
     headerName: "",

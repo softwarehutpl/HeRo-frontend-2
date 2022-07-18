@@ -18,7 +18,6 @@ function Candidates() {
     "Tech interview",
     "Offer",
   ];
-
   return (
     <CustomDiv>
       <CheckboxDiv>
