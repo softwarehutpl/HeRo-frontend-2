@@ -4,10 +4,15 @@ import ProjectsTableHaeder from "./headerProjects/HeaderProjects";
 import { CustomDiv } from "./ProjectsStyles";
 import EditIcon from "@mui/icons-material/Edit";
 import { IconButton } from "@mui/material";
+import axios from "axios";
+
 
 const EditDataButton = ({ index }: any) => {
   const handleEditClick = () => {
     console.log(`editDataButton clicked ${index}`);
+
+    // go to ...candidates?projrctId=1&status=hired filet
+
   };
 
   return (
@@ -16,6 +21,26 @@ const EditDataButton = ({ index }: any) => {
     </IconButton>
   );
 };
+
+const client = axios.create({
+  baseURL:
+    "https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/GetList",
+});
+
+const getDataFromApi = (status: string, stage: string) => {
+  client
+    .post("", {
+      status,
+      stage,
+    })
+    .then((response) => {
+      console.log(response.data);
+    });
+};
+
+getDataFromApi("new", "evaluation");
+
+// useEffect ( () => { getDataFromApi('new', 'evaluation') ; }, [])
 
 const columns: GridColDef[] = [
   { field: "name", headerName: "Name", width: 200 },
@@ -29,7 +54,16 @@ const columns: GridColDef[] = [
     //   `${params.row.firstName || ""} ${params.row.lastName || ""}`,
   },
   { field: "resume", headerName: "Resume", width: 120 },
-  { field: "hired", headerName: "Hired", width: 120 },
+
+  {
+    field: "hired",
+    headerName: "Hired",
+    width: 120,
+    renderCell: (params) => {
+      return <Link to="/candidates">{params.row.hired}</Link>;
+    },
+  },
+
   {
     field: "edit",
     headerName: "",
