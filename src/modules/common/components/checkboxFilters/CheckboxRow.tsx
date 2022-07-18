@@ -1,7 +1,6 @@
-
 import { FunctionComponent, useState } from "react";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import { CustomForm } from "./CheckboxRowStyles";
 
 interface CheckboxRowProps {
   label: string;
@@ -22,7 +21,7 @@ const CheckboxRow: FunctionComponent<CheckboxRowProps> = ({
   };
 
   return (
-    <FormControlLabel
+    <CustomForm
       control={<Checkbox checked={checkboxValue} onChange={handleOnChange} />}
       label={label}
     />

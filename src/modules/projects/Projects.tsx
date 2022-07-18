@@ -2,6 +2,20 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import CheckboxFilters from "../common/components/checkboxFilters/CheckboxFilters";
 import ProjectsTableHaeder from "./headerProjects/HeaderProjects";
 import { CustomDiv } from "./ProjectsStyles";
+import EditIcon from "@mui/icons-material/Edit";
+import { IconButton } from "@mui/material";
+
+const EditDataButton = ({ index }: any) => {
+  const handleEditClick = () => {
+    console.log(`editDataButton clicked ${index}`);
+  };
+
+  return (
+    <IconButton onClick={handleEditClick}>
+      <EditIcon style={{ color: "#1976d2" }}></EditIcon>
+    </IconButton>
+  );
+};
 
 const columns: GridColDef[] = [
   { field: "name", headerName: "Name", width: 200 },
@@ -16,6 +30,15 @@ const columns: GridColDef[] = [
   },
   { field: "resume", headerName: "Resume", width: 120 },
   { field: "hired", headerName: "Hired", width: 120 },
+  {
+    field: "edit",
+    headerName: "",
+    width: 120,
+    sortable: false,
+    renderCell: (params) => {
+      return <EditDataButton index={params.row.id} />;
+    },
+  },
 ];
 
 const rows = [
@@ -27,6 +50,7 @@ const rows = [
     to: "30.07.2022",
     resume: "14",
     hired: "4",
+    field: "",
   },
   {
     id: "2",
@@ -48,10 +72,12 @@ const rows = [
   },
 ];
 
+const statusesList = ["Open", "Closed"];
+
 export default function Projects() {
   return (
     <CustomDiv>
-      <CheckboxFilters />
+      <CheckboxFilters header="Status" filtersList={statusesList} />
       <div style={{ width: "100%" }}>
         <ProjectsTableHaeder title="Projects" />
         <div style={{ height: 400, width: "100%" }}>

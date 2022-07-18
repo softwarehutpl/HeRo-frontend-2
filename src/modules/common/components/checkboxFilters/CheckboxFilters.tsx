@@ -3,28 +3,12 @@ import CheckboxRow from "./CheckboxRow";
 import { StyledHeading } from "./CheckboxStyles";
 import { CustomFormGroup } from "./CheckboxStyles";
 
-// data to test did map function works
-// const dataStatus = ["New", "In processing", "Dropped out", "Hired"];
-// const dataStage = ["New", "In processing", "Dropped out", "Hired"];
+interface CheckboxValue {
+  header: string;
+  filtersList: string[];
+}
 
-const data = {
-  status: {
-    label: "Status",
-    data: ["New", "In processing", "Dropped out", "Hired"],
-  },
-  stage: {
-    label: "Stage",
-    data: [
-      "Evaluation",
-      "Interview",
-      "Phone interview",
-      "Tech interview",
-      "Offer",
-    ],
-  },
-};
-
-const CheckboxFilters = () => {
+const CheckboxFilters: React.FC<CheckboxValue> = ({ header, filtersList }) => {
   const [checked, setChecked] = React.useState(false);
 
   const handleOnClick = (value: boolean) => {
@@ -32,18 +16,9 @@ const CheckboxFilters = () => {
     // go to parent
   };
 
-  const listOfStatus = data.status.data.map((value: string, index: number) => (
+  const listOfCheckbox = filtersList.map((value: string, id: number) => (
     <CheckboxRow
-      key={index}
-      isChecked={checked}
-      handleOnClick={handleOnClick}
-      label={value}
-    />
-  ));
-
-  const listOfStage = data.stage.data.map((value: string, index: number) => (
-    <CheckboxRow
-      key={index}
+      key={id}
       isChecked={checked}
       handleOnClick={handleOnClick}
       label={value}
@@ -52,10 +27,8 @@ const CheckboxFilters = () => {
 
   return (
     <CustomFormGroup>
-      <StyledHeading>{data.status.label}</StyledHeading>
-      {listOfStatus}
-      <StyledHeading>{data.stage.label}</StyledHeading>
-      {listOfStage}
+      <StyledHeading>{header}</StyledHeading>
+      {listOfCheckbox}
     </CustomFormGroup>
   );
 };
