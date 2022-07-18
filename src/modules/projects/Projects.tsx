@@ -4,7 +4,7 @@ import ProjectsTableHaeder from "./headerProjects/HeaderProjects";
 import { CustomDiv } from "./ProjectsStyles";
 import EditIcon from "@mui/icons-material/Edit";
 import { IconButton } from "@mui/material";
-import { Link } from "react-router-dom";
+import axios from "axios";
 
 
 const EditDataButton = ({ index }: any) => {
@@ -21,6 +21,26 @@ const EditDataButton = ({ index }: any) => {
     </IconButton>
   );
 };
+
+const client = axios.create({
+  baseURL:
+    "https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/GetList",
+});
+
+const getDataFromApi = (status: string, stage: string) => {
+  client
+    .post("", {
+      status,
+      stage,
+    })
+    .then((response) => {
+      console.log(response.data);
+    });
+};
+
+getDataFromApi("new", "evaluation");
+
+// useEffect ( () => { getDataFromApi('new', 'evaluation') ; }, [])
 
 const columns: GridColDef[] = [
   { field: "name", headerName: "Name", width: 200 },
