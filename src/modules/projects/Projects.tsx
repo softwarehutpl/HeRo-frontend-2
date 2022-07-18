@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const EditDataButton = ({ index }: any) => {
   const handleEditClick = () => {
     console.log(`editDataButton clicked ${index}`);
-    // go to ...candidates?projrctId=1&status=hired
+    // go to ...candidates?projrctId=1&status=hired filet
   };
 
   return (
