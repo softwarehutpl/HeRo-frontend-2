@@ -8,6 +8,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import axios from "axios";
 
 function Copyright(props: any) {
   return (
@@ -23,13 +24,40 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function SignIn() {
+  const [email, setEmail] = React.useState("test@gmail.com");
+  const [password, setPassword] = React.useState("password");
+  const [response, setResponse] = React.useState("");
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    loginData(email, password);
+  };
+
+  const client = axios.create({
+    baseURL: "https://swh-t-praktyki2022-app.azurewebsites.net/Auth/SignIn",
+  });
+
+  const loginData = (email: string, password: string) => {
+    client
+      .post("", {
+        email,
+        password,
+      })
+      .then((response) => {
+        console.log(response.data);
+      });
+    // setEmail("");
+    // setPassword("");
+  };
+
+  const handleEmailValue = (e: any) => {
+    e.preventDefault();
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordValue = (e: any) => {
+    e.preventDefault();
+    setPassword(e.target.value);
   };
 
   return (
@@ -63,6 +91,8 @@ export default function SignIn() {
               id="email"
               label="Email Address"
               name="email"
+              value={email}
+              onChange={handleEmailValue}
               autoComplete="email"
               autoFocus
             />
@@ -71,6 +101,8 @@ export default function SignIn() {
               required
               fullWidth
               name="password"
+              value={password}
+              onChange={handlePasswordValue}
               label="Password"
               type="password"
               id="password"
