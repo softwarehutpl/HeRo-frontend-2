@@ -4,7 +4,8 @@ import StickyHeadTable from "../common/components/table/StickyHeadTable";
 import { CustomDiv, CheckboxDiv } from "./CandidatesStyles";
 import CandidatesTableHeader from "./headerCandidates/HeaderCandidates";
 import { useTables } from "../contexts/CandidatesTablesContext";
-import { Link } from "react-router-dom";
+import { CustomKanbanDiv} from "../common/components/kanban/KanbanTableStyles"
+import KanbanTable from "../common/components/kanban/KanbanTable";
 
 function Candidates() {
   const whichTable = useTables().value;
@@ -18,32 +19,6 @@ function Candidates() {
     "Offer",
   ];
 
-  // const Candidate = () => {
-  //   const candidateId = ["1", "2", "3"]
-  //   return (
-  //     <CustomDiv>
-  //       <CheckboxDiv>
-  //         <CheckboxFilters header="Status" filtersList={statusesList} />
-  //         <CheckboxFilters header="Stage" filtersList={stageList} />
-  //       </CheckboxDiv>
-  //       <div style={{ width: "100%" }}>
-  //         <CandidatesTableHeader title="Candidates" />
-  //         {whichTable === 0 ? (
-  //           candidateId.map(id => {
-  //             return (
-  //               <Link to={`/candidates/${id}`}>
-  //               </Link>
-  //             )
-  //             <StickyHeadTable />
-  //           })
-  //         ) : (
-  //           <div style={{ fontSize: "200px" }}>Kaban</div>
-  //         )}
-  //       </div>
-  //     </CustomDiv>
-  //   )
-  // }
-
   return (
     <CustomDiv>
       <CheckboxDiv>
@@ -55,7 +30,7 @@ function Candidates() {
         {whichTable === 0 ? (
           <StickyHeadTable />
         ) : (
-          <div style={{ fontSize: "200px" }}>Kaban</div>
+          <CustomKanbanDiv ><KanbanTable/></CustomKanbanDiv>
         )}
       </div>
     </CustomDiv>
