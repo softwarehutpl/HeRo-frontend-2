@@ -6,13 +6,14 @@ import {
   DropResult,
 } from "react-beautiful-dnd";
 import { v4 as uuidv4 } from "uuid";
-// import { v4 as uuidv4 } from 'uuid';
+import CustomAvatar from "../avatars/CustomAvatar";
 
 import {
   KanbanColumn,
   TableWrapper,
   DroppableDiv,
-  DraggableDiv,
+  DraggableNameAndAvatar,
+  DraggableDivWrapper,
 } from "./KanbanTableStyles";
 
 type SetColumnsType = React.Dispatch<
@@ -141,20 +142,23 @@ function KanbanTable() {
                             >
                               {(provided, snapshot) => {
                                 return (
-                                  <DraggableDiv
+                                  <DraggableDivWrapper
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                     style={{
-                                      backgroundColor: snapshot.isDragging
-                                        ? "#263B4A"
-                                        : "#456C86",
-                                      color: "white",
+                                      backgroundColor: "#FFE0CA",
+                                      color: "#000000",
                                       ...provided.draggableProps.style,
                                     }}
                                   >
+                                    <DraggableNameAndAvatar>
                                     {item.content}
-                                  </DraggableDiv>
+                                    <CustomAvatar name={item.content}/>
+                                    </DraggableNameAndAvatar>
+                                    {"Front-End Dev"}
+                                    
+                                  </DraggableDivWrapper>
                                 );
                               }}
                             </Draggable>

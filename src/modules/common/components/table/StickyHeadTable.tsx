@@ -55,9 +55,10 @@ function createData(
   return { avatar, name, source, project, position, status, stage, assignee, profile };
 }
 
+
 const rows = [
-  createData( <CustomAvatar/>, 'John Doe', 'Internal', 'React Developer', 'React Developer', 'Qualified', 'Interview', 'Peter Ditter', 'See Profile'),
-  createData( <CustomAvatar/>, 'John Doe', 'Internal', 'React Developer', 'React Developer', 'Qualified', 'Interview', 'Peter Ditter', 'See Profile'),
+  createData( <CustomAvatar name="John Doe" />, 'John Doe', 'Internal', 'React Developer', 'React Developer', 'Qualified', 'Interview', 'Peter Ditter', 'See Profile'),
+  createData( <CustomAvatar name="John Doe" />, 'John Doe', 'Internal', 'React Developer', 'React Developer', 'Qualified', 'Interview', 'Peter Ditter', 'See Profile'),
 ];
 
 export default function StickyHeadTable() {

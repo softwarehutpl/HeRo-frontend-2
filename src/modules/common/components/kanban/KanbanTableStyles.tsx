@@ -32,13 +32,24 @@ export const DroppableDiv = styled('div')`
 `;
 
 
-export const DraggableDiv = styled('div')`
-user-select: none;
-padding: 16px;
-margin: 0 0 8px 0;
-min-height: 50px;
+
+
+export const DraggableDivWrapper = styled('div')`
+  user-select: none;
+  padding: 16px;
+  margin: 0 0 8px 0;
+  min-height: 50px;
+  border-radius: 25px;
+  color: #000000;
+  border: 1px solid #000000;
+
 `;
 
+export const DraggableNameAndAvatar = styled('div')`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
 
 
 export const KanbanTitleDiv = styled('div')`
