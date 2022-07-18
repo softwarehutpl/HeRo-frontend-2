@@ -6,10 +6,13 @@ import EditIcon from "@mui/icons-material/Edit";
 import { IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
 
+
 const EditDataButton = ({ index }: any) => {
   const handleEditClick = () => {
     console.log(`editDataButton clicked ${index}`);
+
     // go to ...candidates?projrctId=1&status=hired filet
+
   };
 
   return (
@@ -31,6 +34,7 @@ const columns: GridColDef[] = [
     //   `${params.row.firstName || ""} ${params.row.lastName || ""}`,
   },
   { field: "resume", headerName: "Resume", width: 120 },
+
   {
     field: "hired",
     headerName: "Hired",
@@ -39,6 +43,7 @@ const columns: GridColDef[] = [
       return <Link to="/candidates">{params.row.hired}</Link>;
     },
   },
+
   {
     field: "edit",
     headerName: "",
