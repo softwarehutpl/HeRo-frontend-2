@@ -5,6 +5,7 @@ import {HeaderIconButton, CandidateDisplayType} from "../../common/components/he
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import BorderAllIcon from '@mui/icons-material/BorderAll';
 import { useState } from 'react';
+import { useTables } from "../../contexts/CandidatesTablesContext";
 
 interface TextProps {
     title: string,
@@ -15,6 +16,8 @@ interface TextProps {
 export default function CandidatesTableHeader({title, component = "div"}:  React.PropsWithChildren<TextProps>) {
 
   const [activeView, setActiveView] = useState<CandidateDisplayType>(CandidateDisplayType.TABLE);
+  
+const tableValue = useTables().value;
 
   return (
     <HeaderBox >
@@ -22,10 +25,10 @@ export default function CandidatesTableHeader({title, component = "div"}:  React
         {title}
       </HeaderTypography>
       <HeaderDiv>
-        <HeaderIconButton active={activeView === CandidateDisplayType.TABLE} onClick={setActiveView} type={CandidateDisplayType.TABLE}>
+        <HeaderIconButton active={tableValue === 0 ? true : false} onClick={setActiveView} type={CandidateDisplayType.TABLE}>
           <FormatListBulletedIcon />
         </HeaderIconButton>
-        <HeaderIconButton active={activeView === CandidateDisplayType.KABAN} onClick={setActiveView} type={CandidateDisplayType.KABAN}>
+        <HeaderIconButton active={tableValue === 0 ? false : true } onClick={setActiveView} type={CandidateDisplayType.KABAN}>
           <BorderAllIcon />
         </HeaderIconButton>
       </HeaderDiv>
