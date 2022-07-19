@@ -13,8 +13,10 @@ export const CustomKanbanDiv = styled('div')`
 
 export const TableWrapper = styled('div')`
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     height: 100%;
+    overflow-x: scroll;
+    width: 100%;
 `;
 
 
@@ -22,12 +24,13 @@ export const KanbanColumn = styled('div')`
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
     
 `;
 
 export const DroppableDiv = styled('div')`
   padding: 4px;
-  width: 250px;
+  width: 100%;
   min-height: 500px;
 `;
 
@@ -42,7 +45,6 @@ export const DraggableDivWrapper = styled('div')`
   border-radius: 25px;
   color: #000000;
   border: 1px solid #000000;
-
 `;
 
 export const DraggableNameAndAvatar = styled('div')`
