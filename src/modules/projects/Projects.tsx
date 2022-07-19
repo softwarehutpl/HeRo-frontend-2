@@ -6,6 +6,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { IconButton } from "@mui/material";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const EditDataButton = ({ index }: any) => {
   const handleEditClick = () => {
@@ -26,20 +27,35 @@ const client = axios.create({
     "https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/GetList",
 });
 
-const getDataFromApi = (status: string, stage: string) => {
+const getDataFromApi = (
+  name: string,
+  description: string,
+  pageSize: number,
+  pageNumber: number
+) => {
   client
     .post("", {
-      status,
-      stage,
+      name: name,
+      description: description,
+      beginnigData: "",
+      endingDate: "",
+      pagin: {
+        pageSize: pageSize,
+        pageNumber: pageNumber,
+      },
+      sortOrder: {
+        sort: [
+          {
+            key: "",
+            value: "",
+          },
+        ],
+      },
     })
     .then((response) => {
       console.log(response.data);
     });
 };
-
-getDataFromApi("new", "evaluation");
-
-// useEffect ( () => { getDataFromApi('new', 'evaluation') ; }, [])
 
 const columns: GridColDef[] = [
   { field: "name", headerName: "Name", width: 200 },
@@ -108,6 +124,10 @@ const rows = [
 const statusesList = ["Open", "Closed"];
 
 export default function Projects() {
+  useEffect(() => {
+    getDataFromApi("", "", 5, 1);
+  }, []);
+
   return (
     <CustomDiv>
       <CheckboxFilters header="Status" filtersList={statusesList} />
