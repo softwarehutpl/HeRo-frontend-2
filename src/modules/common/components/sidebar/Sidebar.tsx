@@ -5,28 +5,33 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import HomeIcon from '@mui/icons-material/Home';
 import PeopleIcon from '@mui/icons-material/People';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
-import { useNavigate } from "react-router-dom";
-
+import { NavLink, useNavigate, Link } from "react-router-dom";
 import { StyledBox } from './SidebarStyles';
 
+
 export default function Sidebar() {
-  const navigate = useNavigate();
   return (
     <StyledBox>
       <MenuList>
-        <MenuItem onClick={() => navigate("/")}>
+        <MenuItem>
           <ListItemIcon>
-            <HomeIcon style={{color: 'black'}} fontSize="small" />
+            <NavLink to="/" style={({isActive}) => (isActive ? { color: 'blue' } : { color: 'black' })}>
+              <HomeIcon fontSize="small" />
+            </NavLink>
           </ListItemIcon>
         </MenuItem>
-        <MenuItem onClick={() => navigate("candidates")}>
+        <MenuItem>
           <ListItemIcon>
-            <PeopleIcon style={{color: 'black'}} fontSize="small" />
+            <NavLink to="candidates" style={({isActive}) => (isActive ? { color: 'blue' } : { color: 'black' })}>
+              <PeopleIcon fontSize="small" />
+            </NavLink>
           </ListItemIcon>
         </MenuItem>
-        <MenuItem onClick={() => navigate("projects")}>
+        <MenuItem>
           <ListItemIcon>
-            <FormatListBulletedIcon style={{color: 'black'}} fontSize="small" />
+            <NavLink to="projects" style={({isActive}) => (isActive ? { color: 'blue' } : { color: 'black' })}>
+              <FormatListBulletedIcon fontSize="small" />
+            </NavLink>
           </ListItemIcon>
         </MenuItem>
       </MenuList>
