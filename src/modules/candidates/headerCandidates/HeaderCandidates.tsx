@@ -15,7 +15,7 @@ interface TextProps {
 
 export default function CandidatesTableHeader({title, component = "div"}:  React.PropsWithChildren<TextProps>) {
 
-  const [activeView, setActiveView] = useState<CandidateDisplayType>(CandidateDisplayType.TABLE);
+  const [, setActiveView] = useState<CandidateDisplayType>(CandidateDisplayType.TABLE);
   
 const tableValue = useTables().value;
 

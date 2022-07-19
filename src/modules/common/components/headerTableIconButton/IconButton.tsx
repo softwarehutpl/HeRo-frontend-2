@@ -27,8 +27,9 @@ export function HeaderIconButton({ active, onClick, type,  children }: React.Pro
     onClick(type);
   }
 
+
   return (
-    <StyledIconButton  active={active} color="primary" onClick={() => handleClick()}>
+    <StyledIconButton  active={+active} color="primary" onClick={() => handleClick()}>
         {children}
     </StyledIconButton>
   
