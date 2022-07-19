@@ -24,8 +24,8 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function SignIn() {
-  const [email, setEmail] = React.useState("test@gmail.com");
-  const [password, setPassword] = React.useState("password");
+  const [email, setEmail] = React.useState("admin@softwarehut.com");
+  const [password, setPassword] = React.useState("admin");
   const [response, setResponse] = React.useState("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
