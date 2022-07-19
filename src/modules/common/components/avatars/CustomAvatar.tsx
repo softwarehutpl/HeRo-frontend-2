@@ -2,10 +2,9 @@ import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 
 
-
-
 export default function CustomAvatar({ name }: {
   name: string;
+  id?: string;
 }) {
 
   function stringAvatar(name: string) {
