@@ -107,10 +107,11 @@ const onDragEnd = (
 function KanbanTable() {
   const [columns, setColumns] = useState(columnsFromBackend);
   return (
-    <TableWrapper>
+    
       <DragDropContext
         onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
       >
+        <TableWrapper>
         {Object.entries(columns).map(([columnId, column], index) => {
           return (
             <KanbanColumn
@@ -121,7 +122,7 @@ function KanbanTable() {
             >
               <h2>{column.name}</h2>
               <div style={{ margin: 8 }}>
-                <Droppable droppableId={columnId} key={columnId}>
+                <Droppable droppableId={columnId} key={columnId} >
                   {(provided, snapshot) => {
                     return (
                       <DroppableDiv
@@ -173,8 +174,9 @@ function KanbanTable() {
             </KanbanColumn>
           );
         })}
+        </TableWrapper>
       </DragDropContext>
-    </TableWrapper>
+    
   );
 }
 
