@@ -39,10 +39,14 @@ export default function SignIn() {
 
   const loginData = (email: string, password: string) => {
     client
-      .post("", {
-        email,
-        password,
-      })
+      .post(
+        "",
+        {
+          email,
+          password,
+        },
+        { withCredentials: true }
+      )
       .then((response) => {
         console.log(response.data);
       });
