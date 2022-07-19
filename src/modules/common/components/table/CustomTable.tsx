@@ -9,24 +9,35 @@ const columns: GridColDef[] = [
     width: 70,
     sortable: false,
     filterable: false,
+    renderCell: (props) => {
+      return <CustomAvatar name={props.row.name} />;
+    },
   },
-  { field: 'name', headerName: 'Name', width: 190 },
-  { field: 'source', headerName: 'Source', width: 150 },
-  { field: 'project', headerName: 'Project', width: 200 },
-  { field: 'position', headerName: 'Position', width: 200 },
-  { field: 'status', headerName: 'Status', width: 160 },
-  { field: 'stage', headerName: 'Stage', width: 160 },
-  { field: 'assignee', headerName: 'Assignee', width: 160 },
-  { field: 'profile', headerName: 'Profile', width: 160 },
+  { field: 'name', headerName: 'Name', width: 140 },
+  { field: 'source', headerName: 'Source', width: 120 },
+  { field: 'project', headerName: 'Project', width: 160 },
+  { field: 'position', headerName: 'Position', width: 160 },
+  { field: 'status', headerName: 'Status', width: 140 },
+  { field: 'stage', headerName: 'Stage', width: 140 },
+  { field: 'assignee', headerName: 'Assignee', width: 140 },
+  { field: 'profile', headerName: 'Profile', width: 110 },
 ];
 
 const owndata = [
   {
     id: '1',
-    renderCell: () => {
-      return <CustomAvatar name={"John Doe"} />;
-    },
-    name: 'John Doe',
+    name: 'Kohn Doe',
+    source: 'Internal',
+    project: 'React Developer',
+    position: 'React Developer',
+    status: 'Qualified',
+    stage: 'Interview',
+    assignee: 'Peter Ditter',
+    profile: 'see Profile',
+  },
+  {
+    id: '2',
+    name: 'Krzysztof Kononowicz',
     source: 'Internal',
     project: 'React Developer',
     position: 'React Developer',
