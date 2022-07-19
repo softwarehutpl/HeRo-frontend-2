@@ -15,21 +15,21 @@ export default function Sidebar() {
       <MenuList>
         <MenuItem>
           <ListItemIcon>
-            <NavLink to="/" style={({isActive}) => (isActive ? { color: 'blue' } : { color: 'black' })}>
+            <NavLink to="/" style={({isActive}) => (isActive ? { color: '#1976d2' } : { color: '#000000' })}>
               <HomeIcon fontSize="small" />
             </NavLink>
           </ListItemIcon>
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
-            <NavLink to="candidates" style={({isActive}) => (isActive ? { color: 'blue' } : { color: 'black' })}>
+            <NavLink to="candidates" style={({isActive}) => (isActive ? { color: '#1976d2' } : { color: '#000000' })}>
               <PeopleIcon fontSize="small" />
             </NavLink>
           </ListItemIcon>
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
-            <NavLink to="projects" style={({isActive}) => (isActive ? { color: 'blue' } : { color: 'black' })}>
+            <NavLink to="projects" style={({isActive}) => (isActive ? { color: '#1976d2' } : { color: '#000000' })}>
               <FormatListBulletedIcon fontSize="small" />
             </NavLink>
           </ListItemIcon>
