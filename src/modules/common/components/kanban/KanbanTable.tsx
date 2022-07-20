@@ -21,7 +21,7 @@ type SetColumnsType = React.Dispatch<
     [x: number]: {
       name: string;
       items: {
-        id: any;
+        id: string;
         content: string;
       }[];
     };
@@ -62,10 +62,21 @@ const columnsFromBackend = {
     items: [],
   },
 };
+type ColumnsType = {
+  [x: string]: {
+      name: string;
+      items: {
+          id: string;
+          content: string;
+      }[];
+  };
+}
+
+
 
 const onDragEnd = (
   result: DropResult,
-  columns: any,
+  columns: ColumnsType,
   setColumns: SetColumnsType
 ) => {
   if (!result.destination) return;
@@ -141,7 +152,7 @@ function KanbanTable() {
                               draggableId={item.id}
                               index={index}
                             >
-                              {(provided, snapshot) => {
+                              {(provided) => {
                                 return (
                                   <DraggableDivWrapper
                                     ref={provided.innerRef}
