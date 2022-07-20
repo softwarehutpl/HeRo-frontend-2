@@ -8,16 +8,17 @@ export default function Skills() {
       id="combo-box-demo"
       options={skills}
       sx={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label="Movie" />}
+      onChange={(event, value) => console.log(value)}
+      renderInput={(params) => <TextField {...params} label="Skill" />}
     />
   );
 }
 
 
 const skills = [
-    {label: 'React'},
-    {label: 'Angular'},
-    {label: 'Javascript'},
-    {label: 'C#'},
-    {label: 'Java'},
+    {id: '1', label: 'React'},
+    {id: '2', label: 'Angular'},
+    {id: '3', label: 'Javascript'},
+    {id: '4', label: 'C#'},
+    {id: '5', label: 'Java'},
   ]
