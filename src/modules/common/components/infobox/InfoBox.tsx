@@ -1,3 +1,4 @@
+import React from 'react';
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 
@@ -11,7 +12,7 @@ interface InfoBoxTypes{
   value: number,
   name: string,
   route: string
-};
+}
 
 
 export default function InfoBox({title, value, name, route}: InfoBoxTypes) {

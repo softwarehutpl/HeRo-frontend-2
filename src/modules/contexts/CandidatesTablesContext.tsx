@@ -1,3 +1,4 @@
+import React from 'react';
 import { createContext, useContext, useState, FC} from "react";
 
 
@@ -18,7 +19,7 @@ type Props = {
 
 const TablesContext = createContext<TablesCOntextInterface>({
   value: CandidatesDisplayMode.TABLE,
-  setValue: () => {}
+  setValue: () => { throw new Error('read only')}
 });
 
 

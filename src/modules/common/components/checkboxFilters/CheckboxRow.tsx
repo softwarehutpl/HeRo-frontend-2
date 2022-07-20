@@ -1,3 +1,4 @@
+import React from 'react';
 import { FunctionComponent, useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
 import { CustomForm } from "./CheckboxRowStyles";

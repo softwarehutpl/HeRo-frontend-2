@@ -1,4 +1,8 @@
+
+import React from 'react';
+import { TypographyTypeMap } from '@mui/material';
 import { Box, Modal, Typography, TypographyTypeMap } from '@mui/material';
+
 
 import { HeaderBox } from '../../common/components/tableHeader/TableHeaderStyles';
 import { HeaderDiv } from './HeaderProjectsStyles';
@@ -38,8 +42,8 @@ export default function ProjectsTableHaeder({ title, component = 'div' }: React.
       <HeaderTypography variant="h4" component={component}>
         {title}
       </HeaderTypography>
-      <HeaderDiv>
-        <HeaderIconButton active onClick={handleOpen} type={CandidateDisplayType.PLUS}>
+      <HeaderDiv >
+        <HeaderIconButton  active onClick={()=>{console.log("Działa")}} type={CandidateDisplayType.PLUS}>
           <AddBoxOutlinedIcon />
         </HeaderIconButton>
         <Modal

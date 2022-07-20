@@ -1,3 +1,4 @@
+import React from 'react';
 import TablesProvider from "../modules/contexts/CandidatesTablesContext";
 
 type ProvidersProps = {
