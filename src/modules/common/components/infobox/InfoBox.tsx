@@ -2,8 +2,8 @@ import React from 'react';
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 
-import {CustomizedBox} from "./styled/StyledInfoBox";
-import {CustomizedButton} from "./styled/StyledInfoBox";
+import {CustomizedBox} from "./InfoBoxStyles";
+import {CustomizedButton} from "./InfoBoxStyles";
 
 
 
