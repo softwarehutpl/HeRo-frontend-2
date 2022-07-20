@@ -34,3 +34,10 @@ export const CustomHrRate = styled('p')`
     border-radius: 25px;
 
 `;
+
+export const CustomTechRate = styled('p')`
+    margin-right: 25px;
+    background: #ACC900;
+    padding: 5px 11px 5px 11px;
+    border-radius: 25px;
+`;
