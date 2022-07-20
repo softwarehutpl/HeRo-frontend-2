@@ -1,21 +1,21 @@
-import { Box, IconButton, Modal, Typography } from '@mui/material';
+import { Autocomplete, Box, IconButton, Modal, TextField, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import React from 'react';
-
-
+import ModalForm from '../modalForm/ModalForm';
+import Skills from '../skills/Skills';
 
 const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '90%',
-    height: '90%',
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '40%',
+  height: '90%',
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 export const EditDataButton = ({ index }: any) => {
   // const handleEditClick = () => {
@@ -43,6 +43,14 @@ export const EditDataButton = ({ index }: any) => {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Edit project
           </Typography>
+          <ModalForm />
+          <Typography id="modal-modal-title" variant="h6" component="h2" style={{ marginTop: '15px' }}>
+            Skills
+          </Typography>
+          <Skills />
+          <textarea>
+          </textarea>
+          <button type="submit">Save</button>
         </Box>
       </Modal>
     </div>
