@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import CustomAvatar from '../avatars/CustomAvatar';
+import { Link } from 'react-router-dom';
 
 const columns: GridColDef[] = [
   {
@@ -20,7 +21,14 @@ const columns: GridColDef[] = [
   { field: 'status', headerName: 'Status', width: 140 },
   { field: 'stage', headerName: 'Stage', width: 140 },
   { field: 'assignee', headerName: 'Assignee', width: 140 },
-  { field: 'profile', headerName: 'Profile', width: 110 },
+  { 
+    field: 'profile', 
+    headerName: 'Profile', 
+    width: 110,
+    renderCell: (params) => {
+      return <Link to="/profile">{params.row.profile}</Link>;
+    }, 
+  },
 ];
 
 const owndata = [

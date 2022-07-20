@@ -6,5 +6,6 @@ export const StyledBox = styled(Box)`
   min-height: calc(100vh - 63.99px - 40px);
   background-color: #FFFFFF;
   margin-left: 0px;
-  margin-right: 2px;
+  margin-right: 15px;
+  border-right: solid 1px #F4F4F4;
 `;
