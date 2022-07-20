@@ -1,7 +1,8 @@
-import { Box, IconButton, Modal, Typography } from '@mui/material';
+import { Autocomplete, Box, IconButton, Modal, TextField, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import React from 'react';
 import ModalForm from '../modalForm/ModalForm';
+import Skills from '../skills/Skills';
 
 
 
@@ -48,8 +49,11 @@ export const EditDataButton = ({ index }: any) => {
           <Typography id="modal-modal-title" variant="h6" component="h2" style={{marginTop: "15px"}}> 
             Skills
           </Typography>
+          <Skills/>
         </Box>
       </Modal>
     </div>
   );
 };
+
+

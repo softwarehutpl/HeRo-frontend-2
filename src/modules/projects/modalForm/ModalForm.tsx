@@ -1,5 +1,4 @@
 import { FormControlUnstyled } from '@mui/base';
-// import { Label } from '@mui/icons-material';
 import { FormInputWrapper, Input, Label } from './ModalFormStyles';
 
 function ModalForm() {
