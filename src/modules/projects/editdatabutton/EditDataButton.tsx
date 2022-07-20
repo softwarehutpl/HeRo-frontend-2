@@ -41,7 +41,7 @@ export const EditDataButton = ({ index }: any) => {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Create/edit project
+            Edit project
           </Typography>
         </Box>
       </Modal>
