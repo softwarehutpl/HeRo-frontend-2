@@ -1,10 +1,14 @@
 import React from "react";
+import ProfileInfo from "./profileinfo/ProfileInfo";
+import ProfilePdf from "./profilepdf/ProfilePdf";
+import { ProfileWrapper } from "./ProfileStyles";
 
 function Profile() {
     return (
-      <div>
-        <h1>This is the candidate profile page</h1>
-      </div>
+      <ProfileWrapper>
+        <ProfileInfo/>
+        <ProfilePdf/>
+      </ProfileWrapper>
     );
   }
   
