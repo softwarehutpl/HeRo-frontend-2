@@ -2,25 +2,12 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import CheckboxFilters from "../common/components/checkboxFilters/CheckboxFilters";
 import ProjectsTableHaeder from "./headerProjects/HeaderProjects";
 import { CustomDiv } from "./ProjectsStyles";
-import EditIcon from "@mui/icons-material/Edit";
-import { IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import ProjectsSerivce from "../common/Api/Projects.serivce";
+import { EditDataButton } from "./editdatabutton/EditDataButton";
 
-const EditDataButton = ({ index }: any) => {
-  const handleEditClick = () => {
-    console.log(`editDataButton clicked ${index}`);
 
-    // go to ...candidates?projrctId=1&status=hired filet
-  };
-
-  return (
-    <IconButton onClick={handleEditClick}>
-      <EditIcon style={{ color: "#1976d2" }}></EditIcon>
-    </IconButton>
-  );
-};
 
 let receivedData;
 
@@ -131,7 +118,6 @@ export default function Projects() {
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}
-            // checkboxSelection
           />
         </div>
       </div>
