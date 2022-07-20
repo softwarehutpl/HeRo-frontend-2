@@ -1,4 +1,4 @@
-
+import React from 'react';
 import {HeaderBox, HeaderDiv} from "../../common/components/tableHeader/TableHeaderStyles";
 import {HeaderTypography} from "../../common/components/tableHeader/TableHeaderStyles";
 import {HeaderIconButton, CandidateDisplayType} from "../../common/components/headerTableIconButton/IconButton";

@@ -1,3 +1,4 @@
+import React from 'react';
 import { TypographyTypeMap } from '@mui/material';
 
 import {HeaderBox } from "../../common/components/tableHeader/TableHeaderStyles";

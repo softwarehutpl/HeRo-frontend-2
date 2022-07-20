@@ -1,3 +1,4 @@
+import React from 'react';
 import {useTables } from "../../../contexts/CandidatesTablesContext"
 import { StyledIconButton } from './IconButtonStyles';
 

@@ -1,3 +1,4 @@
+import React from 'react';
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import CheckboxFilters from "../common/components/checkboxFilters/CheckboxFilters";
 import ProjectsTableHaeder from "./headerProjects/HeaderProjects";

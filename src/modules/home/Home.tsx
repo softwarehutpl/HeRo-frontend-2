@@ -1,4 +1,4 @@
-// import { Calendar } from "react-big-calendar";
+import React from 'react';
 import InfoBox from "../common/components/infobox/InfoBox";
 import { StyledBox, MainBox } from "./styled/StyledBox";
 import MyCalendar from "./MyCalendar";
