@@ -11,7 +11,7 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '40%',
-    height: '70%',
+    height: '90%',
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -45,6 +45,9 @@ export const EditDataButton = ({ index }: any) => {
             Edit project
           </Typography>
           <ModalForm/>
+          <Typography id="modal-modal-title" variant="h6" component="h2" style={{marginTop: "15px"}}> 
+            Skills
+          </Typography>
         </Box>
       </Modal>
     </div>
