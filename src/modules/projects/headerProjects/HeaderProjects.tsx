@@ -6,6 +6,7 @@ import {HeaderTypography} from "../../common/components/tableHeader/TableHeaderS
 import {HeaderIconButton, CandidateDisplayType} from "../../common/components/headerTableIconButton/IconButton";
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import React from 'react';
+import ModalForm from '../modalForm/ModalForm';
 
 
 interface TextProps {
@@ -55,6 +56,7 @@ export default function ProjectsTableHaeder({title, component = "div" }:  React.
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Add project
           </Typography>
+          <ModalForm/>
         </Box>
       </Modal>
       </HeaderDiv>

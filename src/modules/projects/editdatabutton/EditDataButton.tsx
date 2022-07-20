@@ -1,6 +1,7 @@
 import { Box, IconButton, Modal, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import React from 'react';
+import ModalForm from '../modalForm/ModalForm';
 
 
 
@@ -9,8 +10,8 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '90%',
-    height: '90%',
+    width: '70%',
+    height: '70%',
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -43,6 +44,7 @@ export const EditDataButton = ({ index }: any) => {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Edit project
           </Typography>
+          <ModalForm/>
         </Box>
       </Modal>
     </div>
