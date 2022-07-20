@@ -48,7 +48,8 @@ export const EditDataButton = ({ index }: any) => {
             Skills
           </Typography>
           <Skills />
-          <textarea></textarea>
+          <textarea>
+          </textarea>
           <button type="submit">Save</button>
         </Box>
       </Modal>
