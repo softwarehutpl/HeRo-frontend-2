@@ -98,7 +98,7 @@ export default function CustomTable() {
           ({row})=> handelChange(row)
         }
       />
-      <CandidateSlide isChecked={checked} candidateName={name}/>
+      <CandidateSlide isChecked={checked} candidateName={name} close={setChecked}/>
     </div>
   );
 }

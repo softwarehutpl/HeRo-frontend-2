@@ -18,25 +18,48 @@ export const Content = styled("div")`
   display: flex;
   flex-direction: column;
   height: 100%;
+  padding: 10px 15px;
 `;
 
 export const SlideHeader = styled("div")`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 20%;
+  min-height: 15%;
 `;
 
 export const SlideHeaderNameDiv = styled("div")`
   display: flex;
   justify-content: space-between;
-  width: 35%;
+  align-items: center;
+  width: 45%;
 `;
 
 export const SlideNavbar = styled("div")`
   display: flex;
+  justify-content: space-between;
+  min-height: 5%;
+  padding: 20px 0;
 `;
 
 export const SlideButton = styled(Button)`
   display: flex;
+  min-width: 40%;
+  font-size: 12px;
+  border-radius: 0;
+  text-transform: none;
+`;
+
+export const HistoryWrapper = styled("div")`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 40%;
+  padding: 10px 0;
+`;
+
+export const HistoryContent = styled("div")`
+height: 90%;
+padding: 10px 0;
+background-color: green;
 `;
