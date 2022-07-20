@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { TypographyTypeMap } from '@mui/material';
 import { Box, Modal, Typography, TypographyTypeMap } from '@mui/material';
 
 
@@ -9,7 +8,6 @@ import { HeaderDiv } from './HeaderProjectsStyles';
 import { HeaderTypography } from '../../common/components/tableHeader/TableHeaderStyles';
 import { HeaderIconButton, CandidateDisplayType } from '../../common/components/headerTableIconButton/IconButton';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
-import React from 'react';
 import ModalForm from '../modalForm/ModalForm';
 import Skills from '../skills/Skills';
 
@@ -20,7 +18,7 @@ interface TextProps {
 }
 
 const style = {
-  position: 'absolute' as 'absolute',
+  position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
@@ -34,7 +32,7 @@ const style = {
 
 export default function ProjectsTableHaeder({ title, component = 'div' }: React.PropsWithChildren<TextProps>) {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
