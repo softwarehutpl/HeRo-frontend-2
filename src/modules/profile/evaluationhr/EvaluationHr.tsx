@@ -1,5 +1,5 @@
 import React from "react";
-import { CustomList, CustomListElement, CustomSecondHeading } from "../ProfileStyles";
+import { CustomHrRate, CustomList, CustomListElement, CustomRateWrapper, CustomSecondHeading } from "../ProfileStyles";
 
 function EvaluationHr() {
     return (
@@ -9,7 +9,12 @@ function EvaluationHr() {
             </CustomSecondHeading>
             <CustomList>
                     <CustomListElement>Evaluation Author: </CustomListElement>
-                    <CustomListElement>Rate: </CustomListElement>
+                    <CustomListElement>
+                        <CustomRateWrapper>
+                            <p>Rate:</p>
+                            <CustomHrRate>5/5</CustomHrRate>
+                        </CustomRateWrapper>
+                    </CustomListElement>
                     <CustomListElement>Note: </CustomListElement>
             </CustomList>
         </div>
