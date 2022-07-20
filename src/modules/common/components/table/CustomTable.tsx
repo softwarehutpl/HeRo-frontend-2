@@ -2,6 +2,7 @@ import * as React from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import CustomAvatar from '../avatars/CustomAvatar';
 import { Link } from 'react-router-dom';
+import { CandidateSlide } from '../candidateSlidePopUp/SlidePopUp';
 
 const columns: GridColDef[] = [
   {
@@ -31,6 +32,8 @@ const columns: GridColDef[] = [
   },
 ];
 
+
+
 const owndata = [
   {
     id: '1',
@@ -56,7 +59,34 @@ const owndata = [
   },
 ];
 
+type Data  = {
+  id: string;
+  name: string;
+  source: string;
+  project: string;
+  position: string;
+  status: string;
+  stage: string;
+  assignee: string;
+  profile: string;
+}
+
+
+
 export default function CustomTable() {
+
+  const [checked, setChecked] = React.useState(false);
+  const [name, setName] = React.useState("");
+
+
+  function handelChange(row: Data): void {
+    console.log(row)
+    setChecked(true);
+    setName(row.name)
+  }
+  
+  
+
   return (
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid
@@ -64,7 +94,11 @@ export default function CustomTable() {
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
+        onRowClick={
+          ({row})=> handelChange(row)
+        }
       />
+      <CandidateSlide isChecked={checked} candidateName={name}/>
     </div>
   );
 }
