@@ -10,7 +10,7 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import PersonIcon from "@mui/icons-material/Person";
 
 export default function Navbar() {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const GoToSignIn = () => {
     navigate("/signin", { replace: true });
   };

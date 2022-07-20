@@ -24,7 +24,7 @@ export default function ProjectsTableHaeder({title, component = "div" }:  React.
         {title}
       </HeaderTypography>
       <HeaderDiv >
-        <HeaderIconButton  active onClick={()=>{}} type={CandidateDisplayType.PLUS}>
+        <HeaderIconButton  active onClick={()=>{console.log("Działa")}} type={CandidateDisplayType.PLUS}>
           <AddBoxOutlinedIcon />
         </HeaderIconButton>
       </HeaderDiv>
