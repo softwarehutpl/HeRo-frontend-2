@@ -3,60 +3,32 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import CheckboxFilters from "../common/components/checkboxFilters/CheckboxFilters";
 import ProjectsTableHaeder from "./headerProjects/HeaderProjects";
 import { CustomDiv } from "./ProjectsStyles";
-import EditIcon from "@mui/icons-material/Edit";
-import { IconButton } from "@mui/material";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import ProjectsSerivce from "../common/Api/Projects.serivce";
+import { EditDataButton } from "./editdatabutton/EditDataButton";
 
-const EditDataButton = ({ index }: any) => {
-  const handleEditClick = () => {
-    console.log(`editDataButton clicked ${index}`);
 
-    // go to ...candidates?projrctId=1&status=hired filet
-  };
 
-  return (
-    <IconButton onClick={handleEditClick}>
-      <EditIcon style={{ color: "#1976d2" }}></EditIcon>
-    </IconButton>
-  );
+let receivedData;
+
+const postData = {
+  Paging: {
+    pageSize: 10,
+    pageNumber: 1,
+  },
 };
 
-const client = axios.create({
-  baseURL:
-    "https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/GetList",
-});
-
-const getDataFromApi = (
-  name: string,
-  description: string,
-  pageSize: number,
-  pageNumber: number
-) => {
-  client
-    .post("", {
-      name: name,
-      description: description,
-      beginnigData: "",
-      endingDate: "",
-      pagin: {
-        pageSize: pageSize,
-        pageNumber: pageNumber,
-      },
-      sortOrder: {
-        sort: [
-          {
-            key: "",
-            value: "",
-          },
-        ],
-      },
-    })
-    .then((response) => {
-      console.log(response.data);
-    });
+const getList = () => {
+  const projectData = ProjectsSerivce.recruitmentHttpPost("GetList", postData);
+  // receivedData = projectData.recruitmentDTOs;
+  // console.log(receivedData);
+  // console.log(projectData);
+  receivedData = projectData;
 };
+
+getList();
+console.log(receivedData);
 
 const columns: GridColDef[] = [
   { field: "name", headerName: "Name", width: 200 },
@@ -90,6 +62,13 @@ const columns: GridColDef[] = [
     },
   },
 ];
+
+// const ows = [
+//   receivedData.recruitmentDTOs.map((item: any) => {
+//     id: 'item.id',
+//     name: item.name
+//   })
+// ]
 
 const rows = [
   {
@@ -125,9 +104,9 @@ const rows = [
 const statusesList = ["Open", "Closed"];
 
 export default function Projects() {
-  useEffect(() => {
-    getDataFromApi("", "", 5, 1);
-  }, []);
+  // useEffect(() => {
+  //   getList();
+  // }, []);
 
   return (
     <CustomDiv>
@@ -140,7 +119,6 @@ export default function Projects() {
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}
-            // checkboxSelection
           />
         </div>
       </div>
