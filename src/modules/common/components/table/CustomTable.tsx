@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 
 const columns: GridColDef[] = [
   {
-    field: "avatar",
-    headerName: "",
+    field: 'avatar',
+    headerName: '',
     width: 70,
     sortable: false,
     filterable: false,
-    renderCell: (props) => {
+    renderCell: props => {
       return <CustomAvatar name={props.row.name} />;
     },
   },
@@ -21,13 +21,13 @@ const columns: GridColDef[] = [
   { field: 'status', headerName: 'Status', width: 140 },
   { field: 'stage', headerName: 'Stage', width: 140 },
   { field: 'assignee', headerName: 'Assignee', width: 140 },
-  { 
-    field: 'profile', 
-    headerName: 'Profile', 
+  {
+    field: 'profile',
+    headerName: 'Profile',
     width: 110,
-    renderCell: (params) => {
+    renderCell: params => {
       return <Link to="/profile">{params.row.profile}</Link>;
-    }, 
+    },
   },
 ];
 
@@ -59,14 +59,7 @@ const owndata = [
 export default function CustomTable() {
   return (
     <div style={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={owndata}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-      />
+      <DataGrid rows={owndata} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />
     </div>
   );
 }
-
-

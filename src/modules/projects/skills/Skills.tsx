@@ -24,12 +24,11 @@ export default function Skills() {
       <Autocomplete
         disablePortal
         id="combo-box-demo"
-        options={skills}
+        options={skills.filter(x => !skillList.includes(x))}
         sx={{ width: 300 }}
         onChange={(_event, newSkill) => {
           handleOnChange(newSkill as Skill);
         }}
-        // isOptionEqualToValue={(option, value) => option.id === value.id}
         renderInput={params => <TextField {...params} label="Skill" />}
       />
       <SkillsList list={skillList} />
