@@ -1,12 +1,10 @@
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import React, { useState } from 'react';
-import { stringify } from 'querystring';
-import { kStringMaxLength } from 'buffer';
-import SkillsList from '../skillsList/SkillsList';
+import React from 'react';
+import { SkillsList } from '../skillsList/SkillsList';
 
 export interface Skill {
-  id: string;
+  id: number;
   label: string;
 }
 
@@ -18,6 +16,12 @@ export default function Skills() {
       setSkillList(prevState => [...prevState, newSkill]);
     }
   };
+
+  const handleDelete = (id: number):void => {
+    setSkillList(prevState => {
+      return prevState.filter(skillList => skillList.id !== id)
+    })
+  }
 
   return (
     <div>
@@ -31,15 +35,15 @@ export default function Skills() {
         }}
         renderInput={params => <TextField {...params} label="Skill" />}
       />
-      <SkillsList list={skillList} />
+      <SkillsList list={skillList} onSkillDelete={handleDelete}/>
     </div>
   );
 }
 
 const skills = [
-  { id: '1', label: 'React' },
-  { id: '2', label: 'Angular' },
-  { id: '3', label: 'Javascript' },
-  { id: '4', label: 'C#' },
-  { id: '5', label: 'Java' },
+  { id: 1, label: 'React' },
+  { id: 2, label: 'Angular' },
+  { id: 3, label: 'Javascript' },
+  { id: 4, label: 'C#' },
+  { id: 5, label: 'Java' },
 ];
