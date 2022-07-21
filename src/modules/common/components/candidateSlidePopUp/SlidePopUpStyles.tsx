@@ -1,8 +1,6 @@
-import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
-
-
-
+import Button from "@mui/material/Button";
+import ListItem from "@mui/material/ListItem";
+import { styled } from "@mui/material/styles";
 
 export const ContentWrapper = styled("div")`
   position: fixed;
@@ -12,7 +10,6 @@ export const ContentWrapper = styled("div")`
   background-color: lightblue;
   min-width: 20%;
 `;
-
 
 export const Content = styled("div")`
   display: flex;
@@ -59,22 +56,26 @@ export const HistoryWrapper = styled("div")`
 `;
 
 export const HistoryContent = styled("div")`
-display: flex;
+  display: flex;
 
-height: 90%;
-padding: 10px 0;
-background-color: green;
+  height: 90%;
+  padding: 10px 0;
+  background-color: green;
 `;
 
-
 export const EvaluationWrapper = styled("div")`
-height: 90%;
-padding: 10px 0;
-background-color: green;
+  height: 90%;
+  padding: 10px 0;
+  background-color: green;
 `;
 
 export const EvaluationContent = styled("div")`
-height: 90%;
-padding: 10px 0;
-background-color: green;
+  height: 90%;
+  padding: 10px 0;
+  background-color: green;
+`;
+
+export const InterviewerItem = styled(ListItem)`
+  display: flex;
+  flex-direction: column;
 `;
