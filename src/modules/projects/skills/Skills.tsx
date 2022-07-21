@@ -19,7 +19,7 @@ export default function Skills() {
     />
   );
 }
-
+// put that to service
 const skills = [
   { id: '1', label: 'React' },
   { id: '2', label: 'Angular' },

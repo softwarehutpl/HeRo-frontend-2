@@ -7,7 +7,7 @@ interface ISigninContext {
 
 const defaultState = {
   isLogIn: false,
-  setIsLogIn: () => {},
+  setIsLogIn: () => undefined
 };
 
 type Props = {

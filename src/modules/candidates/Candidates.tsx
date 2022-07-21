@@ -20,6 +20,25 @@ function Candidates() {
     "Offer",
   ];
 
+
+  // Organize the constants values in simiar way:
+
+  // Convert plain dictionaries into enums 
+  /*
+  export enum EProjectColumnLabel {
+    Name = "Name",
+    Creator = "Creator",
+    From = "From",
+    To = "To",
+    Resume = "Resume",
+    Hired = "Hired",
+    actions = "actions",
+  };
+  type ProjectColumnLabelType = keyof typeof EProjectColumnLabel; // if you need type
+
+  const example = EProjectColumnLabel.Name;
+  const onlyValues = Object.values(EProjectColumnLabel); //if you need array of values or keys
+*/
   return (
     <CustomDiv>
       <CheckboxDiv>
@@ -27,6 +46,7 @@ function Candidates() {
         <CheckboxFilters header="Stage" filtersList={stageList} />
       </CheckboxDiv>
       <div style={{ width: "100%" }}>
+        {/* Avoid inline styling. The accepted case is when styling inline in order to hack 3rd party elements */}
         <CandidatesTableHeader title="Candidates" />
         {whichTable === 0 ? (
           <CustomTable />

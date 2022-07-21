@@ -2,7 +2,7 @@ import React from 'react';
 import {useTables } from "../../../contexts/CandidatesTablesContext"
 import { StyledIconButton } from './IconButtonStyles';
 
-
+// Wrong location for the enum. Its supposed to be IconButton, enum for display should be shared
 export enum CandidateDisplayType {
   TABLE,
   KABAN,

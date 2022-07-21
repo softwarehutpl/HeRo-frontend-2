@@ -8,7 +8,8 @@ type Values = {
     title: string;
     color:string;
   };
-
+  // 1.Use shorthand Values[]
+  // 2. Put mocks outside
   const myList2:Array<Values> =[
     {
       id: 1,

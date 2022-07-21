@@ -3,6 +3,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import CustomAvatar from '../avatars/CustomAvatar';
 import { Link } from 'react-router-dom';
 
+// Put column definitions in separate file, e.g. GridConfig.const.ts
 const columns: GridColDef[] = [
   {
     field: "avatar",
