@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState, useContext } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -9,25 +9,17 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
-import ProjectsSerivce from "../common/Api/Projects.serivce";
-
-function Copyright(props: any) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    ></Typography>
-  );
-}
+// import ProjectsSerivce from "../common/Api/Projects.serivce";
+import SigninContext from "../contexts/SigninContext";
 
 const theme = createTheme();
 
 export default function SignIn() {
-  const [email, setEmail] = React.useState("admin@softwarehut.com");
-  const [password, setPassword] = React.useState("admin");
-  // const [response, setResponse] = React.useState("");
+  const [email, setEmail] = useState("admin@softwarehut.com");
+  const [password, setPassword] = useState("admin");
+  // const [response, setResponse] = useState("");
+
+  const { isLogIn, setIsLogIn } = useContext(SigninContext);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -47,14 +39,16 @@ export default function SignIn() {
           password,
         },
         { withCredentials: true }
-        // xsrfHeaderName: "X-XSRF-TOKEN" }
       )
       .then((response) => {
-        console.log(response.data);
+        console.log(response.data.value);
+        setIsLogIn(response.data.value === email ? true : false);
       });
     // setEmail("");
     // setPassword("");
   };
+
+  console.log(isLogIn);
 
   const handleEmailValue = (e: any) => {
     e.preventDefault();
@@ -64,20 +58,6 @@ export default function SignIn() {
   const handlePasswordValue = (e: any) => {
     e.preventDefault();
     setPassword(e.target.value);
-  };
-
-  // const handleTest = () => {
-  //   axios({
-  //     method: "get",
-  //     url: "https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/GetStatusList",
-  //     withCredentials: true,
-  //     // xsrfHeaderName: "X-XSRF-TOKEN",
-  //   }).then((response) => console.log(response));
-  // };
-
-  const handleTest = () => {
-    const testData = ProjectsSerivce.recruitmentHttpGet("GetStatusList");
-    console.log(testData);
   };
 
   return (
@@ -136,10 +116,8 @@ export default function SignIn() {
             >
               Sign In
             </Button>
-            <Button onClick={handleTest}>Test</Button>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );
