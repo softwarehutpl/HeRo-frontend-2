@@ -1,30 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import CheckboxFilters from "../common/components/checkboxFilters/CheckboxFilters";
 import ProjectsTableHaeder from "./headerProjects/HeaderProjects";
 import { CustomDiv } from "./ProjectsStyles";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-// import ProjectsSerivce from "../common/Api/Projects.serivce";
 import { EditDataButton } from "./editdatabutton/EditDataButton";
-import axios from "axios";
-
-const postData = {
-  paging: {
-    pageSize: 10,
-    pageNumber: 1,
-  },
-};
-
-const client = axios.create({
-  baseURL:
-    "https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/GetList",
-  withCredentials: true,
-});
-
-// const projectData = ProjectsSerivce.recruitmentHttpPost("GetList", postData);
-
-// ProjectsSerivce.recruitmentHttpPost("GetList", postData);
+import ProjectsSerivce from "../common/Api/Projects.serivce";
 
 const columns: GridColDef[] = [
   { field: "name", headerName: "Name", width: 200 },
@@ -57,13 +38,6 @@ const columns: GridColDef[] = [
   },
 ];
 
-// const ows = [
-//   receivedData.recruitmentDTOs.map((item: any) => {
-//     id: 'item.id',
-//     name: item.name
-//   })
-// ]
-
 const rows = [
   {
     id: "1",
@@ -95,19 +69,28 @@ const rows = [
   },
 ];
 
+const postData = {
+  paging: {
+    pageSize: 10,
+    pageNumber: 1,
+  },
+};
+
 const statusesList = ["Open", "Closed"];
 
+// ProjectsSerivce.recruitmentHttpPost("GetList", postData);
 export default function Projects() {
-  const [allData, setAllData] = useState(null);
+  // const [allData, setAllData] = useState("");
 
-  const testReq = () => {
-    client.post("", { postData }, { withCredentials: true }).then((res) => {
-      console.log(res.data.recruitmentDTOs[0].id);
-      setAllData(res.data);
-    });
-  };
+  useEffect(() => {
+    const projectData = ProjectsSerivce.recruitmentHttpPost(
+      "GetList",
+      postData
+    );
+    projectData.then((res) => console.log(res.totalCount));
 
-  testReq();
+    // projectData.then((res) => [{id: res.recruitmentDTOs[0].id}]);
+  }, []);
 
   return (
     <CustomDiv>
