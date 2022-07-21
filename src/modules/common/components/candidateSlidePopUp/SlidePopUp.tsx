@@ -8,13 +8,12 @@ import { useNavigate } from "react-router-dom";
 
 
 interface CandidateSlideProps {
-  isChecked?: boolean;
+  isChecked: boolean;
   candidateName: string;
-  close: React.Dispatch<React.SetStateAction<boolean>>;
+  close: () => void;
 }
 
 
-// zapytać Kamila o to aby się nie wysuwał Slide po kliknięciu na innego kandytata !!
 
 
 export function CandidateSlide({isChecked, candidateName, close }: CandidateSlideProps): JSX.Element{
@@ -29,7 +28,7 @@ export function CandidateSlide({isChecked, candidateName, close }: CandidateSlid
                 <CustomAvatar name={candidateName}/>
                 {candidateName}
               </SlideHeaderNameDiv>
-              <IconButton style={{alignSelf: "flex-start"}} onClick={() => close(false)}>
+              <IconButton style={{alignSelf: "flex-start"}} onClick={close}>
                 <CloseOutlinedIcon />  
               </IconButton>
             </SlideHeader>
@@ -38,7 +37,7 @@ export function CandidateSlide({isChecked, candidateName, close }: CandidateSlid
               <SlideButton variant="contained" onClick={() => navigate("/profile")}>Browse profile</SlideButton>
             </SlideNavbar>
             <HistoryWrapper>
-              <div><h3>Evaluations</h3></div>
+              <div><h3>Evaluation Info</h3></div>
               <HistoryContent>
                 <div>Zielona</div>
                 <EvaluationWrapper>
