@@ -5,7 +5,7 @@ import ModalForm from '../modalForm/ModalForm';
 import Skills from '../skills/Skills';
 
 const style = {
-  position: 'absolute' as 'absolute',
+  position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
@@ -48,8 +48,7 @@ export const EditDataButton = ({ index }: any) => {
             Skills
           </Typography>
           <Skills />
-          <textarea>
-          </textarea>
+          <textarea></textarea>
           <button type="submit">Save</button>
         </Box>
       </Modal>
