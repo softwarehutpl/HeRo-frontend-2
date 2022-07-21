@@ -1,10 +1,26 @@
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import React, { useState } from 'react';
+import { stringify } from 'querystring';
+import { kStringMaxLength } from 'buffer';
+
+interface Skill {
+  id: string;
+  label: string;
+}
 
 export default function Skills() {
-  const [selectedSkill, setSelectedSkill] = useState<any>();
-  console.log(selectedSkill);
+  const [skillList, setSkillList] = React.useState<Skill[]>([]);
+
+  const handleOnChange = (newSkill: Skill): void => {
+    console.log(skillList);
+    if (newSkill === null) {
+      alert('null');
+    } else {
+      setSkillList(prevState => [...prevState, newSkill]);
+    }
+    console.log(skillList);
+  };
 
   return (
     <Autocomplete
@@ -13,8 +29,9 @@ export default function Skills() {
       options={skills}
       sx={{ width: 300 }}
       onChange={(_event, newSkill) => {
-        setSelectedSkill(newSkill);
+        handleOnChange(newSkill as Skill);
       }}
+      // isOptionEqualToValue={(option, value) => option.id === value.id}
       renderInput={params => <TextField {...params} label="Skill" />}
     />
   );
