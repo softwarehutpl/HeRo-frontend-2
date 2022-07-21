@@ -10,15 +10,19 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
+
 import SigninContext from "../contexts/SigninContext";
 import { Navigate } from "react-router-dom";
 // import ProjectsSerivce from "../common/Api/Projects.serivce";
 
+
 const theme = createTheme();
 
 export default function SignIn() {
+
   const [email, setEmail] = useState("admin@softwarehut.com");
   const [password, setPassword] = useState("admin");
+
 
   const { isLogIn, setIsLogIn } = useContext(SigninContext);
 
@@ -28,20 +32,20 @@ export default function SignIn() {
   };
 
   const client = axios.create({
-    baseURL: "https://swh-t-praktyki2022-app.azurewebsites.net/Auth/SignIn",
+    baseURL: 'https://swh-t-praktyki2022-app.azurewebsites.net/Auth/SignIn',
   });
 
   const loginData = (email: string, password: string) => {
     client
       .post(
-        "",
+        '',
         {
           email,
           password,
         },
         { withCredentials: true }
       )
-      .then((response) => {
+      .then(response => {
         console.log(response.data.value);
         setIsLogIn(response.data.value === email ? true : false);
       });
@@ -70,23 +74,18 @@ export default function SignIn() {
         <Box
           sx={{
             marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "#1976d2" }}>
+          <Avatar sx={{ m: 1, bgcolor: '#1976d2' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -111,12 +110,7 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
             />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
+            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
               Sign In
             </Button>
           </Box>

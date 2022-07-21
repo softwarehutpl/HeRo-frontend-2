@@ -1,5 +1,6 @@
 import { FormControlUnstyled } from '@mui/base';
 import { FormInputWrapper, Input, Label } from './ModalFormStyles';
+import React from 'react';
 
 function ModalForm() {
   return (
@@ -12,11 +13,11 @@ function ModalForm() {
           <Input placeholder="Seniority" />
         </FormControlUnstyled>
         <FormInputWrapper>
-          <FormControlUnstyled defaultValue="" required style={{flexBasis: '45%'}}>
+          <FormControlUnstyled defaultValue="" required style={{ flexBasis: '45%' }}>
             <Label>From</Label>
             <Input placeholder="From" type="date" />
           </FormControlUnstyled>
-          <FormControlUnstyled defaultValue="" required style={{flexBasis: '45%'}}>
+          <FormControlUnstyled defaultValue="" required style={{ flexBasis: '45%' }}>
             <Label>To</Label>
             <Input placeholder="To" type="date" />
           </FormControlUnstyled>

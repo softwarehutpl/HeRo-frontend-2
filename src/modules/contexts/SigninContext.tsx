@@ -1,4 +1,4 @@
-import { createContext, FunctionComponent, useState } from "react";
+import React, { createContext, FunctionComponent, useState } from 'react';
 
 interface ISigninContext {
   isLogIn: boolean;
@@ -7,7 +7,9 @@ interface ISigninContext {
 
 const defaultState = {
   isLogIn: false,
-  setIsLogIn: () => {},
+  setIsLogIn: () => {
+    console.log('ok');
+  },
 };
 
 type Props = {
@@ -19,11 +21,7 @@ const SigninContext = createContext<ISigninContext>(defaultState);
 export const SigninProvider: FunctionComponent<Props> = ({ children }) => {
   const [isLogIn, setIsLogIn] = useState(defaultState.isLogIn);
 
-  return (
-    <SigninContext.Provider value={{ isLogIn, setIsLogIn }}>
-      {children}
-    </SigninContext.Provider>
-  );
+  return <SigninContext.Provider value={{ isLogIn, setIsLogIn }}>{children}</SigninContext.Provider>;
 };
 
 export default SigninContext;
