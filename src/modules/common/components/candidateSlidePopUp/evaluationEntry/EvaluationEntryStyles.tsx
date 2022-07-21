@@ -39,3 +39,17 @@ export const CustomListItemText = styled(ListItemText)`
   flex-direction: column;
   background-color: white;
 `;
+
+export const EvaluationItem = styled(ListItem)`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: white;
+`;
+
+export const RatingWrapper = styled("div")`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: brown;
+`;

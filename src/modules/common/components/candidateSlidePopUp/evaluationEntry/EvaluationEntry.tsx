@@ -1,15 +1,19 @@
 import React from "react";
 import ListItem from "@mui/material/ListItem";
-import List from "@mui/material/List";
-import ListItemText from "@mui/material/ListItemText";
+import LinearProgress from "@mui/material/LinearProgress";
+import Box from "@mui/material/Box";
+
 import {
   AvatarNameWrapper,
   CustomList,
   CustomListItemText,
+  EvaluationItem,
   InterviewerItem,
+  RatingWrapper,
 } from "./EvaluationEntryStyles";
 import CustomAvatar from "../../avatars/CustomAvatar";
 import Divider from "@mui/material/Divider";
+import Avatar from "@mui/material/Avatar";
 
 export function Entry() {
   // const handleClick = ()=> {
@@ -36,7 +40,15 @@ export function Entry() {
         </AvatarNameWrapper>
       </InterviewerItem>
       <Divider />
-      <ListItem>Ewaluation</ListItem>
+      <EvaluationItem>
+        <p>Evaluation</p>
+        <RatingWrapper>
+          <Avatar>4</Avatar>
+          <Box sx={{ width: "100%" }}>
+            <LinearProgress variant="determinate" value={4} />
+          </Box>
+        </RatingWrapper>
+      </EvaluationItem>
     </CustomList>
   );
 }
