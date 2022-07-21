@@ -59,6 +59,21 @@ export const HistoryWrapper = styled("div")`
 `;
 
 export const HistoryContent = styled("div")`
+display: flex;
+
+height: 90%;
+padding: 10px 0;
+background-color: green;
+`;
+
+
+export const EvaluationWrapper = styled("div")`
+height: 90%;
+padding: 10px 0;
+background-color: green;
+`;
+
+export const EvaluationContent = styled("div")`
 height: 90%;
 padding: 10px 0;
 background-color: green;

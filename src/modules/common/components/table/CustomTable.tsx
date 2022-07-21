@@ -81,6 +81,7 @@ export default function CustomTable() {
 
   function handelChange(row: Data): void {
     console.log(row)
+
     setChecked(true);
     setName(row.name)
   }
@@ -95,7 +96,7 @@ export default function CustomTable() {
         pageSize={5}
         rowsPerPageOptions={[5]}
         onRowClick={
-          ({row})=> handelChange(row)
+          ({row})=> checked === false ? handelChange(row) : null
         }
       />
       <CandidateSlide isChecked={checked} candidateName={name} close={setChecked}/>

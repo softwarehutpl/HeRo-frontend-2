@@ -1,6 +1,6 @@
 import React from 'react';
 import Slide from '@mui/material/Slide';
-import { ContentWrapper, Content, SlideButton, SlideHeader, SlideHeaderNameDiv, SlideNavbar, HistoryWrapper, HistoryContent} from "./SlidePopUpStyles"
+import { ContentWrapper, Content, SlideButton, SlideHeader, SlideHeaderNameDiv, SlideNavbar, HistoryWrapper, HistoryContent, EvaluationWrapper, EvaluationContent} from "./SlidePopUpStyles"
 import CustomAvatar from '../avatars/CustomAvatar';
 import IconButton from '@mui/material/IconButton';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
@@ -29,8 +29,8 @@ export function CandidateSlide({isChecked, candidateName, close }: CandidateSlid
                 <CustomAvatar name={candidateName}/>
                 {candidateName}
               </SlideHeaderNameDiv>
-              <IconButton style={{alignSelf: "flex-start"}}>
-                <CloseOutlinedIcon onClick={() => close(false)}/>  
+              <IconButton style={{alignSelf: "flex-start"}} onClick={() => close(false)}>
+                <CloseOutlinedIcon />  
               </IconButton>
             </SlideHeader>
             <SlideNavbar>
@@ -38,8 +38,17 @@ export function CandidateSlide({isChecked, candidateName, close }: CandidateSlid
               <SlideButton variant="contained" onClick={() => navigate("/profile")}>Browse profile</SlideButton>
             </SlideNavbar>
             <HistoryWrapper>
-              <div><p>History</p></div>
-              <HistoryContent>Hui</HistoryContent>
+              <div><h3>Evaluations</h3></div>
+              <HistoryContent>
+                <div>Zielona</div>
+                <EvaluationWrapper>
+                  <EvaluationContent>
+                    <div>Date</div>
+                    <div>Intervievers</div>
+                    <div>Ewaluation</div>
+                  </EvaluationContent>
+                </EvaluationWrapper>
+              </HistoryContent>
             </HistoryWrapper>
           </Content>
         </ContentWrapper>
