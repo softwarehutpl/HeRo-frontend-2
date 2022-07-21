@@ -8,6 +8,7 @@ import { HeaderIconButton, CandidateDisplayType } from '../../common/components/
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import ModalForm from '../modalForm/ModalForm';
 import Skills from '../skills/Skills';
+import { CustomFormButton, CustomTextArea, TextAreaWrapper } from '../ProjectsStyles';
 
 interface TextProps {
   title: string;
@@ -57,8 +58,10 @@ export default function ProjectsTableHaeder({ title, component = 'div' }: React.
               Skills
             </Typography>
             <Skills />
-            <textarea></textarea>
-            <button type="submit">Save</button>
+            <TextAreaWrapper>
+              <CustomTextArea></CustomTextArea>
+              <CustomFormButton type="submit">Save</CustomFormButton>
+            </TextAreaWrapper>
           </Box>
         </Modal>
       </HeaderDiv>
