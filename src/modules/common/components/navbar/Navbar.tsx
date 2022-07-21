@@ -8,11 +8,22 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import PersonIcon from "@mui/icons-material/Person";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { useContext } from "react";
+import SigninContext from "../../../contexts/SigninContext";
+import axios from "axios";
 
 export default function Navbar() {
+  const { isLogIn, setIsLogIn } = useContext(SigninContext);
   const navigate = useNavigate();
-  const GoToSignIn = () => {
+  const goToSignIn = () => {
     navigate("/signin", { replace: true });
+  };
+
+  const logOut = () => {
+    axios.get("https://swh-t-praktyki2022-app.azurewebsites.net/Auth/LogOut");
+
+    setIsLogIn(false);
   };
 
   return (
@@ -32,9 +43,15 @@ export default function Navbar() {
           <Button color="inherit">
             <NotificationsNoneIcon />
           </Button>
-          <Button color="inherit" onClick={GoToSignIn}>
-            <PersonIcon sx={{ paddingLeft: "20px" }} />
-          </Button>
+          {isLogIn ? (
+            <Button color="inherit" onClick={logOut}>
+              <LogoutIcon sx={{ paddingLeft: "20px" }} />
+            </Button>
+          ) : (
+            <Button color="inherit" onClick={goToSignIn}>
+              <PersonIcon sx={{ paddingLeft: "20px" }} />
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </Box>

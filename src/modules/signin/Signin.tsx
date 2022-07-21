@@ -10,15 +10,19 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
+
+import SigninContext from "../contexts/SigninContext";
+import { Navigate } from "react-router-dom";
 // import ProjectsSerivce from "../common/Api/Projects.serivce";
-import SigninContext from '../contexts/SigninContext';
+
 
 const theme = createTheme();
 
 export default function SignIn() {
-  const [email, setEmail] = useState('admin@softwarehut.com');
-  const [password, setPassword] = useState('admin');
-  // const [response, setResponse] = useState("");
+
+  const [email, setEmail] = useState("admin@softwarehut.com");
+  const [password, setPassword] = useState("admin");
+
 
   const { isLogIn, setIsLogIn } = useContext(SigninContext);
 
@@ -61,7 +65,9 @@ export default function SignIn() {
     setPassword(e.target.value);
   };
 
-  return (
+  return isLogIn ? (
+    <Navigate to="/" replace={true} />
+  ) : (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
