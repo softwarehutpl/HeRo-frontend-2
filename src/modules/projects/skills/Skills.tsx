@@ -1,6 +1,6 @@
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 export default function Skills() {
   const [selectedSkill, setSelectedSkill] = useState<any>();
