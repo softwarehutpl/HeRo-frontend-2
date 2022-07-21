@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import DeleteButton from '../deleteButton/DeleteButton';
 import SkillRating from '../rating/SkillRating';
-import { Skill } from '../skills/Skills';
-import { CustomList, CustomListItem } from './SkillsListStyles';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import { CustomDeleteButton, CustomList, CustomListItem, CustomSpan } from './SkillsListStyles';
 
 interface SkillsListProps {
-  list: Array<Skill>;
+  list: {id: string; label: string }[];
+  onDeleteSkill: (id: string) => void;
 }
 
-export default function SkillsList({ list }: SkillsListProps): JSX.Element {
-  const mapList = list.map(item => (
+export const SkillsList: React.FC<SkillsListProps> = props => {
+  const mapList = props.list.map(item => (
     <CustomListItem key={item.id}>
-      {item.label}
+      <CustomSpan>{item.label}</CustomSpan>
       <SkillRating />
-      <DeleteButton />
+       <CustomDeleteButton onClick={props.onDeleteSkill.bind(null, item.id)}/>
     </CustomListItem>
   ));
   return (

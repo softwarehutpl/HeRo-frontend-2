@@ -1,9 +1,7 @@
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import React, { useState } from 'react';
-import { stringify } from 'querystring';
-import { kStringMaxLength } from 'buffer';
-import SkillsList from '../skillsList/SkillsList';
+import React from 'react';
+import { SkillsList } from '../skillsList/SkillsList';
 
 export interface Skill {
   id: string;
@@ -19,6 +17,12 @@ export default function Skills() {
     }
   };
 
+  const deleteHandler = (id: string) => {
+    setSkillList(prevState => {
+      return prevState.filter(skillList => skillList.id !== id)
+    })
+  }
+
   return (
     <div>
       <Autocomplete
@@ -31,7 +35,7 @@ export default function Skills() {
         }}
         renderInput={params => <TextField {...params} label="Skill" />}
       />
-      <SkillsList list={skillList} />
+      <SkillsList list={skillList} onDeleteSkill={deleteHandler}/>
     </div>
   );
 }

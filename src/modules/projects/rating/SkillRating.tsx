@@ -4,13 +4,13 @@ import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 
 export default function SkillRating() {
-  const [value, setValue] = React.useState<number | null>(2);
+  const [value, setValue] = React.useState<number | null>(0);
 
   return (
     <Box
       sx={{
         '& > legend': { mt: 2 },
-        mr: '15px',
+        mr: '30px',
         ml: '15px',
       }}
     >

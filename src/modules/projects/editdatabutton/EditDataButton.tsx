@@ -3,7 +3,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import React from 'react';
 import ModalForm from '../modalForm/ModalForm';
 import Skills from '../skills/Skills';
-import SkillsList from '../skillsList/SkillsList';
 import { CustomDiv, CustomFormButton, CustomTextArea, TextAreaWrapper } from '../ProjectsStyles';
 
 const style = {
@@ -21,11 +20,6 @@ const style = {
 };
 
 export const EditDataButton = ({ index }: any) => {
-  // const handleEditClick = () => {
-  //   console.log(`editDataButton clicked ${index}`);
-
-  //   // go to ...candidates?projrctId=1&status=hired filet
-  // };
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
