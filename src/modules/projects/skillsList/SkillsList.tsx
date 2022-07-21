@@ -12,7 +12,7 @@ export const SkillsList: React.FC<SkillsListProps> = props => {
     <CustomListItem key={item.id}>
       <CustomSpan>{item.label}</CustomSpan>
       <SkillRating />
-       <CustomDeleteButton onClick={props.onSkillDelete.bind(null, item.id)}/>
+      <CustomDeleteButton onClick={(e) => props.onSkillDelete(item.id)}/>
     </CustomListItem>
   ));
   return (
