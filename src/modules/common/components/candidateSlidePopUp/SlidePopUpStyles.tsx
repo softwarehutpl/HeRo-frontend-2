@@ -1,5 +1,4 @@
 import Button from "@mui/material/Button";
-import ListItem from "@mui/material/ListItem";
 import { styled } from "@mui/material/styles";
 
 export const ContentWrapper = styled("div")`
@@ -61,21 +60,4 @@ export const HistoryContent = styled("div")`
   height: 90%;
   padding: 10px 0;
   background-color: green;
-`;
-
-export const EvaluationWrapper = styled("div")`
-  height: 90%;
-  padding: 10px 0;
-  background-color: green;
-`;
-
-export const EvaluationContent = styled("div")`
-  height: 90%;
-  padding: 10px 0;
-  background-color: green;
-`;
-
-export const InterviewerItem = styled(ListItem)`
-  display: flex;
-  flex-direction: column;
 `;

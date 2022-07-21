@@ -9,14 +9,16 @@ import {
   SlideNavbar,
   HistoryWrapper,
   HistoryContent,
-  EvaluationWrapper,
-  EvaluationContent,
 } from "./SlidePopUpStyles";
 import CustomAvatar from "../avatars/CustomAvatar";
 import IconButton from "@mui/material/IconButton";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import { useNavigate } from "react-router-dom";
 import { Entry } from "./evaluationEntry/EvaluationEntry";
+import {
+  EvaluationContent,
+  EvaluationWrapper,
+} from "./evaluationEntry/EvaluationEntryStyles";
 
 interface CandidateSlideProps {
   isChecked: boolean;

@@ -1,9 +1,15 @@
 import React from "react";
 import ListItem from "@mui/material/ListItem";
 import List from "@mui/material/List";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
-import { InterviewerItem } from "../SlidePopUpStyles";
+import {
+  AvatarNameWrapper,
+  CustomList,
+  CustomListItemText,
+  InterviewerItem,
+} from "./EvaluationEntryStyles";
+import CustomAvatar from "../../avatars/CustomAvatar";
+import Divider from "@mui/material/Divider";
 
 export function Entry() {
   // const handleClick = ()=> {
@@ -12,14 +18,25 @@ export function Entry() {
   // }
 
   return (
-    <List>
+    <CustomList>
       <ListItem>Date</ListItem>
+      <Divider />
       <InterviewerItem>
-        <p>Intervievers</p>
-        <ListItemAvatar></ListItemAvatar>
-        <ListItemText primary="Caroline Robertson" secondary="HR Manager" />
+        <p>Interviewers</p>
+        <AvatarNameWrapper>
+          <CustomAvatar name={"Caroline Robertson"}></CustomAvatar>
+          <div style={{ paddingLeft: "10px" }}>
+            <CustomListItemText
+              primary="Caroline Robertson"
+              primaryTypographyProps={{ fontSize: "15px" }}
+              secondary="HR Manager"
+              secondaryTypographyProps={{ fontSize: "12px" }}
+            />
+          </div>
+        </AvatarNameWrapper>
       </InterviewerItem>
+      <Divider />
       <ListItem>Ewaluation</ListItem>
-    </List>
+    </CustomList>
   );
 }
