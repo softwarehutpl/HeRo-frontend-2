@@ -3,31 +3,27 @@ import CheckboxFilters from "../common/components/checkboxFilters/CheckboxFilter
 import ProjectsTableHaeder from "./headerProjects/HeaderProjects";
 import { CustomDiv } from "./ProjectsStyles";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import ProjectsSerivce from "../common/Api/Projects.serivce";
+import { useState } from "react";
+// import ProjectsSerivce from "../common/Api/Projects.serivce";
 import { EditDataButton } from "./editdatabutton/EditDataButton";
-
-
-
-let receivedData;
+import axios from "axios";
 
 const postData = {
-  Paging: {
+  paging: {
     pageSize: 10,
     pageNumber: 1,
   },
 };
 
-const getList = () => {
-  const projectData = ProjectsSerivce.recruitmentHttpPost("GetList", postData);
-  // receivedData = projectData.recruitmentDTOs;
-  // console.log(receivedData);
-  // console.log(projectData);
-  receivedData = projectData;
-};
+const client = axios.create({
+  baseURL:
+    "https://swh-t-praktyki2022-app.azurewebsites.net/Recruitment/GetList",
+  withCredentials: true,
+});
 
-getList();
-console.log(receivedData);
+// const projectData = ProjectsSerivce.recruitmentHttpPost("GetList", postData);
+
+// ProjectsSerivce.recruitmentHttpPost("GetList", postData);
 
 const columns: GridColDef[] = [
   { field: "name", headerName: "Name", width: 200 },
@@ -37,8 +33,6 @@ const columns: GridColDef[] = [
     field: "to",
     headerName: "To",
     width: 160,
-    // valueGetter: (params: GridValueGetterParams) =>
-    //   `${params.row.firstName || ""} ${params.row.lastName || ""}`,
   },
   { field: "resume", headerName: "Resume", width: 120 },
 
@@ -103,9 +97,16 @@ const rows = [
 const statusesList = ["Open", "Closed"];
 
 export default function Projects() {
-  // useEffect(() => {
-  //   getList();
-  // }, []);
+  const [allData, setAllData] = useState(null);
+
+  const testReq = () => {
+    client.post("", { postData }, { withCredentials: true }).then((res) => {
+      console.log(res.data.recruitmentDTOs[0].id);
+      setAllData(res.data);
+    });
+  };
+
+  testReq();
 
   return (
     <CustomDiv>
