@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
+import { Skill } from '../skills/Skills';
 
-export default function SkillsList() {
+interface SkillsListProps {
+  list: Array<Skill>;
+}
+
+export default function SkillsList({ list }: SkillsListProps): JSX.Element {
+  const mapList = list.map(item => <li key={item.id}>{item.label}</li>);
   return (
     <div>
-      <ul>
-        <li>:;</li>
-      </ul>
+      <ul>{mapList}</ul>
     </div>
   );
 }

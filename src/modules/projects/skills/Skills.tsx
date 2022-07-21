@@ -5,7 +5,7 @@ import { stringify } from 'querystring';
 import { kStringMaxLength } from 'buffer';
 import SkillsList from '../skillsList/SkillsList';
 
-interface Skill {
+export interface Skill {
   id: string;
   label: string;
 }
@@ -14,13 +14,9 @@ export default function Skills() {
   const [skillList, setSkillList] = React.useState<Skill[]>([]);
 
   const handleOnChange = (newSkill: Skill): void => {
-    console.log(skillList);
-    if (newSkill === null) {
-      alert('null');
-    } else {
+    if (newSkill !== null) {
       setSkillList(prevState => [...prevState, newSkill]);
     }
-    console.log(skillList);
   };
 
   return (
@@ -36,7 +32,7 @@ export default function Skills() {
         // isOptionEqualToValue={(option, value) => option.id === value.id}
         renderInput={params => <TextField {...params} label="Skill" />}
       />
-      <SkillsList />
+      <SkillsList list={skillList} />
     </div>
   );
 }
