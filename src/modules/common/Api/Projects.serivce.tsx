@@ -12,9 +12,7 @@ const recruitmentHttpGet = (endpoint: any) => {
 };
 
 const recruitmentHttpPost = (endpoint: any, postData: any) => {
-  return client
-    .post(`${endpoint}`, postData)
-    .then((response) => console.log(response.data.recruitmentDTOs[0].id));
+  return client.post(`${endpoint}`, postData).then((response) => response.data);
 };
 // console.log(recruitmentHttpPost);
 
