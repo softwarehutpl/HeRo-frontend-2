@@ -4,7 +4,7 @@ import React from 'react';
 import { SkillsList } from '../skillsList/SkillsList';
 
 export interface Skill {
-  id: string;
+  id: number;
   label: string;
 }
 
@@ -17,7 +17,7 @@ export default function Skills() {
     }
   };
 
-  const deleteHandler = (id: string) => {
+  const handleDelete = (id: number):void => {
     setSkillList(prevState => {
       return prevState.filter(skillList => skillList.id !== id)
     })
@@ -35,15 +35,15 @@ export default function Skills() {
         }}
         renderInput={params => <TextField {...params} label="Skill" />}
       />
-      <SkillsList list={skillList} onDeleteSkill={deleteHandler}/>
+      <SkillsList list={skillList} onSkillDelete={handleDelete}/>
     </div>
   );
 }
 
 const skills = [
-  { id: '1', label: 'React' },
-  { id: '2', label: 'Angular' },
-  { id: '3', label: 'Javascript' },
-  { id: '4', label: 'C#' },
-  { id: '5', label: 'Java' },
+  { id: 1, label: 'React' },
+  { id: 2, label: 'Angular' },
+  { id: 3, label: 'Javascript' },
+  { id: 4, label: 'C#' },
+  { id: 5, label: 'Java' },
 ];
