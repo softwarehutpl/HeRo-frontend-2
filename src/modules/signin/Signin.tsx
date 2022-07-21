@@ -1,3 +1,4 @@
+import * as React from "react";
 import { useState, useContext } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -50,12 +51,12 @@ export default function SignIn() {
 
   console.log(isLogIn);
 
-  const handleEmailValue = (e: any) => {
+  const handleEmailValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setEmail(e.target.value);
   };
 
-  const handlePasswordValue = (e: any) => {
+  const handlePasswordValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setPassword(e.target.value);
   };
