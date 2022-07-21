@@ -3,6 +3,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import React from 'react';
 import ModalForm from '../modalForm/ModalForm';
 import Skills from '../skills/Skills';
+import SkillsList from '../skillsList/SkillsList';
+import { CustomDiv, CustomFormButton, CustomTextArea, TextAreaWrapper } from '../ProjectsStyles';
 
 const style = {
   position: 'absolute',
@@ -15,6 +17,7 @@ const style = {
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
+  overflowY: 'scroll',
 };
 
 export const EditDataButton = ({ index }: any) => {
@@ -48,8 +51,10 @@ export const EditDataButton = ({ index }: any) => {
             Skills
           </Typography>
           <Skills />
-          <textarea></textarea>
-          <button type="submit">Save</button>
+          <TextAreaWrapper>
+            <CustomTextArea></CustomTextArea>
+            <CustomFormButton type="submit">Save</CustomFormButton>
+          </TextAreaWrapper>
         </Box>
       </Modal>
     </div>

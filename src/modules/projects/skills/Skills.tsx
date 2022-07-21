@@ -3,6 +3,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import React, { useState } from 'react';
 import { stringify } from 'querystring';
 import { kStringMaxLength } from 'buffer';
+import SkillsList from '../skillsList/SkillsList';
 
 interface Skill {
   id: string;
@@ -23,17 +24,20 @@ export default function Skills() {
   };
 
   return (
-    <Autocomplete
-      disablePortal
-      id="combo-box-demo"
-      options={skills}
-      sx={{ width: 300 }}
-      onChange={(_event, newSkill) => {
-        handleOnChange(newSkill as Skill);
-      }}
-      // isOptionEqualToValue={(option, value) => option.id === value.id}
-      renderInput={params => <TextField {...params} label="Skill" />}
-    />
+    <div>
+      <Autocomplete
+        disablePortal
+        id="combo-box-demo"
+        options={skills}
+        sx={{ width: 300 }}
+        onChange={(_event, newSkill) => {
+          handleOnChange(newSkill as Skill);
+        }}
+        // isOptionEqualToValue={(option, value) => option.id === value.id}
+        renderInput={params => <TextField {...params} label="Skill" />}
+      />
+      <SkillsList />
+    </div>
   );
 }
 
