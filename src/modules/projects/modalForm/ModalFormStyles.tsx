@@ -1,32 +1,31 @@
 import InputUnstyled, { inputUnstyledClasses } from '@mui/base/InputUnstyled';
-import { styled } from "@mui/material/styles";
-import  { useFormControlUnstyledContext } from '@mui/base/FormControlUnstyled';
+import { styled } from '@mui/material/styles';
+import { useFormControlUnstyledContext } from '@mui/base/FormControlUnstyled';
 import React from 'react';
 import clsx from 'clsx';
-  
 
 const blue = {
-    100: '#DAECFF',
-    200: '#80BFFF',
-    400: '#3399FF',
-    600: '#0072E5',
-  };
-  
-  const grey = {
-    50: '#F3F6F9',
-    100: '#E7EBF0',
-    200: '#E0E3E7',
-    300: '#CDD2D7',
-    400: '#B2BAC2',
-    500: '#A0AAB4',
-    600: '#6F7E8C',
-    700: '#3E5060',
-    800: '#2D3843',
-    900: '#1A2027',
-  };
-  
+  100: '#DAECFF',
+  200: '#80BFFF',
+  400: '#3399FF',
+  600: '#0072E5',
+};
+
+const grey = {
+  50: '#F3F6F9',
+  100: '#E7EBF0',
+  200: '#E0E3E7',
+  300: '#CDD2D7',
+  400: '#B2BAC2',
+  500: '#A0AAB4',
+  600: '#6F7E8C',
+  700: '#3E5060',
+  800: '#2D3843',
+  900: '#1A2027',
+};
+
 export const Input = styled(InputUnstyled)(
-    ({ theme }) => `
+  ({ theme }) => `
     
     .${inputUnstyledClasses.input} {
       width: calc(100% - 32px);
@@ -47,63 +46,47 @@ export const Input = styled(InputUnstyled)(
       }
   
       &:focus {
-        outline: 3px solid ${
-          theme.palette.mode === 'dark' ? blue[600] : blue[100]
-        };
+        outline: 3px solid ${theme.palette.mode === 'dark' ? blue[600] : blue[100]};
       }
     }
   `
+);
+
+export const Label = styled(({ children, className }: { children?: React.ReactNode; className?: string }) => {
+  const formControlContext = useFormControlUnstyledContext();
+  const [dirty, setDirty] = React.useState(false);
+
+  React.useEffect(() => {
+    if (formControlContext?.filled) {
+      setDirty(true);
+    }
+  }, [formControlContext]);
+
+  if (formControlContext === undefined) {
+    return <p>{children}</p>;
+  }
+
+  const { error, required, filled } = formControlContext;
+  const showRequiredError = dirty && required && !filled;
+
+  return (
+    <p className={clsx(className, error || showRequiredError ? 'invalid' : '')}>
+      {children}
+      {required ? ' *' : ''}
+    </p>
   );
+})`
+  font-family: IBM Plex Sans, sans-serif;
+  font-size: 0.875rem;
+  margin-bottom: 4px;
 
-
-
-
-export const Label = styled(
-    ({
-      children,
-      className,
-    }: {
-      children?: React.ReactNode;
-      className?: string;
-    }) => {
-      const formControlContext = useFormControlUnstyledContext();
-      const [dirty, setDirty] = React.useState(false);
-  
-      React.useEffect(() => {
-        if (formControlContext?.filled) {
-          setDirty(true);
-        }
-      }, [formControlContext]);
-  
-      if (formControlContext === undefined) {
-        return <p>{children}</p>;
-      }
-  
-      const { error, required, filled } = formControlContext;
-      const showRequiredError = dirty && required && !filled;
-  
-      return (
-        <p
-          className={clsx(className, error || showRequiredError ? 'invalid' : '')}
-        >
-          {children}
-          {required ? ' *' : ''}
-        </p>
-      );
-    }
-  )`
-    font-family: IBM Plex Sans, sans-serif;
-    font-size: 0.875rem;
-    margin-bottom: 4px;
-  
-    &.invalid {
-      color: red;
-    }
-  `;
-
+  &.invalid {
+    color: red;
+  }
+`;
 
 export const FormInputWrapper = styled('div')`
-    display: flex;
-    width: 93%;
-    justify-content: space-between;
+  display: flex;
+  width: 93%;
+  justify-content: space-between;
 `;

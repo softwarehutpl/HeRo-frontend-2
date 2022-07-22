@@ -1,12 +1,7 @@
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 
-
-export default function CustomAvatar({ name }: {
-  name: string;
-  id?: string;
-}) {
-
+export default function CustomAvatar({ name }: { name: string; id?: string }) {
   function stringAvatar(name: string) {
     return {
       sx: {
@@ -15,7 +10,5 @@ export default function CustomAvatar({ name }: {
       children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
     };
   }
-  return (
-      <Avatar {...stringAvatar(name)} />
-  );
+  return <Avatar {...stringAvatar(name)} />;
 }

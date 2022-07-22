@@ -1,33 +1,25 @@
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import axios from "axios";
-import ProjectsSerivce from "../common/Api/Projects.serivce";
-
-function Copyright(props: any) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    ></Typography>
-  );
-}
+import * as React from 'react';
+import { useState, useContext } from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
+import SigninContext from '../contexts/SigninContext';
+import { Navigate } from 'react-router-dom';
 
 const theme = createTheme();
 
 export default function SignIn() {
-  const [email, setEmail] = React.useState("admin@softwarehut.com");
-  const [password, setPassword] = React.useState("admin");
-  // const [response, setResponse] = React.useState("");
+  const [email, setEmail] = useState('admin@softwarehut.com');
+  const [password, setPassword] = useState('admin');
+
+  const { isLogIn, setIsLogIn } = useContext(SigninContext);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -35,75 +27,58 @@ export default function SignIn() {
   };
 
   const client = axios.create({
-    baseURL: "https://swh-t-praktyki2022-app.azurewebsites.net/Auth/SignIn",
+    baseURL: 'https://swh-t-praktyki2022-app.azurewebsites.net/Auth/SignIn',
   });
 
   const loginData = (email: string, password: string) => {
     client
       .post(
-        "",
+        '',
         {
           email,
           password,
         },
         { withCredentials: true }
-        // xsrfHeaderName: "X-XSRF-TOKEN" }
       )
-      .then((response) => {
-        console.log(response.data);
+      .then(response => {
+        console.log(response.data.value);
+        setIsLogIn(response.data.value === email ? true : false);
       });
-    // setEmail("");
-    // setPassword("");
   };
 
-  const handleEmailValue = (e: any) => {
+  console.log(isLogIn);
+
+  const handleEmailValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setEmail(e.target.value);
   };
 
-  const handlePasswordValue = (e: any) => {
+  const handlePasswordValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setPassword(e.target.value);
   };
 
-  // const handleTest = () => {
-  //   axios({
-  //     method: "get",
-  //     url: "https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/GetStatusList",
-  //     withCredentials: true,
-  //     // xsrfHeaderName: "X-XSRF-TOKEN",
-  //   }).then((response) => console.log(response));
-  // };
-
-  const handleTest = () => {
-    const testData = ProjectsSerivce.recruitmentHttpGet("GetStatusList");
-    console.log(testData);
-  };
-
-  return (
+  return isLogIn ? (
+    <Navigate to="/" replace={true} />
+  ) : (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
             marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "#1976d2" }}>
+          <Avatar sx={{ m: 1, bgcolor: '#1976d2' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -128,18 +103,11 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
             />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
+            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
               Sign In
             </Button>
-            <Button onClick={handleTest}>Test</Button>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );

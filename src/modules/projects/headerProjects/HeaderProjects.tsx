@@ -1,8 +1,5 @@
-
 import React from 'react';
 import { Box, Modal, Typography, TypographyTypeMap } from '@mui/material';
-
-
 import { HeaderBox } from '../../common/components/tableHeader/TableHeaderStyles';
 import { HeaderDiv } from './HeaderProjectsStyles';
 import { HeaderTypography } from '../../common/components/tableHeader/TableHeaderStyles';
@@ -10,6 +7,7 @@ import { HeaderIconButton, CandidateDisplayType } from '../../common/components/
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import ModalForm from '../modalForm/ModalForm';
 import Skills from '../skills/Skills';
+import { CustomFormButton, CustomTextArea, TextAreaWrapper } from '../ProjectsStyles';
 
 interface TextProps {
   title: string;
@@ -32,7 +30,7 @@ const style = {
 
 export default function ProjectsTableHaeder({ title, component = 'div' }: React.PropsWithChildren<TextProps>) {
   const [open, setOpen] = React.useState(false);
-  // const handleOpen = () => setOpen(true);
+  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
@@ -40,8 +38,8 @@ export default function ProjectsTableHaeder({ title, component = 'div' }: React.
       <HeaderTypography variant="h4" component={component}>
         {title}
       </HeaderTypography>
-      <HeaderDiv >
-        <HeaderIconButton  active onClick={()=>{console.log("Działa")}} type={CandidateDisplayType.PLUS}>
+      <HeaderDiv>
+        <HeaderIconButton active onClick={handleOpen} type={CandidateDisplayType.PLUS}>
           <AddBoxOutlinedIcon />
         </HeaderIconButton>
         <Modal
@@ -59,8 +57,10 @@ export default function ProjectsTableHaeder({ title, component = 'div' }: React.
               Skills
             </Typography>
             <Skills />
-            <textarea></textarea>
-            <button type="submit">Save</button>
+            <TextAreaWrapper>
+              <CustomTextArea></CustomTextArea>
+              <CustomFormButton type="submit">Save</CustomFormButton>
+            </TextAreaWrapper>
           </Box>
         </Modal>
       </HeaderDiv>
