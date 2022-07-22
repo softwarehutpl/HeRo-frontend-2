@@ -7,23 +7,28 @@ import { Link } from "react-router-dom";
 import { EditDataButton } from "./editdatabutton/EditDataButton";
 import ProjectsSerivce from "../common/Api/Projects.serivce";
 
+interface Project {
+  id: string;
+  name: string;
+}
+
 const columns: GridColDef[] = [
   { field: "name", headerName: "Name", width: 200 },
   { field: "creator", headerName: "Creator", width: 200 },
-  { field: "from", headerName: "Frome", width: 160 },
+  { field: "beginningDate", headerName: "Frome", width: 160 },
   {
-    field: "to",
+    field: "endingDate",
     headerName: "To",
     width: 160,
   },
-  { field: "resume", headerName: "Resume", width: 120 },
+  { field: "candidateCount", headerName: "Resume", width: 120 },
 
   {
-    field: "hired",
+    field: "hiredCount",
     headerName: "Hired",
     width: 120,
     renderCell: (params) => {
-      return <Link to="/candidates">{params.row.hired}</Link>;
+      return <Link to="/candidates">{params.row.hiredCount}</Link>;
     },
   },
 
@@ -38,37 +43,6 @@ const columns: GridColDef[] = [
   },
 ];
 
-const rows = [
-  {
-    id: "1",
-    name: "JavaScript Developer",
-    creator: "Jonh Doe",
-    from: "01.07.2022",
-    to: "30.07.2022",
-    resume: "14",
-    hired: "4",
-    field: "",
-  },
-  {
-    id: "2",
-    name: "React Developer",
-    creator: "Jonh Doe",
-    from: "01.07.2022",
-    to: "30.07.2022",
-    resume: "3",
-    hired: "2",
-  },
-  {
-    id: "3",
-    name: "Angular Developer",
-    creator: "Jonh Doe",
-    from: "01.07.2022",
-    to: "30.07.2022",
-    resume: "1",
-    hired: "0",
-  },
-];
-
 const postData = {
   paging: {
     pageSize: 10,
@@ -78,18 +52,15 @@ const postData = {
 
 const statusesList = ["Open", "Closed"];
 
-// ProjectsSerivce.recruitmentHttpPost("GetList", postData);
 export default function Projects() {
-  // const [allData, setAllData] = useState("");
+  const [recruitmentDTOs, setRecruitmentDTOs] = useState<Project[]>([]);
 
   useEffect(() => {
     const projectData = ProjectsSerivce.recruitmentHttpPost(
       "GetList",
       postData
     );
-    projectData.then((res) => console.log(res.totalCount));
-
-    // projectData.then((res) => [{id: res.recruitmentDTOs[0].id}]);
+    projectData.then((res) => setRecruitmentDTOs(res.recruitmentDTOs));
   }, []);
 
   return (
@@ -99,7 +70,7 @@ export default function Projects() {
         <ProjectsTableHaeder title="Projects" />
         <div style={{ height: 400, width: "100%" }}>
           <DataGrid
-            rows={rows}
+            rows={recruitmentDTOs}
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}
