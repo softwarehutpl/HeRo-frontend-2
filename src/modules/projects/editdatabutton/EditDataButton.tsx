@@ -20,7 +20,6 @@ const style = {
 };
 
 export const EditDataButton = ({ index }: any) => {
-
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
