@@ -5,7 +5,7 @@ import CandidatesTableHeader from './headerCandidates/HeaderCandidates';
 import { useTables } from '../contexts/CandidatesTablesContext';
 import { CustomKanbanDiv } from '../common/components/kanban/KanbanTableStyles';
 import KanbanTable from '../common/components/kanban/KanbanTable';
-import CustomTable from '../common/components/table/CustomTable';
+import CustomTable from './table/CustomTable';
 
 function Candidates() {
   const whichTable = useTables().value;

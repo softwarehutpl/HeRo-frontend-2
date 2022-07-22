@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import CustomAvatar from '../avatars/CustomAvatar';
+import CustomAvatar from '../../common/components/avatars/CustomAvatar';
 import { Link } from 'react-router-dom';
+import candidate from '../../common/mocks/Candidates.json';
 
 const columns: GridColDef[] = [
   {
@@ -31,35 +32,10 @@ const columns: GridColDef[] = [
   },
 ];
 
-const owndata = [
-  {
-    id: '1',
-    name: 'Kohn Doe',
-    source: 'Internal',
-    project: 'React Developer',
-    position: 'React Developer',
-    status: 'Qualified',
-    stage: 'Interview',
-    assignee: 'Peter Ditter',
-    profile: 'see Profile',
-  },
-  {
-    id: '2',
-    name: 'Krzysztof Kononowicz',
-    source: 'Internal',
-    project: 'React Developer',
-    position: 'React Developer',
-    status: 'Qualified',
-    stage: 'Interview',
-    assignee: 'Peter Ditter',
-    profile: 'see Profile',
-  },
-];
-
 export default function CustomTable() {
   return (
     <div style={{ height: 400, width: '100%' }}>
-      <DataGrid rows={owndata} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />
+      <DataGrid rows={candidate} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />
     </div>
   );
 }

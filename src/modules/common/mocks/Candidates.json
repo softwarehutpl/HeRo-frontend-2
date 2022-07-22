@@ -1,0 +1,46 @@
+[
+    {
+        "id": 1,
+        "name": "Grzegorz Brzęczyszczykiewicz",
+        "source": "Internal",
+        "project": "React Developer",
+        "position": "React Developer",
+        "status": "Qualified",
+        "stage": "Interview",
+        "assignee": "Peter Ditter",
+        "profile": "see Profile"
+      },
+    {
+        "id": 2,
+        "name": "Krzysztof Kononowicz",
+        "source": "Internal",
+        "project": "React Developer",
+        "position": "React Developer",
+        "status": "Qualified",
+        "stage": "Interview",
+        "assignee": "Peter Ditter",
+        "profile": "see Profile"
+      },
+    {
+        "id": 3,
+        "name": "John Doe",
+        "source": "Internal",
+        "project": "Angular Developer",
+        "position": "Angular Developer",
+        "status": "Dropped out",
+        "stage": "Interview",
+        "assignee": "Neil Armstrong",
+        "profile": "see Profile"
+      },
+    {
+        "id": 4,
+        "name": "Robert Lewandowski",
+        "source": "Internal",
+        "project": "React Developer",
+        "position": "React Developer",
+        "status": "Qualified",
+        "stage": "Interview",
+        "assignee": "Peter Ditter",
+        "profile": "see Profile"
+      }
+]
