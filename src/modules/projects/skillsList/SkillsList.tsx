@@ -3,7 +3,7 @@ import SkillRating from '../rating/SkillRating';
 import { CustomDeleteButton, CustomList, CustomListItem, CustomSpan } from './SkillsListStyles';
 
 interface SkillsListProps {
-  list: {id: number; label: string }[];
+  list: { id: number; label: string }[];
   onSkillDelete: (id: number) => void;
 }
 
@@ -12,7 +12,7 @@ export const SkillsList: React.FC<SkillsListProps> = props => {
     <CustomListItem key={item.id}>
       <CustomSpan>{item.label}</CustomSpan>
       <SkillRating />
-      <CustomDeleteButton onClick={(e) => props.onSkillDelete(item.id)}/>
+      <CustomDeleteButton onClick={e => props.onSkillDelete(item.id)} />
     </CustomListItem>
   ));
   return (
@@ -20,4 +20,4 @@ export const SkillsList: React.FC<SkillsListProps> = props => {
       <CustomList>{mapList}</CustomList>
     </div>
   );
-}
+};

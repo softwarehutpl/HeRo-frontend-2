@@ -17,11 +17,11 @@ export default function Skills() {
     }
   };
 
-  const handleDelete = (id: number):void => {
+  const handleDelete = (id: number): void => {
     setSkillList(prevState => {
-      return prevState.filter(skillList => skillList.id !== id)
-    })
-  }
+      return prevState.filter(skillList => skillList.id !== id);
+    });
+  };
 
   return (
     <div>
@@ -35,7 +35,7 @@ export default function Skills() {
         }}
         renderInput={params => <TextField {...params} label="Skill" />}
       />
-      <SkillsList list={skillList} onSkillDelete={handleDelete}/>
+      <SkillsList list={skillList} onSkillDelete={handleDelete} />
     </div>
   );
 }

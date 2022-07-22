@@ -1,13 +1,11 @@
 import { styled } from '@mui/material/styles';
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-
-
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 
 export const CustomizedBox = styled(Box)`
   max-width: 600px;
   max-height: 220px;
-  background-color: #F4F4F4;
+  background-color: #f4f4f4;
   margin-right: 60px;
 `;
 

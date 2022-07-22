@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, Modal, Typography, TypographyTypeMap } from '@mui/material';
-
 import { HeaderBox } from '../../common/components/tableHeader/TableHeaderStyles';
 import { HeaderDiv } from './HeaderProjectsStyles';
 import { HeaderTypography } from '../../common/components/tableHeader/TableHeaderStyles';
