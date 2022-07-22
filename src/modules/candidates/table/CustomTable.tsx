@@ -1,8 +1,9 @@
-import * as React from "react";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import CustomAvatar from "../avatars/CustomAvatar";
-import { Link } from "react-router-dom";
-import { CandidateSlide } from "../candidateSlidePopUp/SlidePopUp";
+import * as React from 'react';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import CustomAvatar from '../../common/components/avatars/CustomAvatar';
+import { Link } from 'react-router-dom';
+import candidate from '../../common/mocks/Candidates.json';
+import { CandidateSlide } from '../../common/components/candidateSlidePopUp/SlidePopUp';
 
 const columns: GridColDef[] = [
   {
@@ -33,31 +34,6 @@ const columns: GridColDef[] = [
   },
 ];
 
-const owndata = [
-  {
-    id: "1",
-    name: "Kohn Doe",
-    source: "Internal",
-    project: "React Developer",
-    position: "React Developer",
-    status: "Qualified",
-    stage: "Interview",
-    assignee: "Peter Ditter",
-    profile: "see Profile",
-  },
-  {
-    id: "2",
-    name: "Krzysztof Kononowicz",
-    source: "Internal",
-    project: "React Developer",
-    position: "React Developer",
-    status: "Qualified",
-    stage: "Interview",
-    assignee: "Peter Ditter",
-    profile: "see Profile",
-  },
-];
-
 export type Data = {
   id: string;
   name: string;
@@ -83,9 +59,9 @@ export default function CustomTable() {
   };
 
   return (
-    <div style={{ height: 400, width: "100%" }}>
+    <div style={{ height: 400, width: '100%' }}>
       <DataGrid
-        rows={owndata}
+        rows={candidate}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
@@ -93,7 +69,7 @@ export default function CustomTable() {
       />
       <CandidateSlide
         isChecked={clickedCandidate !== undefined}
-        candidateName={clickedCandidate ? clickedCandidate.name : "John Doe"}
+        candidateName={clickedCandidate ? clickedCandidate.name : 'John Doe'}
         close={closeDetails}
       />
     </div>
