@@ -10,6 +10,11 @@ import ProjectsSerivce from "../common/Api/Projects.serivce";
 interface Project {
   id: string;
   name: string;
+  creator: string;
+  beginningDate: Date;
+  endingDate: Date;
+  candidateCount: number;
+  hiredCount: number;
 }
 
 const columns: GridColDef[] = [
