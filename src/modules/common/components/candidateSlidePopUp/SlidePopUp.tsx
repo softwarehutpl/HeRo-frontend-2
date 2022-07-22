@@ -19,6 +19,7 @@ import {
   EvaluationContent,
   EvaluationWrapper,
 } from "./evaluationEntry/EvaluationEntryStyles";
+import Typography from "@mui/material/Typography";
 
 interface CandidateSlideProps {
   isChecked: boolean;
@@ -42,7 +43,7 @@ export function CandidateSlide({
               {candidateName}
             </SlideHeaderNameDiv>
             <IconButton style={{ alignSelf: "flex-start" }} onClick={close}>
-              <CloseOutlinedIcon />
+              <CloseOutlinedIcon style={{ color: "#0F62FE" }} />
             </IconButton>
           </SlideHeader>
           <SlideNavbar>
@@ -56,10 +57,11 @@ export function CandidateSlide({
           </SlideNavbar>
           <HistoryWrapper>
             <div>
-              <h3>Evaluation Info</h3>
+              <Typography style={{ fontSize: "18px" }}>
+                Evaluation Info
+              </Typography>
             </div>
             <HistoryContent>
-              <div>Zielona</div>
               <EvaluationWrapper>
                 <EvaluationContent>
                   <Entry />

@@ -6,7 +6,7 @@ export const ContentWrapper = styled("div")`
   height: 90%;
   bottom: 0%;
   right: 0%;
-  background-color: lightblue;
+  background-color: #fafafa;
   min-width: 20%;
 `;
 
@@ -28,7 +28,7 @@ export const SlideHeaderNameDiv = styled("div")`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 45%;
+  gap: 20px;
 `;
 
 export const SlideNavbar = styled("div")`
@@ -56,8 +56,6 @@ export const HistoryWrapper = styled("div")`
 
 export const HistoryContent = styled("div")`
   display: flex;
-
   height: 90%;
   padding: 10px 0;
-  background-color: green;
 `;
