@@ -2,6 +2,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import React from 'react';
 import { SkillsList } from '../skillsList/SkillsList';
+import skills from '../../common/mocks/Skills.json';
 
 export interface Skill {
   id: number;
@@ -39,11 +40,3 @@ export default function Skills() {
     </div>
   );
 }
-
-const skills = [
-  { id: 1, label: 'React' },
-  { id: 2, label: 'Angular' },
-  { id: 3, label: 'Javascript' },
-  { id: 4, label: 'C#' },
-  { id: 5, label: 'Java' },
-];
