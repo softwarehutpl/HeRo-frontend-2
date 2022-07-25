@@ -33,17 +33,17 @@ const columns: GridColDef[] = [
 
   { field: 'name', headerName: 'Name', width: 140 },
   { field: 'source', headerName: 'Source', width: 120 },
-  { field: 'project', headerName: 'Project', width: 160 },
+  { field: 'recruitmentName', headerName: 'Project', width: 160 },
   { field: 'position', headerName: 'Position', width: 160 },
   { field: 'status', headerName: 'Status', width: 140 },
   { field: 'stage', headerName: 'Stage', width: 140 },
-  { field: 'assignee', headerName: 'Assignee', width: 140 },
+  { field: 'recruiterEmail', headerName: 'Assignee', width: 140 },
   {
     field: 'profile',
     headerName: 'Profile',
     width: 110,
     renderCell: params => {
-      return <Link to="/profile">{params.row.profile}</Link>;
+      return <Link to="/profile">{params.row.profile}see profile</Link>;
     },
   },
 ];
