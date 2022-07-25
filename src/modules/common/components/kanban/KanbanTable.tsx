@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
-import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
-import { v4 as uuidv4 } from 'uuid';
-import CustomAvatar from '../avatars/CustomAvatar';
+import React, { useEffect, useState } from "react";
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+  DropResult,
+} from "react-beautiful-dnd";
+import { v4 as uuidv4 } from "uuid";
+import CustomAvatar from "../avatars/CustomAvatar";
+import CandidatesSerivce from "./apiKanban/ApiKanban";
 
 import {
   KanbanColumn,
@@ -9,7 +15,7 @@ import {
   DroppableDiv,
   DraggableNameAndAvatar,
   DraggableDivWrapper,
-} from './KanbanTableStyles';
+} from "./KanbanTableStyles";
 
 type SetColumnsType = React.Dispatch<
   React.SetStateAction<{
@@ -24,39 +30,42 @@ type SetColumnsType = React.Dispatch<
 >;
 
 const itemsFromBackend = [
-  { id: uuidv4(), content: 'Krzysztof Kononowitz' },
-  { id: uuidv4(), content: 'Grzegorz Szeszko' },
-  { id: uuidv4(), content: 'Jakub Sosnowski' },
-  { id: uuidv4(), content: 'John Dalton' },
-  { id: uuidv4(), content: 'Filip Mackiewicz' },
+  { id: uuidv4(), content: "Krzysztof Kononowitz" },
+  { id: uuidv4(), content: "Grzegorz Szeszko" },
+  { id: uuidv4(), content: "Jakub Sosnowski" },
+  { id: uuidv4(), content: "John Dalton" },
+  { id: uuidv4(), content: "Filip Mackiewicz" },
 ];
 
 const columnsFromBackend = {
   [uuidv4()]: {
-    name: 'New',
+    name: "New",
     items: itemsFromBackend,
   },
   [uuidv4()]: {
-    name: 'Evaluation',
+    name: "Evaluation",
     items: [],
   },
   [uuidv4()]: {
-    name: 'Phone Interview',
+    name: "Phone Interview",
     items: [],
   },
   [uuidv4()]: {
-    name: 'Interview',
+    name: "Interview",
     items: [],
   },
   [uuidv4()]: {
-    name: 'Offer',
+    name: "Offer",
     items: [],
   },
   [uuidv4()]: {
-    name: 'Hired',
+    name: "Hired",
     items: [],
   },
 };
+
+console.log(columnsFromBackend);
+
 type ColumnsType = {
   [x: string]: {
     name: string;
@@ -67,7 +76,11 @@ type ColumnsType = {
   };
 };
 
-const onDragEnd = (result: DropResult, columns: ColumnsType, setColumns: SetColumnsType) => {
+const onDragEnd = (
+  result: DropResult,
+  columns: ColumnsType,
+  setColumns: SetColumnsType
+) => {
   if (!result.destination) return;
   const { source, destination } = result;
 
@@ -104,16 +117,35 @@ const onDragEnd = (result: DropResult, columns: ColumnsType, setColumns: SetColu
   }
 };
 
+const CandidatePost = {
+  status: ["IN_PROCESSING"],
+  paging: {
+    pageSize: 10,
+    pageNumber: 1,
+  },
+};
+
 function KanbanTable() {
   const [columns, setColumns] = useState(columnsFromBackend);
+
+  useEffect(() => {
+    const projectData = CandidatesSerivce.candidateHttpPost(
+      "GetList",
+      CandidatePost
+    );
+    projectData.then((res) => console.log(res));
+  }, []);
+
   return (
-    <DragDropContext onDragEnd={result => onDragEnd(result, columns, setColumns)}>
+    <DragDropContext
+      onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
+    >
       <TableWrapper>
         {Object.entries(columns).map(([columnId, column], index) => {
           return (
             <KanbanColumn
               style={{
-                borderRight: index === 5 ? '' : '1px solid gray',
+                borderRight: index === 5 ? "" : "1px solid gray",
               }}
               key={columnId}
             >
@@ -126,21 +158,27 @@ function KanbanTable() {
                         {...provided.droppableProps}
                         ref={provided.innerRef}
                         style={{
-                          background: snapshot.isDraggingOver ? 'lightblue' : 'white',
+                          background: snapshot.isDraggingOver
+                            ? "lightblue"
+                            : "white",
                         }}
                       >
                         {column.items.map((item, index) => {
                           return (
-                            <Draggable key={item.id} draggableId={item.id} index={index}>
-                              {provided => {
+                            <Draggable
+                              key={item.id}
+                              draggableId={item.id}
+                              index={index}
+                            >
+                              {(provided) => {
                                 return (
                                   <DraggableDivWrapper
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                     style={{
-                                      backgroundColor: '#FFE0CA',
-                                      color: '#000000',
+                                      backgroundColor: "#FFE0CA",
+                                      color: "#000000",
                                       ...provided.draggableProps.style,
                                     }}
                                   >
@@ -148,7 +186,7 @@ function KanbanTable() {
                                       {item.content}
                                       <CustomAvatar name={item.content} />
                                     </DraggableNameAndAvatar>
-                                    {'Front-End Dev'}
+                                    {"Front-End Dev"}
                                   </DraggableDivWrapper>
                                 );
                               }}
