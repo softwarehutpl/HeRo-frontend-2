@@ -43,7 +43,7 @@ const columns: GridColDef[] = [
     headerName: 'Profile',
     width: 110,
     renderCell: params => {
-      return <Link to="/profile">{params.row.profile}see profile</Link>;
+      return <Link to="/profile">{params.row.profile}See profile</Link>;
     },
   },
 ];
