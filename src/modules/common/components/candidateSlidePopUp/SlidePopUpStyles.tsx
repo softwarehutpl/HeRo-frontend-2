@@ -1,5 +1,8 @@
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
+import IconButton from "@mui/material/IconButton";
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import Typography from "@mui/material/Typography";
 
 export const ContentWrapper = styled("div")`
   position: fixed;
@@ -31,6 +34,14 @@ export const SlideHeaderNameDiv = styled("div")`
   gap: 20px;
 `;
 
+export const CustomIconButton = styled(IconButton)`
+  align-self: flex-start;
+`;
+
+export const ClosingButton = styled(CloseOutlinedIcon)`
+  color: #0f62fe;
+`;
+
 export const SlideNavbar = styled("div")`
   display: flex;
   justify-content: space-between;
@@ -52,6 +63,10 @@ export const HistoryWrapper = styled("div")`
   justify-content: space-between;
   min-height: 40%;
   padding: 10px 0;
+`;
+
+export const CustomTypography = styled(Typography)`
+  font-size: 18px;
 `;
 
 export const HistoryContent = styled("div")`

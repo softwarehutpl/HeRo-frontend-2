@@ -6,20 +6,20 @@ import {
   SlideButton,
   SlideHeader,
   SlideHeaderNameDiv,
+  CustomIconButton,
+  ClosingButton,
   SlideNavbar,
   HistoryWrapper,
+  CustomTypography,
   HistoryContent,
 } from "./SlidePopUpStyles";
 import CustomAvatar from "../avatars/CustomAvatar";
-import IconButton from "@mui/material/IconButton";
-import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import { useNavigate } from "react-router-dom";
 import { Entry } from "./evaluationEntry/EvaluationEntry";
 import {
   EvaluationContent,
   EvaluationWrapper,
 } from "./evaluationEntry/EvaluationEntryStyles";
-import Typography from "@mui/material/Typography";
 
 interface CandidateSlideProps {
   isChecked: boolean;
@@ -42,9 +42,9 @@ export function CandidateSlide({
               <CustomAvatar name={candidateName} />
               {candidateName}
             </SlideHeaderNameDiv>
-            <IconButton style={{ alignSelf: "flex-start" }} onClick={close}>
-              <CloseOutlinedIcon style={{ color: "#0F62FE" }} />
-            </IconButton>
+            <CustomIconButton onClick={close}>
+              <ClosingButton />
+            </CustomIconButton>
           </SlideHeader>
           <SlideNavbar>
             <SlideButton variant="contained">Add Evaluation</SlideButton>
@@ -57,9 +57,7 @@ export function CandidateSlide({
           </SlideNavbar>
           <HistoryWrapper>
             <div>
-              <Typography style={{ fontSize: "18px" }}>
-                Evaluation Info
-              </Typography>
+              <CustomTypography>Evaluation Info</CustomTypography>
             </div>
             <HistoryContent>
               <EvaluationWrapper>
