@@ -1,9 +1,23 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import CustomAvatar from '../../common/components/avatars/CustomAvatar';
 import { Link } from 'react-router-dom';
 import candidate from '../../common/mocks/Candidates.json';
 import { CandidateSlide } from '../../common/components/candidateSlidePopUp/SlidePopUp';
+import CandidatesService from '../../common/Api/Candidates.service';
+
+interface Candidates {
+  id: number;
+  name: string;
+  source: string;
+  recruitmentName: string;
+  status: string[];
+  stage: string[];
+  techId: number;
+  techEmail: string;
+  recruiterId: number;
+  recruiterEmail: string;
+}
 
 const columns: GridColDef[] = [
   {
@@ -19,38 +33,33 @@ const columns: GridColDef[] = [
 
   { field: 'name', headerName: 'Name', width: 140 },
   { field: 'source', headerName: 'Source', width: 120 },
-  { field: 'project', headerName: 'Project', width: 160 },
+  { field: 'recruitmentName', headerName: 'Project', width: 160 },
   { field: 'position', headerName: 'Position', width: 160 },
   { field: 'status', headerName: 'Status', width: 140 },
   { field: 'stage', headerName: 'Stage', width: 140 },
-  { field: 'assignee', headerName: 'Assignee', width: 140 },
+  { field: 'recruiterEmail', headerName: 'Assignee', width: 140 },
   {
     field: 'profile',
     headerName: 'Profile',
     width: 110,
     renderCell: params => {
-      return <Link to="/profile">{params.row.profile}</Link>;
+      return <Link to="/profile">{params.row.profile}see profile</Link>;
     },
   },
 ];
 
-export type Data = {
-  id: string;
-  name: string;
-  source: string;
-  project: string;
-  position: string;
-  status: string;
-  stage: string;
-  assignee: string;
-  profile: string;
+const postData = {
+  paging: {
+    pageSize: 10,
+    pageNumber: 1,
+  },
 };
 
 export default function CustomTable() {
-  const [clickedCandidate, setClickedCandidate] = React.useState<Data>();
+  const [clickedCandidate, setClickedCandidate] = useState<Candidates>();
+  const [candidateInfoForListDTOs, setcandidateInfoForListDTOs] = useState<Candidates[]>([]);
 
-  function handelChange(row: Data): void {
-    console.log(row);
+  function handelChange(row: Candidates): void {
     setClickedCandidate(row);
   }
 
@@ -58,12 +67,17 @@ export default function CustomTable() {
     setClickedCandidate(undefined);
   };
 
+  useEffect(() => {
+    const candidateData = CandidatesService.candidateHttpPost('GetList', postData);
+    candidateData.then(res => setcandidateInfoForListDTOs(res.candidateInfoForListDTOs));
+  }, []);
+
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div style={{ height: 600, width: '100%' }}>
       <DataGrid
-        rows={candidate}
+        rows={candidateInfoForListDTOs}
         columns={columns}
-        pageSize={5}
+        pageSize={10}
         rowsPerPageOptions={[5]}
         onRowClick={({ row }) => handelChange(row)}
       />
