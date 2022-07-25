@@ -75,7 +75,7 @@ export function Entry() {
               style={{
                 backgroundColor: "white",
                 color: "black",
-                border: "1px solid ##CCCCCC",
+                border: "1px solid #e6e6e6",
               }}
             >
               4
