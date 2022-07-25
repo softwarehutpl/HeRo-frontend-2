@@ -4,12 +4,20 @@ import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
 
 import {
   AvatarNameWrapper,
+  DoneAvatar,
   CustomList,
   CustomListItemText,
   DateItem,
+  DoneIconWrapper,
   EvaluationItem,
   InterviewerItem,
   RatingWrapper,
+  WrapperBox,
+  DividerWrapper,
+  EditButton,
+  PStyled,
+  DivStyled,
+  AvatarStyled,
 } from "./EvaluationEntryStyles";
 import CustomAvatar from "../../avatars/CustomAvatar";
 import Divider from "@mui/material/Divider";
@@ -20,19 +28,17 @@ import SliderMarks from "../slider/SliderMarks";
 
 export function Entry() {
   return (
-    <Box sx={{ display: "flex" }}>
-      <div style={{ padding: "0 10px" }}>
-        <Avatar style={{ backgroundColor: "#33CD94" }}>
+    <WrapperBox>
+      <DoneIconWrapper>
+        <DoneAvatar>
           <DoneIcon />
-        </Avatar>
-        <div
-          style={{ display: "flex", justifyContent: "center", height: "90%" }}
-        >
+        </DoneAvatar>
+        <DividerWrapper>
           <div></div>
           <Divider orientation="vertical" variant="middle" flexItem />
           <div></div>
-        </div>
-      </div>
+        </DividerWrapper>
+      </DoneIconWrapper>
       <CustomList>
         <DateItem>
           <CustomListItemText
@@ -49,43 +55,35 @@ export function Entry() {
             secondaryTypographyProps={{ fontSize: "12px" }}
           />
           <IconButton aria-label="edit">
-            <ModeEditOutlinedIcon style={{ color: "gray" }} />
+            <EditButton />
           </IconButton>
         </DateItem>
         <Divider variant="middle" />
         <InterviewerItem>
-          <p style={{ color: "gray" }}>Interviewers</p>
+          <PStyled>Interviewers</PStyled>
           <AvatarNameWrapper>
             <CustomAvatar name={"Caroline Robertson"}></CustomAvatar>
-            <div style={{ paddingLeft: "10px" }}>
+            <DivStyled>
               <CustomListItemText
                 primary="Caroline Robertson"
                 primaryTypographyProps={{ fontSize: "15px" }}
                 secondary="HR Manager"
                 secondaryTypographyProps={{ fontSize: "12px" }}
               />
-            </div>
+            </DivStyled>
           </AvatarNameWrapper>
         </InterviewerItem>
         <Divider variant="middle" />
         <EvaluationItem>
-          <p style={{ color: "gray" }}>Evaluation</p>
+          <PStyled>Evaluation</PStyled>
           <RatingWrapper>
-            <Avatar
-              style={{
-                backgroundColor: "white",
-                color: "black",
-                border: "1px solid #e6e6e6",
-              }}
-            >
-              4
-            </Avatar>
+            <AvatarStyled>4</AvatarStyled>
             <Box sx={{ width: "100%" }}>
               <SliderMarks />
             </Box>
           </RatingWrapper>
         </EvaluationItem>
       </CustomList>
-    </Box>
+    </WrapperBox>
   );
 }
