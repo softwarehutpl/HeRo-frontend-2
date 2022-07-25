@@ -1,31 +1,36 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
+import {
+  CustomSliderTrack,
+  CustomSliderThumb,
+  CustomSliderMark,
+} from "./SliderMarksStyle";
 
 const marks = [
   {
     value: 0,
-    label: "0",
+    label: "|",
   },
   {
     value: 1,
-    label: "1",
+    label: "|",
   },
   {
     value: 2,
-    label: "2",
+    label: "|",
   },
   {
     value: 3,
-    label: "3",
+    label: "|",
   },
   {
     value: 4,
-    label: "4",
+    label: "|",
   },
   {
     value: 5,
-    label: "5",
+    label: "|",
   },
 ];
 
@@ -35,7 +40,7 @@ function valuetext(value: number) {
 
 export default function SliderMarks() {
   return (
-    <Box sx={{ width: 300 }}>
+    <Box sx={{ width: 250 }}>
       <Slider
         disabled
         aria-label="Custom marks"
@@ -43,9 +48,14 @@ export default function SliderMarks() {
         min={0}
         max={5}
         getAriaValueText={valuetext}
-        step={10}
+        step={8}
         valueLabelDisplay="auto"
         marks={marks}
+        components={{
+          Track: CustomSliderTrack,
+          Thumb: CustomSliderThumb,
+          Mark: CustomSliderMark,
+        }}
       />
     </Box>
   );
