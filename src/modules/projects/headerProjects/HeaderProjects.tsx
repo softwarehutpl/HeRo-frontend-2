@@ -6,8 +6,6 @@ import { HeaderTypography } from '../../common/components/tableHeader/TableHeade
 import { HeaderIconButton, CandidateDisplayType } from '../../common/components/headerTableIconButton/IconButton';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import ModalForm from '../modalForm/ModalForm';
-import Skills from '../skills/Skills';
-import { CustomFormButton, CustomTextArea, TextAreaWrapper } from '../ProjectsStyles';
 
 interface TextProps {
   title: string;
@@ -26,6 +24,7 @@ const style = {
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
+  overflowY: 'scroll',
 };
 
 export default function ProjectsTableHaeder({ title, component = 'div' }: React.PropsWithChildren<TextProps>) {
@@ -53,14 +52,6 @@ export default function ProjectsTableHaeder({ title, component = 'div' }: React.
               Add project
             </Typography>
             <ModalForm />
-            <Typography id="modal-modal-title" variant="h6" component="h2" style={{ marginTop: '15px' }}>
-              Skills
-            </Typography>
-            <Skills />
-            <TextAreaWrapper>
-              <CustomTextArea></CustomTextArea>
-              <CustomFormButton type="submit">Save</CustomFormButton>
-            </TextAreaWrapper>
           </Box>
         </Modal>
       </HeaderDiv>
