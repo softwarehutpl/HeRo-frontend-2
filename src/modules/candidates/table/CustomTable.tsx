@@ -85,6 +85,7 @@ export default function CustomTable() {
       <CandidateSlide
         isChecked={clickedCandidate !== undefined}
         candidateName={clickedCandidate ? clickedCandidate.name : 'John Doe'}
+        candidateid={clickedCandidate ? clickedCandidate.id : 0}
         close={closeDetails}
       />
     </div>

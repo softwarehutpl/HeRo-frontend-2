@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function SeeProfile({ id }: { id?: number }) {
   return (
     <div>
-      <Link to={`/profile/${id}`}>See Profile {id}</Link>
+      <Link to={`/profile/${id}`}>Browse Profile</Link>
     </div>
   );
 }
