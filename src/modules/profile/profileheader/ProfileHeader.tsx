@@ -11,7 +11,9 @@ export default function ProfileHeader({ candidate }: Props) {
   return (
     <ProfileHeaderWrapper>
       <CustomAvatar name={candidate.fullName} />
-      <ProfileHeaderHeading>Profile of {candidate.fullName}</ProfileHeaderHeading>
+      <ProfileHeaderHeading>
+        Profile of <p>{candidate.fullName}</p>
+      </ProfileHeaderHeading>
     </ProfileHeaderWrapper>
   );
 }

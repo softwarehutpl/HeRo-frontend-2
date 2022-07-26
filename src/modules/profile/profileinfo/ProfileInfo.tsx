@@ -18,8 +18,6 @@ function ProfileInfo() {
     profileData.then(res => setCandidate(res));
   }, []);
 
-  console.log(candidate);
-
   return (
     <>
       {candidate && (
@@ -27,8 +25,8 @@ function ProfileInfo() {
           <ProfileHeader candidate={candidate} />
           <ProfileSummary candidate={candidate} />
           <ProfileNotes candidate={candidate} />
-          <EvaluationHr />
-          <EvaluationTech />
+          <EvaluationHr candidate={candidate} />
+          <EvaluationTech candidate={candidate} />
         </ProfileInfoWrapper>
       )}
     </>
