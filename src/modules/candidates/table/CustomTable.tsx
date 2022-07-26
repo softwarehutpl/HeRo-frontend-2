@@ -42,7 +42,7 @@ const columns: GridColDef[] = [
   {
     field: 'profile',
     headerName: 'Profile',
-    width: 110,
+    width: 150,
     renderCell: props => {
       return <SeeProfile id={props.row.id} />;
     },
@@ -51,7 +51,7 @@ const columns: GridColDef[] = [
 
 const postData = {
   paging: {
-    pageSize: 10,
+    pageSize: 104,
     pageNumber: 1,
   },
 };

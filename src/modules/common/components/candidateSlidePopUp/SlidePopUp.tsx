@@ -12,7 +12,6 @@ import {
   HistoryWrapper,
   CustomTypography,
   HistoryContent,
-  CustomSeeProfile,
 } from './SlidePopUpStyles';
 import CustomAvatar from '../avatars/CustomAvatar';
 import { useNavigate } from 'react-router-dom';
@@ -44,9 +43,9 @@ export function CandidateSlide({ isChecked, candidateName, candidateid, close }:
           </SlideHeader>
           <SlideNavbar>
             <SlideButton variant="contained">Add Evaluation</SlideButton>
-            <SlideButton variant="contained">
-              <CustomSeeProfile id={candidateid} />
-            </SlideButton>
+            {/* <SlideButton variant="contained"> */}
+              <SeeProfile id={candidateid} />
+            {/* </SlideButton> */}
           </SlideNavbar>
           <HistoryWrapper>
             <div>

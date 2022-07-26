@@ -1,13 +1,30 @@
 import { FormControlUnstyled } from '@mui/base';
 import { FormInputWrapper, Input, Label } from './ModalFormStyles';
 import React from 'react';
-import { Typography } from '@mui/material';
+import { FormControlLabel, Switch, Typography } from '@mui/material';
 import Skills from '../skills/Skills';
 import { CustomFormButton, CustomTextArea, TextAreaWrapper } from '../ProjectsStyles';
 
 function ModalForm() {
+
+  // function handleOnSubmit(e: any) {
+  //   e.preventdefault();
+
+  //   const PostData = {
+  //     name,
+  //     seniority,
+  //     beginningDate,
+  //     endingDate,
+  //     localization,
+  //     isPublic,
+  //     description,
+  //   };
+  // }
+
+
   return (
     <div>
+      {/* <form onSubmit={handleOnSubmit}> */}
       <form>
         <FormControlUnstyled defaultValue="" required>
           <Input placeholder="Project name" />
@@ -28,6 +45,7 @@ function ModalForm() {
         <FormControlUnstyled defaultValue="" required>
           <Input placeholder="Location" />
         </FormControlUnstyled>
+        <FormControlLabel control={<Switch defaultChecked />} label="Is Public" />
         <Typography id="modal-modal-title" variant="h6" component="h2" style={{ marginTop: '15px' }}>
           Skills
         </Typography>
