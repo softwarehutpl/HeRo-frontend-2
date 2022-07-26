@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-type SkillGet = {
-  id: number;
-  name: string;
-};
+// type SkillGet = {
+//   id: number;
+//   name: string;
+// };
 
 const client = axios.create({
   baseURL: 'https://swh-t-praktyki2022-app.azurewebsites.net/Skill/',

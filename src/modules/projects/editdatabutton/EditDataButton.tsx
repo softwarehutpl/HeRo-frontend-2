@@ -1,34 +1,22 @@
-import {
-  Autocomplete,
-  Box,
-  IconButton,
-  Modal,
-  TextField,
-  Typography,
-} from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import React from "react";
-import ModalForm from "../modalForm/ModalForm";
-import Skills from "../skills/Skills";
-import {
-  CustomDiv,
-  CustomFormButton,
-  CustomTextArea,
-  TextAreaWrapper,
-} from "../ProjectsStyles";
+import { Autocomplete, Box, IconButton, Modal, TextField, Typography } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import React from 'react';
+import ModalForm from '../modalForm/ModalForm';
+import Skills from '../skills/Skills';
+import { CustomDiv, CustomFormButton, CustomTextArea, TextAreaWrapper } from '../ProjectsStyles';
 
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "40%",
-  height: "90%",
-  bgcolor: "background.paper",
-  border: "2px solid #000",
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '40%',
+  height: '90%',
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
   boxShadow: 24,
   p: 4,
-  overflowY: "scroll",
+  overflowY: 'scroll',
 };
 
 export const EditDataButton = ({ index }: any) => {
@@ -39,7 +27,7 @@ export const EditDataButton = ({ index }: any) => {
   return (
     <div>
       <IconButton onClick={handleOpen}>
-        <EditIcon style={{ color: "#1976d2" }}></EditIcon>
+        <EditIcon style={{ color: '#1976d2' }}></EditIcon>
       </IconButton>
       <Modal
         open={open}
@@ -52,12 +40,7 @@ export const EditDataButton = ({ index }: any) => {
             Edit project
           </Typography>
           <ModalForm />
-          <Typography
-            id="modal-modal-title"
-            variant="h6"
-            component="h2"
-            style={{ marginTop: "15px" }}
-          >
+          <Typography id="modal-modal-title" variant="h6" component="h2" style={{ marginTop: '15px' }}>
             Skills
           </Typography>
           <Skills />
