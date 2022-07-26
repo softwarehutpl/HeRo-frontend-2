@@ -1,9 +1,7 @@
-import { Autocomplete, Box, IconButton, Modal, TextField, Typography } from '@mui/material';
+import { Box, IconButton, Modal, TextField, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import React from 'react';
 import ModalForm from '../modalForm/ModalForm';
-import Skills from '../skills/Skills';
-import { CustomDiv, CustomFormButton, CustomTextArea, TextAreaWrapper } from '../ProjectsStyles';
 
 const style = {
   position: 'absolute',
@@ -40,14 +38,6 @@ export const EditDataButton = ({ index }: any) => {
             Edit project
           </Typography>
           <ModalForm />
-          <Typography id="modal-modal-title" variant="h6" component="h2" style={{ marginTop: '15px' }}>
-            Skills
-          </Typography>
-          <Skills />
-          <TextAreaWrapper>
-            <CustomTextArea></CustomTextArea>
-            <CustomFormButton type="submit">Save</CustomFormButton>
-          </TextAreaWrapper>
         </Box>
       </Modal>
     </div>
