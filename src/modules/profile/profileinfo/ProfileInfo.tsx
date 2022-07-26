@@ -26,7 +26,7 @@ function ProfileInfo() {
         <ProfileInfoWrapper>
           <ProfileHeader candidate={candidate} />
           <ProfileSummary candidate={candidate} />
-          <ProfileNotes />
+          <ProfileNotes candidate={candidate} />
           <EvaluationHr />
           <EvaluationTech />
         </ProfileInfoWrapper>

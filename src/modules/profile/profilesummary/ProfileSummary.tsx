@@ -16,10 +16,10 @@ function ProfileSummary({ candidate }: Props) {
             Full Name: <span>{candidate.fullName}</span>
           </CustomListElement>
           <CustomListElement>
-            E-mail: <span>{candidate.email}</span>
+            E-mail: <a href={'mailto:' + candidate.email}>{candidate.email}</a>
           </CustomListElement>
           <CustomListElement>
-            Contact phone: <span>{candidate.phoneNumber}</span>
+            Contact phone: <a href={'tel:+48' + candidate.phoneNumber}>{candidate.phoneNumber}</a>
           </CustomListElement>
         </CustomList>
       </CustomSecondHeading>
