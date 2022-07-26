@@ -1,26 +1,17 @@
-import { CoPresentOutlined } from '@mui/icons-material';
-import React from 'react';
 import CustomAvatar from '../../common/components/avatars/CustomAvatar';
+import React from 'react';
 import { ProfileHeaderHeading, ProfileHeaderWrapper } from './ProfileHeaderStyles';
+import { Candidate } from '../../common/interfaces/Candidate.interface';
 
-type Candidate = {
-  candidate: {
-    id: number;
-    fullName: string;
-    email: string;
-    phoneNumber: string;
-    availableFrom: Date;
-    expectedMonthlySalary: number;
-    otherExpectations: string;
-    cvPath: string;
-  }[];
+type Props = {
+  candidate: Candidate;
 };
 
-export const ProfileHeader: React.FC<Candidate> = props => {
+export default function ProfileHeader({ candidate }: Props) {
   return (
     <ProfileHeaderWrapper>
       <CustomAvatar name={'test test'} />
-      <ProfileHeaderHeading>Profile of {props.candidate.id}</ProfileHeaderHeading>
+      <ProfileHeaderHeading>Profile of {candidate.fullName}</ProfileHeaderHeading>
     </ProfileHeaderWrapper>
   );
-};
+}
