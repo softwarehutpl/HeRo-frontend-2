@@ -10,7 +10,7 @@ type Props = {
 export default function ProfileHeader({ candidate }: Props) {
   return (
     <ProfileHeaderWrapper>
-      <CustomAvatar name={'test test'} />
+      <CustomAvatar name={candidate.fullName} />
       <ProfileHeaderHeading>Profile of {candidate.fullName}</ProfileHeaderHeading>
     </ProfileHeaderWrapper>
   );

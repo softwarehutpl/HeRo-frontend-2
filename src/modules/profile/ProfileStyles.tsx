@@ -15,6 +15,9 @@ export const CustomList = styled('ul')`
 export const CustomListElement = styled('li')`
   font-size: 15px;
   font-weight: 300;
+  & > span {
+    font-weight: 500;
+  }
 `;
 
 export const CustomSecondHeading = styled('h2')`
