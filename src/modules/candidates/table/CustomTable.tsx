@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import candidate from '../../common/mocks/Candidates.json';
 import { CandidateSlide } from '../../common/components/candidateSlidePopUp/SlidePopUp';
 import CandidatesService from '../../common/Api/Candidates.service';
+import SeeProfile from '../../profile/seeProfile/SeeProfile';
 
 interface Candidates {
   id: number;
@@ -42,8 +43,8 @@ const columns: GridColDef[] = [
     field: 'profile',
     headerName: 'Profile',
     width: 110,
-    renderCell: params => {
-      return <Link to="/profile">{params.row.profile}see profile</Link>;
+    renderCell: props => {
+      return <SeeProfile id={props.row.id} />;
     },
   },
 ];

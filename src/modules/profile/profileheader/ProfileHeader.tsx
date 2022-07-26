@@ -1,14 +1,19 @@
-import React from 'react';
 import CustomAvatar from '../../common/components/avatars/CustomAvatar';
+import React from 'react';
 import { ProfileHeaderHeading, ProfileHeaderWrapper } from './ProfileHeaderStyles';
+import { Candidate } from '../../common/interfaces/Candidate.interface';
 
-function ProfileHeader() {
+type Props = {
+  candidate: Candidate;
+};
+
+export default function ProfileHeader({ candidate }: Props) {
   return (
     <ProfileHeaderWrapper>
-      <CustomAvatar name={'John Doe'} />
-      <ProfileHeaderHeading>Profile of John Doe</ProfileHeaderHeading>
+      <CustomAvatar name={candidate.fullName} />
+      <ProfileHeaderHeading>
+        Profile of <p>{candidate.fullName}</p>
+      </ProfileHeaderHeading>
     </ProfileHeaderWrapper>
   );
 }
-
-export default ProfileHeader;

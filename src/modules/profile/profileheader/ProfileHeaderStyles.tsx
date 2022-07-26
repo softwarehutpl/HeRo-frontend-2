@@ -12,4 +12,12 @@ export const ProfileHeaderHeading = styled('h1')`
   font-weight: 300;
   font-size: 25px;
   padding-top: 5px;
+  width: 100%;
+  display: flex;
+  & > p {
+    font-weight: 800;
+    font-size: 25px;
+    margin: 0;
+    padding-left: 15px;
+  }
 `;

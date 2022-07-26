@@ -15,6 +15,21 @@ export const CustomList = styled('ul')`
 export const CustomListElement = styled('li')`
   font-size: 15px;
   font-weight: 300;
+  & > span {
+    font-weight: 500;
+  }
+
+  & > a {
+    text-decoration: none;
+    color: #dd0000;
+    font-size: 15px;
+    transition: all 0.2s ease-in;
+  }
+
+  & > a:hover {
+    text-decoration: underline;
+    color: #b30909;
+  }
 `;
 
 export const CustomSecondHeading = styled('h2')`

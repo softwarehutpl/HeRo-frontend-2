@@ -6,20 +6,29 @@ import {
   CustomSecondHeading,
   CustomTechRate,
 } from '../ProfileStyles';
+import { Candidate } from '../../common/interfaces/Candidate.interface';
 
-function EvaluationTech() {
+type Props = {
+  candidate: Candidate;
+};
+
+function EvaluationTech({ candidate }: Props) {
   return (
     <div>
       <CustomSecondHeading>Evaluation Result</CustomSecondHeading>
       <CustomList>
-        <CustomListElement>Evaluation Author: </CustomListElement>
+        <CustomListElement>
+          Evaluation Author: <span>{candidate.interviewName}</span>
+        </CustomListElement>
         <CustomListElement>
           <CustomRateWrapper>
             <p>Rate:</p>
-            <CustomTechRate>5/5</CustomTechRate>
+            <CustomTechRate>{candidate.interviewOpinionScore}/5</CustomTechRate>
           </CustomRateWrapper>
         </CustomListElement>
-        <CustomListElement>Note: </CustomListElement>
+        <CustomListElement>
+          Note: <span>{candidate.interviewOpinionText}</span>
+        </CustomListElement>
       </CustomList>
     </div>
   );
