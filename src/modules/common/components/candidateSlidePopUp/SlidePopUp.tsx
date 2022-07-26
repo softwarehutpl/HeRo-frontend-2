@@ -1,5 +1,5 @@
-import React from "react";
-import Slide from "@mui/material/Slide";
+import React from 'react';
+import Slide from '@mui/material/Slide';
 import {
   ContentWrapper,
   Content,
@@ -12,26 +12,22 @@ import {
   HistoryWrapper,
   CustomTypography,
   HistoryContent,
-} from "./SlidePopUpStyles";
-import CustomAvatar from "../avatars/CustomAvatar";
-import { useNavigate } from "react-router-dom";
-import { Entry } from "./evaluationEntry/EvaluationEntry";
-import {
-  EvaluationContent,
-  EvaluationWrapper,
-} from "./evaluationEntry/EvaluationEntryStyles";
+  CustomSeeProfile,
+} from './SlidePopUpStyles';
+import CustomAvatar from '../avatars/CustomAvatar';
+import { useNavigate } from 'react-router-dom';
+import { Entry } from './evaluationEntry/EvaluationEntry';
+import { EvaluationContent, EvaluationWrapper } from './evaluationEntry/EvaluationEntryStyles';
+import SeeProfile from '../../../profile/seeProfile/SeeProfile';
 
 interface CandidateSlideProps {
   isChecked: boolean;
   candidateName: string;
+  candidateid: number;
   close: () => void;
 }
 
-export function CandidateSlide({
-  isChecked,
-  candidateName,
-  close,
-}: CandidateSlideProps): JSX.Element {
+export function CandidateSlide({ isChecked, candidateName, candidateid, close }: CandidateSlideProps): JSX.Element {
   const navigate = useNavigate();
   return (
     <Slide direction="left" in={isChecked} mountOnEnter unmountOnExit>
@@ -48,11 +44,8 @@ export function CandidateSlide({
           </SlideHeader>
           <SlideNavbar>
             <SlideButton variant="contained">Add Evaluation</SlideButton>
-            <SlideButton
-              variant="contained"
-              onClick={() => navigate("/profile")}
-            >
-              Browse profile
+            <SlideButton variant="contained">
+              <CustomSeeProfile id={candidateid} />
             </SlideButton>
           </SlideNavbar>
           <HistoryWrapper>

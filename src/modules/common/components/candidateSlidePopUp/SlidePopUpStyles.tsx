@@ -1,10 +1,11 @@
-import Button from "@mui/material/Button";
-import { styled } from "@mui/material/styles";
-import IconButton from "@mui/material/IconButton";
-import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-import Typography from "@mui/material/Typography";
+import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import Typography from '@mui/material/Typography';
+import SeeProfile from '../../../profile/seeProfile/SeeProfile';
 
-export const ContentWrapper = styled("div")`
+export const ContentWrapper = styled('div')`
   position: fixed;
   height: 90%;
   bottom: 0%;
@@ -13,21 +14,21 @@ export const ContentWrapper = styled("div")`
   min-width: 20%;
 `;
 
-export const Content = styled("div")`
+export const Content = styled('div')`
   display: flex;
   flex-direction: column;
   height: 100%;
   padding: 10px 15px;
 `;
 
-export const SlideHeader = styled("div")`
+export const SlideHeader = styled('div')`
   display: flex;
   justify-content: space-between;
   align-items: center;
   min-height: 15%;
 `;
 
-export const SlideHeaderNameDiv = styled("div")`
+export const SlideHeaderNameDiv = styled('div')`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -42,7 +43,7 @@ export const ClosingButton = styled(CloseOutlinedIcon)`
   color: #0f62fe;
 `;
 
-export const SlideNavbar = styled("div")`
+export const SlideNavbar = styled('div')`
   display: flex;
   justify-content: space-between;
   min-height: 5%;
@@ -57,7 +58,7 @@ export const SlideButton = styled(Button)`
   text-transform: none;
 `;
 
-export const HistoryWrapper = styled("div")`
+export const HistoryWrapper = styled('div')`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -69,8 +70,12 @@ export const CustomTypography = styled(Typography)`
   font-size: 18px;
 `;
 
-export const HistoryContent = styled("div")`
+export const HistoryContent = styled('div')`
   display: flex;
   height: 90%;
   padding: 10px 0;
+`;
+
+export const CustomSeeProfile = styled(SeeProfile)`
+  display: none;
 `;
