@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import CheckboxFilters from "../common/components/checkboxFilters/CheckboxFilters";
-import ProjectsTableHaeder from "./headerProjects/HeaderProjects";
-import { CustomDiv } from "./ProjectsStyles";
-import { Link } from "react-router-dom";
-import { EditDataButton } from "./editdatabutton/EditDataButton";
-import ProjectsSerivce from "../common/Api/Projects.serivce";
+import React, { useEffect, useState } from 'react';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import CheckboxFilters from '../common/components/checkboxFilters/CheckboxFilters';
+import ProjectsTableHaeder from './headerProjects/HeaderProjects';
+import { CustomDiv } from './ProjectsStyles';
+import { Link } from 'react-router-dom';
+import { EditDataButton } from './editdatabutton/EditDataButton';
+import ProjectsSerivce from '../common/Api/Projects.serivce';
 // import UserService from "../common/Api/User.service";
 
 interface Project {
@@ -30,27 +30,27 @@ interface Project {
 let indexOfRecruitment: number;
 
 const columns: GridColDef[] = [
-  { field: "name", headerName: "Name", width: 200 },
-  { field: "creator", headerName: "Creator", width: 200 },
+  { field: 'name', headerName: 'Name', width: 200 },
+  { field: 'creator', headerName: 'Creator', width: 200 },
   {
-    field: "beginningDate",
-    headerName: "Frome",
-    type: "dateTime",
+    field: 'beginningDate',
+    headerName: 'Frome',
+    type: 'dateTime',
     width: 250,
     valueGetter: ({ value }) => new Date(value),
   },
   {
-    field: "endingDate",
-    headerName: "To",
-    type: "dateTime",
+    field: 'endingDate',
+    headerName: 'To',
+    type: 'dateTime',
     width: 250,
     valueGetter: ({ value }) => value && new Date(value),
   },
-  { field: "candidateCount", headerName: "Resume", width: 120 },
+  { field: 'candidateCount', headerName: 'Resume', width: 120 },
 
   {
-    field: "hiredCount",
-    headerName: "Hired",
+    field: 'hiredCount',
+    headerName: 'Hired',
     width: 120,
     renderCell: (params) => {
       return (
@@ -65,11 +65,11 @@ const columns: GridColDef[] = [
   },
 
   {
-    field: "edit",
-    headerName: "",
+    field: 'edit',
+    headerName: '',
     width: 120,
     sortable: false,
-    renderCell: (params) => {
+    renderCell: params => {
       return <EditDataButton index={params.row.id} />;
     },
   },
@@ -77,12 +77,12 @@ const columns: GridColDef[] = [
 
 const postData = {
   paging: {
-    pageSize: 10,
+    pageSize: 105,
     pageNumber: 1,
   },
 };
 
-const statusesList = ["Open", "Closed"];
+const statusesList = ['Open', 'Closed'];
 
 export default function Projects() {
   const [recruitmentDTOs, setRecruitmentDTOs] = useState<Project[]>([]);
@@ -90,10 +90,7 @@ export default function Projects() {
   const [isChecked, setIsChecked] = useState<boolean>(true);
 
   const recruitmentDTOsData = async () => {
-    const response = await ProjectsSerivce.recruitmentHttpPost(
-      "GetList",
-      postData
-    );
+    const response = await ProjectsSerivce.recruitmentHttpPost('GetList', postData);
     setRecruitmentDTOs(response.data.recruitmentDTOs);
     indexOfRecruitment = response.data.recruitmentDTOs;
   };
@@ -120,21 +117,11 @@ export default function Projects() {
 
   return (
     <CustomDiv>
-      <CheckboxFilters
-        header="Status"
-        filtersList={statusesList}
-        isChecked={isChecked}
-        setIsChecked={setIsChecked}
-      />
-      <div style={{ width: "100%" }}>
+      <CheckboxFilters header="Status" filtersList={statusesList} isChecked={isChecked} setIsChecked={setIsChecked} />
+      <div style={{ width: '100%' }}>
         <ProjectsTableHaeder title="Projects" />
-        <div style={{ height: 400, width: "100%" }}>
-          <DataGrid
-            rows={recruitmentDTOs}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-          />
+        <div style={{ height: 400, width: '100%' }}>
+          <DataGrid rows={recruitmentDTOs} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />
         </div>
       </div>
     </CustomDiv>

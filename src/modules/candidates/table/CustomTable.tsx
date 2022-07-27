@@ -79,7 +79,6 @@ export const CustomTable: React.FC<candidateListProps> = ({
   const closeDetails = () => {
     setClickedCandidate(undefined);
   };
-
   return (
     <div style={{ height: 600, width: "100%" }}>
       <DataGrid
