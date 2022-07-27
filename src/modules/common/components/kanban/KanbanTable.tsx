@@ -97,6 +97,19 @@ type SetUpdatedUserType = React.Dispatch<
   }>
 >;
 
+type Candidate = {
+  id: number;
+  name: string;
+  recruiterAssignee: string;
+  recruiterId: number;
+  recruitmentName: string;
+  source: string;
+  stage: string;
+  status: string;
+  techAssignee: string;
+  techId: number;
+};
+
 const onDragEnd = (
   result: DropResult,
   columns: ColumnsType,
@@ -153,7 +166,7 @@ function KanbanTable() {
   // const [columns, setColumns] = useState(columnsFromBackend);
   const [all, setAll] = useState<string[]>([]);
   const [aggregatedData, setAggregatedData] = useState<ColumnsType>({});
-  const [candidates, setCandidates] = useState<[]>([]);
+  const [candidates, setCandidates] = useState<Candidate[]>([]);
   const [updatedUser, setUpdatedUser] = useState<object | null>(null);
 
   useEffect(() => {
@@ -178,24 +191,57 @@ function KanbanTable() {
 
   useEffect(() => {
     if (all.length && candidates.length) {
-      const agg: any = {};
+      const agg: any = {
+        NEW: [],
+        EVALUATION: [],
+        PHONE_INTERVIEW: [],
+        INTERVIEW: [],
+        TECH_INTERVIEW: [],
+        DROPPED_OUT: [],
+        OFFER: [],
+        HIRED: [],
+      };
       console.log(candidates);
-      candidates.forEach((c: any) => {
-        // agg[c.status] = agg[c.status] ? [...agg[c.status], c] : [c];
+      // console.log(all);
 
-        if (c.status !== "IN_PROCESSING") {
-          if (agg[c.status]) {
-            agg[c.status] = [...agg[c.status], c];
-          } else {
-            agg[c.status] = [c];
+      Object.keys(agg).forEach((a: string) => {
+        for (let i = 0; i < candidates.length; i++) {
+          if (a == candidates[i].status) {
+            agg[a] = agg[a] ? [...agg[a], candidates[i]] : [candidates[i]];
+          } else if (a == candidates[i].stage) {
+            agg[a] = agg[a] ? [...agg[a], candidates[i]] : [candidates[i]];
           }
         }
       });
+
+      // all.forEach((a: string) => {
+      //   agg[a] ? null : (agg[a] = []);
+      // });
+
+      // candidates.forEach((c: any) => {
+      //   // agg[c.status] = agg[c.status] ? [...agg[c.status], c] : [c];
+
+      //   if (c.status !== "IN_PROCESSING") {
+      //     if (agg[c.status]) {
+      //       agg[c.status] = [...agg[c.status], c];
+      //     } else {
+      //       agg[c.status] = [c];
+      //     }
+      //   }
+      // });
       console.log(agg);
 
       setAggregatedData(agg);
     }
   }, [all, candidates]);
+
+  useEffect(() => {
+    CandidatesSerivce.candidateHttpPost("GetList", CandidatePost).then(
+      (response) => {
+        setCandidates(response.candidateInfoForListDTOs);
+      }
+    );
+  }, [updatedUser]);
 
   return (
     <DragDropContext
@@ -208,7 +254,7 @@ function KanbanTable() {
           return (
             <KanbanColumn
               style={{
-                borderRight: index === 5 ? "" : "1px solid gray",
+                borderRight: index === 7 ? "" : "1px solid gray",
               }}
               key={columnId}
             >
