@@ -114,7 +114,8 @@ const onDragEnd = (
   result: DropResult,
   columns: ColumnsType,
   setColumns: SetColumnsType,
-  setUpdatedUser: SetUpdatedUserType
+  setUpdatedUser: SetUpdatedUserType,
+  setDestinationColumn: React.Dispatch<React.SetStateAction<string>>
 ) => {
   if (!result.destination) return;
   const { source, destination } = result;
@@ -127,6 +128,8 @@ const onDragEnd = (
     const [removed] = sourceItems.splice(source.index, 1);
     destItems.splice(destination.index, 0, removed);
     setUpdatedUser(removed);
+    console.log(destination);
+    setDestinationColumn(destination.droppableId);
     setColumns({
       ...columns,
       // [source.droppableId]: {
@@ -167,7 +170,8 @@ function KanbanTable() {
   const [all, setAll] = useState<string[]>([]);
   const [aggregatedData, setAggregatedData] = useState<ColumnsType>({});
   const [candidates, setCandidates] = useState<Candidate[]>([]);
-  const [updatedUser, setUpdatedUser] = useState<object | null>(null);
+  const [updatedUser, setUpdatedUser] = useState<any>(null); // czy tu ma być any?
+  const [destinationColumn, setDestinationColumn] = useState("");
 
   useEffect(() => {
     CandidatesSerivce.candidateHttpPost("GetList", CandidatePost).then(
@@ -236,17 +240,59 @@ function KanbanTable() {
   }, [all, candidates]);
 
   useEffect(() => {
-    CandidatesSerivce.candidateHttpPost("GetList", CandidatePost).then(
-      (response) => {
-        setCandidates(response.candidateInfoForListDTOs);
+    if (updatedUser !== null) {
+      console.log(updatedUser.id);
+
+      if (["NEW", "DROPPED_OUT", "HIRED"].includes(destinationColumn)) {
+        const CandidateUpdate = {
+          candidateId: updatedUser.id,
+          status: destinationColumn,
+          stage: "",
+          paging: {
+            pageSize: 10,
+            pageNumber: 1,
+          },
+        };
+        CandidatesSerivce.candidateUpdatePost("Edit", CandidateUpdate).then(
+          () => {
+            setUpdatedUser(null);
+          }
+        );
+      } else {
+        const CandidateUpdate = {
+          candidateId: updatedUser.id,
+          status: "IN_PROCESSING",
+          stage: destinationColumn,
+          paging: {
+            pageSize: 10,
+            pageNumber: 1,
+          },
+        };
+        CandidatesSerivce.candidateUpdatePost("Edit", CandidateUpdate).then(
+          () => {
+            setUpdatedUser(null);
+          }
+        );
       }
-    );
+
+      // CandidatesSerivce.candidateUpdatePost("Edit", CandidateUpdate).then(
+      //   (response) => {
+      //     setUpdatedUser(null);
+      //   }
+      // );
+    }
   }, [updatedUser]);
 
   return (
     <DragDropContext
       onDragEnd={(result) =>
-        onDragEnd(result, aggregatedData, setAggregatedData, setUpdatedUser)
+        onDragEnd(
+          result,
+          aggregatedData,
+          setAggregatedData,
+          setUpdatedUser,
+          setDestinationColumn
+        )
       }
     >
       <TableWrapper>
@@ -295,7 +341,7 @@ function KanbanTable() {
                                       {candidate.name}
                                       <CustomAvatar name={candidate.name} />
                                     </DraggableNameAndAvatar>
-                                    {"Front-End Dev"}
+                                    {candidate.recruitmentName}
                                   </DraggableDivWrapper>
                                 );
                               }}

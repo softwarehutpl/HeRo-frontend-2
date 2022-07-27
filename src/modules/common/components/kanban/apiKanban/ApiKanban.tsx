@@ -35,6 +35,23 @@ type CandidatePost = {
 //   ];
 // };
 
+type CandidateUpdate = {
+  status?: string;
+  stage?: string;
+  paging: {
+    pageSize: number;
+    pageNumber: number;
+  };
+  sortOrder?: {
+    sort: [
+      {
+        key: "string";
+        value: "string";
+      }
+    ];
+  };
+};
+
 const client = axios.create({
   baseURL: "https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/",
   withCredentials: true,
@@ -52,8 +69,13 @@ const candidateHttpPost = (endpoint: string, postData: CandidatePost) => {
   return client.post(`${endpoint}`, postData).then((response) => response.data);
 };
 
+const candidateUpdatePost = (endpoint: string, postData: CandidateUpdate) => {
+  return client.post(`${endpoint}`, postData).then((response) => response.data);
+};
+
 export default {
   candidateHttpPost,
   candidateStatusesGet,
   candidateStagesGet,
+  candidateUpdatePost,
 };
