@@ -1,6 +1,12 @@
-import React from 'react';
-import { CustomHrRate, CustomList, CustomListElement, CustomRateWrapper, CustomSecondHeading } from '../ProfileStyles';
-import { Candidate } from '../../common/interfaces/Candidate.interface';
+import React from "react";
+import Candidate from "../../common/interfaces/Candidate.interface";
+import {
+  CustomHrRate,
+  CustomList,
+  CustomListElement,
+  CustomRateWrapper,
+  CustomSecondHeading,
+} from "../ProfileStyles";
 
 type Props = {
   candidate: Candidate;

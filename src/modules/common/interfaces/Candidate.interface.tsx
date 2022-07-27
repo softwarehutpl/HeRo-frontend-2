@@ -1,4 +1,4 @@
-export interface Candidate {
+export default interface Candidate {
   id: number;
   fullName: string;
   email: string;

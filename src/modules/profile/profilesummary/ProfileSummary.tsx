@@ -1,6 +1,10 @@
-import React from 'react';
-import { CustomList, CustomListElement, CustomSecondHeading } from '../ProfileStyles';
-import { Candidate } from '../../common/interfaces/Candidate.interface';
+import React from "react";
+import Candidate from "../../common/interfaces/Candidate.interface";
+import {
+  CustomList,
+  CustomListElement,
+  CustomSecondHeading,
+} from "../ProfileStyles";
 
 type Props = {
   candidate: Candidate;
@@ -16,10 +20,13 @@ function ProfileSummary({ candidate }: Props) {
             Full Name: <span>{candidate.fullName}</span>
           </CustomListElement>
           <CustomListElement>
-            E-mail: <a href={'mailto:' + candidate.email}>{candidate.email}</a>
+            E-mail: <a href={"mailto:" + candidate.email}>{candidate.email}</a>
           </CustomListElement>
           <CustomListElement>
-            Contact phone: <a href={'tel:+48' + candidate.phoneNumber}>{candidate.phoneNumber}</a>
+            Contact phone:{" "}
+            <a href={"tel:+48" + candidate.phoneNumber}>
+              {candidate.phoneNumber}
+            </a>
           </CustomListElement>
         </CustomList>
       </CustomSecondHeading>

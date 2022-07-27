@@ -27,6 +27,7 @@ interface Project {
 //   userStatus?: string;
 //   roleName?: string;
 // }
+let indexOfRecruitment: number;
 
 const columns: GridColDef[] = [
   { field: "name", headerName: "Name", width: 200 },
@@ -52,7 +53,14 @@ const columns: GridColDef[] = [
     headerName: "Hired",
     width: 120,
     renderCell: (params) => {
-      return <Link to="/candidates">{params.row.hiredCount}</Link>;
+      return (
+        <Link
+          to={`/candidates/${params.row.id}`}
+          onClick={() => console.log("działa")}
+        >
+          {params.row.hiredCount}
+        </Link>
+      );
     },
   },
 
@@ -87,6 +95,7 @@ export default function Projects() {
       postData
     );
     setRecruitmentDTOs(response.data.recruitmentDTOs);
+    indexOfRecruitment = response.data.recruitmentDTOs;
   };
 
   useEffect(() => {
