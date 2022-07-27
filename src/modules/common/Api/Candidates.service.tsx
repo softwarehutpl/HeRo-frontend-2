@@ -34,19 +34,19 @@ const client = axios.create({
 });
 
 const candidateHttpGet = (endpoint: string) => {
-  return client.get(`${endpoint}`).then(response => response.data);
+  return client.get(`${endpoint}`);
 };
 
 const candidateHttpPost = (endpoint: string, postData: CandidatePost) => {
-  return client.post(`${endpoint}`, postData).then(response => response.data);
+  return client.post(`${endpoint}`, postData);
 };
 
 const candidateHttpPut = (endpoint: string, postData: CandidateEdit) => {
-  return client.put(`${endpoint}`, postData).then(response => response.data);
+  return client.put(`${endpoint}`, postData);
 };
 
 const candidatetHttpDelete = (endpoint: string) => {
-  return client.delete(`${endpoint}`).then(response => response.data);
+  return client.delete(`${endpoint}`);
 };
 
 export default {

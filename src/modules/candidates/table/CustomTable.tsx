@@ -68,9 +68,13 @@ export default function CustomTable() {
     setClickedCandidate(undefined);
   };
 
+  const candidateListDTOs = async () => {
+    const candidateData = await CandidatesService.candidateHttpPost('GetList', postData);
+    setcandidateInfoForListDTOs(candidateData.data.candidateInfoForListDTOs);
+  };
+
   useEffect(() => {
-    const candidateData = CandidatesService.candidateHttpPost('GetList', postData);
-    candidateData.then(res => setcandidateInfoForListDTOs(res.candidateInfoForListDTOs));
+    candidateListDTOs();
   }, []);
 
   return (

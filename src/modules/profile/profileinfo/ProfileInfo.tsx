@@ -13,9 +13,13 @@ function ProfileInfo() {
   const params = useParams();
   const [candidate, setCandidate] = useState<Candidate>();
 
+  const getCandidateId = async () => {
+    const profileData = await CandidatesService.candidateHttpGet(`Get/${params.id}`);
+    setCandidate(profileData.data);
+  };
+
   useEffect(() => {
-    const profileData = CandidatesService.candidateHttpGet(`Get/${params.id}`);
-    profileData.then(res => setCandidate(res));
+    getCandidateId();
   }, []);
 
   return (
