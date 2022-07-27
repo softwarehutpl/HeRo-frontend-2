@@ -45,19 +45,19 @@ const client = axios.create({
 });
 
 const recruitmentHttpGet = (endpoint: string) => {
-  return client.get(`${endpoint}`).then((response) => response.data);
+  return client.get(`${endpoint}`);
 };
 
 const recruitmentHttpPost = (endpoint: string, postData: ProjectPost) => {
-  return client.post(`${endpoint}`, postData).then((response) => response.data);
+  return client.post(`${endpoint}`, postData);
 };
 
 const recruitmentHttpPut = (endpoint: string, postData: ProjectEdit) => {
-  return client.put(`${endpoint}`, postData).then((response) => response.data);
+  return client.put(`${endpoint}`, postData);
 };
 
 const recruitmentHttpDelete = (endpoint: string) => {
-  return client.delete(`${endpoint}`).then((response) => response.data);
+  return client.delete(`${endpoint}`);
 };
 
 export default {

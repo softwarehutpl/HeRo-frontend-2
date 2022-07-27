@@ -6,7 +6,7 @@ import { CustomDiv } from "./ProjectsStyles";
 import { Link } from "react-router-dom";
 import { EditDataButton } from "./editdatabutton/EditDataButton";
 import ProjectsSerivce from "../common/Api/Projects.serivce";
-import UserService from "../common/Api/User.service";
+// import UserService from "../common/Api/User.service";
 
 interface Project {
   id: number;
@@ -20,22 +20,30 @@ interface Project {
   fullName: string;
 }
 
-interface UserInterface {
-  id?: number;
-  fullName?: string;
-  email?: string;
-  userStatus?: string;
-  roleName?: string;
-}
+// interface UserInterface {
+//   id?: number;
+//   fullName?: string;
+//   email?: string;
+//   userStatus?: string;
+//   roleName?: string;
+// }
 
 const columns: GridColDef[] = [
   { field: "name", headerName: "Name", width: 200 },
   { field: "creator", headerName: "Creator", width: 200 },
-  { field: "beginningDate", headerName: "Frome", width: 160 },
+  {
+    field: "beginningDate",
+    headerName: "Frome",
+    type: "dateTime",
+    width: 250,
+    valueGetter: ({ value }) => new Date(value),
+  },
   {
     field: "endingDate",
     headerName: "To",
-    width: 160,
+    type: "dateTime",
+    width: 250,
+    valueGetter: ({ value }) => value && new Date(value),
   },
   { field: "candidateCount", headerName: "Resume", width: 120 },
 
@@ -70,37 +78,31 @@ const statusesList = ["Open", "Closed"];
 
 export default function Projects() {
   const [recruitmentDTOs, setRecruitmentDTOs] = useState<Project[]>([]);
-  const [getRecruiters, setGetRecruiters] = useState<UserInterface[]>([
-    { id: 1, fullName: "Admin admin" },
-  ]);
+  // const [getRecruiters, setGetRecruiters] = useState<UserInterface[]>([]);
   const [isChecked, setIsChecked] = useState<boolean>(true);
-  // const [creator, setCreater] = useState<UserInterface[]>([]);
 
-  useEffect(() => {
-    const projectData = ProjectsSerivce.recruitmentHttpPost(
+  const recruitmentDTOsData = async () => {
+    const response = await ProjectsSerivce.recruitmentHttpPost(
       "GetList",
       postData
     );
-    projectData.then((res) => setRecruitmentDTOs(res.recruitmentDTOs));
+    setRecruitmentDTOs(response.data.recruitmentDTOs);
+  };
 
-    const creatorInfo = UserService.userHttpPost("GetList", postData);
-    creatorInfo.then((res) => setGetRecruiters(res.userDTOs));
-    // res.map((item: UserInterface) => {
-    //   recruitmentDTOs.filter((recruitId) => recruitId.id === item.id);
+  useEffect(() => {
+    recruitmentDTOsData();
   }, []);
 
-  // getRecruiters.map(item => {
-  //   if(item.id === recruitmentDTOs.map(i => i.recruitId.id) )
-  // })
-  // recruitmentDTOs.map((item) => {
-  //   creatorData = getRecruiters.filter((i) => item.recruiterId === i.id);
-  // });
-  // console.log(`creatorData ${creatorData}`);
-  // console.log(getRecruiters[0].id);
+  // console.log(recruitmentDTOs);
+
   // console.log(`getRecruiters ${getRecruiters.map((i) => i.id)}`);
-  // console.log(`getRecruiters ${getRecruiters}`);
-  // console.log(`getRecruiters ${getRecruiters.map((i) => i.id)}`);
+
   // console.log(`recruitmentDTOs ${recruitmentDTOs.map((i) => i.recruiterId)}`);
+  // creatorData = recruitmentDTOs.map((item) =>
+  //   getRecruiters.filter((i) => item.recruiterId === i.id)
+  // );
+
+  // console.log(creatorData);
   // console.log(
   //   recruitmentDTOs.map((item) =>
   //     getRecruiters.filter((i) => item.recruiterId === i.id)
