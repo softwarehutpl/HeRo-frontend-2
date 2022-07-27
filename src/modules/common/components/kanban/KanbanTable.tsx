@@ -17,17 +17,17 @@ import {
   DraggableDivWrapper,
 } from "./KanbanTableStyles";
 
-type SetColumnsType = React.Dispatch<
-  React.SetStateAction<{
-    [x: number]: {
-      name: string;
-      items: {
-        id: string;
-        content: string;
-      }[];
-    };
-  }>
->;
+// type SetColumnsType = React.Dispatch<
+//   React.SetStateAction<{
+//     [x: number]: {
+//       name: string;
+//       items: {
+//         id: string;
+//         content: string;
+//       }[];
+//     };
+//   }>
+// >;
 
 const itemsFromBackend = [
   { id: uuidv4(), content: "Krzysztof Kononowitz" },
@@ -64,84 +64,147 @@ const columnsFromBackend = {
   },
 };
 
-console.log(columnsFromBackend);
+// type ColumnsType = {
+//   [x: string]: {
+//     name: string;
+//     items: {
+//       id: string;
+//       content: string;
+//     }[];
+//   };
+// };
 
 type ColumnsType = {
   [x: string]: {
+    id: string;
     name: string;
-    items: {
-      id: string;
-      content: string;
-    }[];
-  };
+  }[];
 };
+
+type SetColumnsType = React.Dispatch<
+  React.SetStateAction<{
+    [x: string]: {
+      id: string;
+      name: string;
+    }[];
+  }>
+>;
+
+type SetUpdatedUserType = React.Dispatch<
+  React.SetStateAction<{
+    id: string;
+    name: string;
+  }>
+>;
 
 const onDragEnd = (
   result: DropResult,
   columns: ColumnsType,
-  setColumns: SetColumnsType
+  setColumns: SetColumnsType,
+  setUpdatedUser: SetUpdatedUserType
 ) => {
   if (!result.destination) return;
   const { source, destination } = result;
 
   if (source.droppableId !== destination.droppableId) {
-    const sourceColumn = columns[source.droppableId];
-    const destColumn = columns[destination.droppableId];
-    const sourceItems = [...sourceColumn.items];
-    const destItems = [...destColumn.items];
+    const sourceItems = columns[source.droppableId];
+    const destItems = columns[destination.droppableId];
+    // const sourceItems = [...sourceColumn];
+    // const destItems = [...destColumn];
     const [removed] = sourceItems.splice(source.index, 1);
     destItems.splice(destination.index, 0, removed);
+    setUpdatedUser(removed);
     setColumns({
       ...columns,
-      [source.droppableId]: {
-        ...sourceColumn,
-        items: sourceItems,
-      },
-      [destination.droppableId]: {
-        ...destColumn,
-        items: destItems,
-      },
+      // [source.droppableId]: {
+      //   ...sourceColumn,
+      //   items: sourceItems,
+      // },
+      [source.droppableId]: sourceItems,
+      // [destination.droppableId]: {
+      //   ...destColumn,
+      //   items: destItems,
+      // },
+      [destination.droppableId]: destItems,
     });
   } else {
-    const column = columns[source.droppableId];
-    const copiedItems = [...column.items];
+    const copiedItems = columns[source.droppableId];
     const [removed] = copiedItems.splice(source.index, 1);
     copiedItems.splice(destination.index, 0, removed);
     setColumns({
       ...columns,
-      [source.droppableId]: {
-        ...column,
-        items: copiedItems,
-      },
+      // [source.droppableId]: {
+      //   ...column,
+      //   items: copiedItems,
+      // },
+      [source.droppableId]: copiedItems,
     });
   }
 };
 
 const CandidatePost = {
-  status: ["IN_PROCESSING"],
   paging: {
-    pageSize: 10,
+    pageSize: 100,
     pageNumber: 1,
   },
 };
 
 function KanbanTable() {
-  const [columns, setColumns] = useState(columnsFromBackend);
+  // const [columns, setColumns] = useState(columnsFromBackend);
+  const [all, setAll] = useState<string[]>([]);
+  const [aggregatedData, setAggregatedData] = useState<ColumnsType>({});
+  const [candidates, setCandidates] = useState<[]>([]);
+  const [updatedUser, setUpdatedUser] = useState<object | null>(null);
 
   useEffect(() => {
-    const projectData = CandidatesSerivce.candidateHttpPost(
-      "GetList",
-      CandidatePost
+    CandidatesSerivce.candidateHttpPost("GetList", CandidatePost).then(
+      (response) => {
+        setCandidates(response.candidateInfoForListDTOs);
+      }
     );
-    projectData.then((res) => console.log(res));
+
+    const candidateStatuses =
+      CandidatesSerivce.candidateStatusesGet("GetStatusList");
+    candidateStatuses.then((res) => {
+      const statuses = res.filter((item: string) => item !== "IN_PROCESSING");
+
+      const candidateStages =
+        CandidatesSerivce.candidateStagesGet("GetStageList");
+      candidateStages.then((stages) => {
+        setAll([...all, ...stages, ...statuses]);
+      });
+    });
   }, []);
+
+  useEffect(() => {
+    if (all.length && candidates.length) {
+      const agg: any = {};
+      console.log(candidates);
+      candidates.forEach((c: any) => {
+        // agg[c.status] = agg[c.status] ? [...agg[c.status], c] : [c];
+
+        if (c.status !== "IN_PROCESSING") {
+          if (agg[c.status]) {
+            agg[c.status] = [...agg[c.status], c];
+          } else {
+            agg[c.status] = [c];
+          }
+        }
+      });
+      console.log(agg);
+
+      setAggregatedData(agg);
+    }
+  }, [all, candidates]);
 
   return (
     <DragDropContext
-      onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
+      onDragEnd={(result) =>
+        onDragEnd(result, aggregatedData, setAggregatedData, setUpdatedUser)
+      }
     >
       <TableWrapper>
-        {Object.entries(columns).map(([columnId, column], index) => {
+        {Object.entries(aggregatedData).map(([columnId, candidates], index) => {
           return (
             <KanbanColumn
               style={{
@@ -149,7 +212,7 @@ function KanbanTable() {
               }}
               key={columnId}
             >
-              <h2>{column.name}</h2>
+              <h2>{columnId}</h2>
               <div style={{ margin: 8 }}>
                 <Droppable droppableId={columnId} key={columnId}>
                   {(provided, snapshot) => {
@@ -163,11 +226,11 @@ function KanbanTable() {
                             : "white",
                         }}
                       >
-                        {column.items.map((item, index) => {
+                        {candidates.map((candidate: any, index: number) => {
                           return (
                             <Draggable
-                              key={item.id}
-                              draggableId={item.id}
+                              key={candidate.id}
+                              draggableId={candidate.id.toString()}
                               index={index}
                             >
                               {(provided) => {
@@ -183,8 +246,8 @@ function KanbanTable() {
                                     }}
                                   >
                                     <DraggableNameAndAvatar>
-                                      {item.content}
-                                      <CustomAvatar name={item.content} />
+                                      {candidate.name}
+                                      <CustomAvatar name={candidate.name} />
                                     </DraggableNameAndAvatar>
                                     {"Front-End Dev"}
                                   </DraggableDivWrapper>

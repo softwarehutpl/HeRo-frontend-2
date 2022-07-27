@@ -40,10 +40,20 @@ const client = axios.create({
   withCredentials: true,
 });
 
+const candidateStatusesGet = (endpoint: string) => {
+  return client.get(`${endpoint}`).then((response) => response.data);
+};
+
+const candidateStagesGet = (endpoint: string) => {
+  return client.get(`${endpoint}`).then((response) => response.data);
+};
+
 const candidateHttpPost = (endpoint: string, postData: CandidatePost) => {
   return client.post(`${endpoint}`, postData).then((response) => response.data);
 };
 
 export default {
   candidateHttpPost,
+  candidateStatusesGet,
+  candidateStagesGet,
 };
