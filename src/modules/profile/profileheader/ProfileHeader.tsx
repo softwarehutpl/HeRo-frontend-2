@@ -1,7 +1,10 @@
-import CustomAvatar from '../../common/components/avatars/CustomAvatar';
-import React from 'react';
-import { ProfileHeaderHeading, ProfileHeaderWrapper } from './ProfileHeaderStyles';
-import { Candidate } from '../../common/interfaces/Candidate.interface';
+import CustomAvatar from "../../common/components/avatars/CustomAvatar";
+import React from "react";
+import {
+  ProfileHeaderHeading,
+  ProfileHeaderWrapper,
+} from "./ProfileHeaderStyles";
+import Candidate from "../../common/interfaces/Candidate.interface";
 
 type Props = {
   candidate: Candidate;
