@@ -5,7 +5,6 @@ import {
   Droppable,
   DropResult,
 } from "react-beautiful-dnd";
-import { v4 as uuidv4 } from "uuid";
 import CustomAvatar from "../avatars/CustomAvatar";
 import CandidatesSerivce from "./apiKanban/ApiKanban";
 
@@ -17,84 +16,18 @@ import {
   DraggableDivWrapper,
 } from "./KanbanTableStyles";
 
-// type SetColumnsType = React.Dispatch<
-//   React.SetStateAction<{
-//     [x: number]: {
-//       name: string;
-//       items: {
-//         id: string;
-//         content: string;
-//       }[];
-//     };
-//   }>
-// >;
-
-const itemsFromBackend = [
-  { id: uuidv4(), content: "Krzysztof Kononowitz" },
-  { id: uuidv4(), content: "Grzegorz Szeszko" },
-  { id: uuidv4(), content: "Jakub Sosnowski" },
-  { id: uuidv4(), content: "John Dalton" },
-  { id: uuidv4(), content: "Filip Mackiewicz" },
-];
-
-const columnsFromBackend = {
-  [uuidv4()]: {
-    name: "New",
-    items: itemsFromBackend,
-  },
-  [uuidv4()]: {
-    name: "Evaluation",
-    items: [],
-  },
-  [uuidv4()]: {
-    name: "Phone Interview",
-    items: [],
-  },
-  [uuidv4()]: {
-    name: "Interview",
-    items: [],
-  },
-  [uuidv4()]: {
-    name: "Offer",
-    items: [],
-  },
-  [uuidv4()]: {
-    name: "Hired",
-    items: [],
-  },
-};
-
-// type ColumnsType = {
-//   [x: string]: {
-//     name: string;
-//     items: {
-//       id: string;
-//       content: string;
-//     }[];
-//   };
-// };
-
 type ColumnsType = {
-  [x: string]: {
-    id: string;
-    name: string;
-  }[];
+  [x: string]: Candidate[];
 };
 
 type SetColumnsType = React.Dispatch<
   React.SetStateAction<{
-    [x: string]: {
-      id: string;
-      name: string;
-    }[];
+    [x: string]: Candidate[];
   }>
 >;
 
 type SetUpdatedUserType = React.Dispatch<
-  React.SetStateAction<{
-    id: string;
-    name: string;
-  }>
+  React.SetStateAction<Candidate | null>
 >;
 
 type Candidate = {
@@ -123,24 +56,13 @@ const onDragEnd = (
   if (source.droppableId !== destination.droppableId) {
     const sourceItems = columns[source.droppableId];
     const destItems = columns[destination.droppableId];
-    // const sourceItems = [...sourceColumn];
-    // const destItems = [...destColumn];
     const [removed] = sourceItems.splice(source.index, 1);
     destItems.splice(destination.index, 0, removed);
     setUpdatedUser(removed);
-    console.log(destination);
     setDestinationColumn(destination.droppableId);
     setColumns({
       ...columns,
-      // [source.droppableId]: {
-      //   ...sourceColumn,
-      //   items: sourceItems,
-      // },
       [source.droppableId]: sourceItems,
-      // [destination.droppableId]: {
-      //   ...destColumn,
-      //   items: destItems,
-      // },
       [destination.droppableId]: destItems,
     });
   } else {
@@ -149,10 +71,6 @@ const onDragEnd = (
     copiedItems.splice(destination.index, 0, removed);
     setColumns({
       ...columns,
-      // [source.droppableId]: {
-      //   ...column,
-      //   items: copiedItems,
-      // },
       [source.droppableId]: copiedItems,
     });
   }
@@ -166,11 +84,9 @@ const CandidatePost = {
 };
 
 function KanbanTable() {
-  // const [columns, setColumns] = useState(columnsFromBackend);
-  const [all, setAll] = useState<string[]>([]);
   const [aggregatedData, setAggregatedData] = useState<ColumnsType>({});
   const [candidates, setCandidates] = useState<Candidate[]>([]);
-  const [updatedUser, setUpdatedUser] = useState<any>(null); // czy tu ma być any?
+  const [updatedUser, setUpdatedUser] = useState<Candidate | null>(null);
   const [destinationColumn, setDestinationColumn] = useState("");
 
   useEffect(() => {
@@ -179,23 +95,11 @@ function KanbanTable() {
         setCandidates(response.candidateInfoForListDTOs);
       }
     );
-
-    const candidateStatuses =
-      CandidatesSerivce.candidateStatusesGet("GetStatusList");
-    candidateStatuses.then((res) => {
-      const statuses = res.filter((item: string) => item !== "IN_PROCESSING");
-
-      const candidateStages =
-        CandidatesSerivce.candidateStagesGet("GetStageList");
-      candidateStages.then((stages) => {
-        setAll([...all, ...stages, ...statuses]);
-      });
-    });
   }, []);
 
   useEffect(() => {
-    if (all.length && candidates.length) {
-      const agg: any = {
+    if (candidates.length) {
+      const agg: ColumnsType = {
         NEW: [],
         EVALUATION: [],
         PHONE_INTERVIEW: [],
@@ -205,53 +109,31 @@ function KanbanTable() {
         OFFER: [],
         HIRED: [],
       };
-      console.log(candidates);
-      // console.log(all);
 
-      Object.keys(agg).forEach((a: string) => {
+      Object.keys(agg).forEach((item) => {
         for (let i = 0; i < candidates.length; i++) {
-          if (a == candidates[i].status) {
-            agg[a] = agg[a] ? [...agg[a], candidates[i]] : [candidates[i]];
-          } else if (a == candidates[i].stage) {
-            agg[a] = agg[a] ? [...agg[a], candidates[i]] : [candidates[i]];
+          if (item == candidates[i].status) {
+            agg[item] = agg[item]
+              ? [...agg[item], candidates[i]]
+              : [candidates[i]];
+          } else if (item == candidates[i].stage) {
+            agg[item] = agg[item]
+              ? [...agg[item], candidates[i]]
+              : [candidates[i]];
           }
         }
       });
-
-      // all.forEach((a: string) => {
-      //   agg[a] ? null : (agg[a] = []);
-      // });
-
-      // candidates.forEach((c: any) => {
-      //   // agg[c.status] = agg[c.status] ? [...agg[c.status], c] : [c];
-
-      //   if (c.status !== "IN_PROCESSING") {
-      //     if (agg[c.status]) {
-      //       agg[c.status] = [...agg[c.status], c];
-      //     } else {
-      //       agg[c.status] = [c];
-      //     }
-      //   }
-      // });
-      console.log(agg);
-
       setAggregatedData(agg);
     }
-  }, [all, candidates]);
+  }, [candidates]);
 
   useEffect(() => {
     if (updatedUser !== null) {
-      console.log(updatedUser.id);
-
       if (["NEW", "DROPPED_OUT", "HIRED"].includes(destinationColumn)) {
         const CandidateUpdate = {
           candidateId: updatedUser.id,
           status: destinationColumn,
           stage: "",
-          paging: {
-            pageSize: 10,
-            pageNumber: 1,
-          },
         };
         CandidatesSerivce.candidateUpdatePost("Edit", CandidateUpdate).then(
           () => {
@@ -263,10 +145,6 @@ function KanbanTable() {
           candidateId: updatedUser.id,
           status: "IN_PROCESSING",
           stage: destinationColumn,
-          paging: {
-            pageSize: 10,
-            pageNumber: 1,
-          },
         };
         CandidatesSerivce.candidateUpdatePost("Edit", CandidateUpdate).then(
           () => {
@@ -274,12 +152,6 @@ function KanbanTable() {
           }
         );
       }
-
-      // CandidatesSerivce.candidateUpdatePost("Edit", CandidateUpdate).then(
-      //   (response) => {
-      //     setUpdatedUser(null);
-      //   }
-      // );
     }
   }, [updatedUser]);
 
@@ -296,67 +168,71 @@ function KanbanTable() {
       }
     >
       <TableWrapper>
-        {Object.entries(aggregatedData).map(([columnId, candidates], index) => {
-          return (
-            <KanbanColumn
-              style={{
-                borderRight: index === 7 ? "" : "1px solid gray",
-              }}
-              key={columnId}
-            >
-              <h2>{columnId}</h2>
-              <div style={{ margin: 8 }}>
-                <Droppable droppableId={columnId} key={columnId}>
-                  {(provided, snapshot) => {
-                    return (
-                      <DroppableDiv
-                        {...provided.droppableProps}
-                        ref={provided.innerRef}
-                        style={{
-                          background: snapshot.isDraggingOver
-                            ? "lightblue"
-                            : "white",
-                        }}
-                      >
-                        {candidates.map((candidate: any, index: number) => {
-                          return (
-                            <Draggable
-                              key={candidate.id}
-                              draggableId={candidate.id.toString()}
-                              index={index}
-                            >
-                              {(provided) => {
-                                return (
-                                  <DraggableDivWrapper
-                                    ref={provided.innerRef}
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps}
-                                    style={{
-                                      backgroundColor: "#FFE0CA",
-                                      color: "#000000",
-                                      ...provided.draggableProps.style,
-                                    }}
-                                  >
-                                    <DraggableNameAndAvatar>
-                                      {candidate.name}
-                                      <CustomAvatar name={candidate.name} />
-                                    </DraggableNameAndAvatar>
-                                    {candidate.recruitmentName}
-                                  </DraggableDivWrapper>
-                                );
-                              }}
-                            </Draggable>
-                          );
-                        })}
-                        {provided.placeholder}
-                      </DroppableDiv>
-                    );
-                  }}
-                </Droppable>
-              </div>
-            </KanbanColumn>
-          );
-        })}
+        {Object.entries(aggregatedData || {}).map(
+          ([columnId, candidates], index) => {
+            return (
+              <KanbanColumn
+                style={{
+                  borderRight: index === 7 ? "" : "1px solid gray",
+                }}
+                key={columnId}
+              >
+                <h2>{columnId}</h2>
+                <div style={{ margin: 8 }}>
+                  <Droppable droppableId={columnId} key={columnId}>
+                    {(provided, snapshot) => {
+                      return (
+                        <DroppableDiv
+                          {...provided.droppableProps}
+                          ref={provided.innerRef}
+                          style={{
+                            background: snapshot.isDraggingOver
+                              ? "lightblue"
+                              : "white",
+                          }}
+                        >
+                          {candidates.map(
+                            (candidate: Candidate, index: number) => {
+                              return (
+                                <Draggable
+                                  key={candidate.id}
+                                  draggableId={candidate.id.toString()}
+                                  index={index}
+                                >
+                                  {(provided) => {
+                                    return (
+                                      <DraggableDivWrapper
+                                        ref={provided.innerRef}
+                                        {...provided.draggableProps}
+                                        {...provided.dragHandleProps}
+                                        style={{
+                                          backgroundColor: "#FFE0CA",
+                                          color: "#000000",
+                                          ...provided.draggableProps.style,
+                                        }}
+                                      >
+                                        <DraggableNameAndAvatar>
+                                          {candidate.name}
+                                          <CustomAvatar name={candidate.name} />
+                                        </DraggableNameAndAvatar>
+                                        {candidate.recruitmentName}
+                                      </DraggableDivWrapper>
+                                    );
+                                  }}
+                                </Draggable>
+                              );
+                            }
+                          )}
+                          {provided.placeholder}
+                        </DroppableDiv>
+                      );
+                    }}
+                  </Droppable>
+                </div>
+              </KanbanColumn>
+            );
+          }
+        )}
       </TableWrapper>
     </DragDropContext>
   );
