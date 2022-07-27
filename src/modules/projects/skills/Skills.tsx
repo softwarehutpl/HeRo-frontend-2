@@ -32,10 +32,11 @@ export default function Skills() {
             disablePortal
             id="combo-box-demo"
             // options={skills.filter(x => !skillList.includes(x))}
-            options={skills
-              .map(skill => ({ id: skill.id, label: skill.name }))
-              .filter(skill => !skillList.includes(skill.label as any))}
-            // options={skills.filter(obj => !skillList.includes(obj)).map(obj => ({ id: obj.id, label: obj.name }))}
+            // options={skills
+            //   .map(skill => ({ id: skill.id, label: skill.name }))
+            //   .filter(skill => !skillList.includes(skill.label as any))}
+            options={skills.filter(obj => !skillList.includes(obj)).map(obj => ({ id: obj.id, label: obj.name }))}
+            // options={skills.map(skill => ({id: skill.id, label: skill.name})).filter(name => !skillList.includes(name: skill.label))}
             sx={{ width: 300 }}
             onChange={(_event, option) => {
               if (option?.id && option?.label) {

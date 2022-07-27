@@ -75,7 +75,3 @@ export const HistoryContent = styled('div')`
   height: 90%;
   padding: 10px 0;
 `;
-
-export const CustomSeeProfile = styled(SeeProfile)`
-  display: none;
-`;
