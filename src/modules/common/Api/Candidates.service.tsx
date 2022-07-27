@@ -1,8 +1,8 @@
 import axios from "axios";
 
 type CandidatePost = {
-  status?: "string[]";
-  stage?: "string[]";
+  status?: string[];
+  stage?: string[];
   paging: {
     pageSize: number;
     pageNumber: number;

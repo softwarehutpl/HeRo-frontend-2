@@ -7,6 +7,7 @@ import { CustomKanbanDiv } from "../common/components/kanban/KanbanTableStyles";
 import KanbanTable from "../common/components/kanban/KanbanTable";
 import CandidatesService from "../common/Api/Candidates.service";
 import { CustomTable } from "./table/CustomTable";
+import { useParams, useSearchParams } from "react-router-dom";
 
 interface Candidates {
   id: number;
@@ -20,20 +21,42 @@ interface Candidates {
   recruiterId: number;
   recruiterEmail: string;
 }
+
 function Candidates() {
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("id") || undefined;
+  const status = searchParams.get("status") || undefined;
+  console.log(id, status);
+
+  interface CandidateGetListDto {
+    paging: {
+      pageSize: number;
+      pageNumber: number;
+    };
+    stage?: string[];
+    status?: string[];
+    recruitmentId?: number;
+  }
   const [candidateInfoForListDTOs, setcandidateInfoForListDTOs] = useState<
     Candidates[]
   >([]);
   const whichTable = useTables().value;
 
-  const postData = {
-    paging: {
-      pageSize: 104,
-      pageNumber: 1,
-    },
-  };
+  const candidateData = async (projectId?: string, status?: string) => {
+    const postData: CandidateGetListDto = {
+      paging: {
+        pageSize: 104,
+        pageNumber: 1,
+      },
+    };
 
-  const candidateData = async () => {
+    //....
+    if (projectId) {
+      postData.recruitmentId = parseInt(projectId);
+    }
+    if (status) {
+      postData.status = [status];
+    }
     const responseData = await CandidatesService.candidateHttpPost(
       "GetList",
       postData
@@ -42,8 +65,8 @@ function Candidates() {
   };
 
   useEffect(() => {
-    candidateData();
-  }, []);
+    candidateData(id, status);
+  }, [id, status]);
 
   console.log(candidateInfoForListDTOs);
 
