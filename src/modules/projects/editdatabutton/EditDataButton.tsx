@@ -12,7 +12,7 @@ export const EditDataButton = ({ index }: any) => {
       <IconButton onClick={handleOpen}>
         <EditIcon style={{ color: '#1976d2' }}></EditIcon>
       </IconButton>
-      <ProjectModal status={open} setstatus={setOpen} />
+      <ProjectModal status={open} setstatus={setOpen} name={'Edit project'} />
     </div>
   );
 };
