@@ -128,29 +128,23 @@ function KanbanTable() {
   }, [candidates]);
 
   useEffect(() => {
+    const bodyFormData = new FormData();
     if (updatedUser !== null) {
       if (["NEW", "DROPPED_OUT", "HIRED"].includes(destinationColumn)) {
-        const CandidateUpdate = {
-          candidateId: updatedUser.id,
-          status: destinationColumn,
-          stage: "",
-        };
-        CandidatesSerivce.candidateUpdatePost("Edit", CandidateUpdate).then(
-          () => {
-            setUpdatedUser(null);
-          }
-        );
+        bodyFormData.append("candidateId", updatedUser.id.toString());
+        bodyFormData.append("status", destinationColumn.toString());
+        bodyFormData.append("stage", "");
+        CandidatesSerivce.candidateUpdatePost("Edit", bodyFormData).then(() => {
+          setUpdatedUser(null);
+        });
       } else {
-        const CandidateUpdate = {
-          candidateId: updatedUser.id,
-          status: "IN_PROCESSING",
-          stage: destinationColumn,
-        };
-        CandidatesSerivce.candidateUpdatePost("Edit", CandidateUpdate).then(
-          () => {
-            setUpdatedUser(null);
-          }
-        );
+        bodyFormData.append("candidateId", updatedUser.id.toString());
+        bodyFormData.append("status", "IN_PROCESSING");
+        bodyFormData.append("stage", destinationColumn.toString());
+
+        CandidatesSerivce.candidateUpdatePost("Edit", bodyFormData).then(() => {
+          setUpdatedUser(null);
+        });
       }
     }
   }, [updatedUser]);
