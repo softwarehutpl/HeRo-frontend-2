@@ -8,7 +8,6 @@ interface SkillsListProps {
 }
 
 export const SkillsList: React.FC<SkillsListProps> = props => {
-  console.log(props);
   const mapList = props.list.map((item, id) => (
     <CustomListItem key={id}>
       <CustomSpan>{item.name}</CustomSpan>
