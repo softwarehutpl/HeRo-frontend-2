@@ -7,7 +7,7 @@ import { CustomKanbanDiv } from "../common/components/kanban/KanbanTableStyles";
 import KanbanTable from "../common/components/kanban/KanbanTable";
 import CandidatesService from "../common/Api/Candidates.service";
 import { CustomTable } from "./table/CustomTable";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 interface Candidates {
   id: number;
@@ -84,30 +84,36 @@ function Candidates() {
     <>
       {candidateInfoForListDTOs && (
         <CustomDiv>
-          <CheckboxDiv>
-            <CheckboxFilters
-              header="Status"
-              filtersList={statusesList}
-              isChecked={isChecked}
-              setIsChecked={setIsChecked}
-            />
-            <CheckboxFilters
-              header="Stage"
-              filtersList={stageList}
-              isChecked={isChecked}
-              setIsChecked={setIsChecked}
-            />
-          </CheckboxDiv>
-          <div style={{ width: "100%" }}>
-            <CandidatesTableHeader title="Candidates" />
-            {whichTable === 0 ? (
-              <CustomTable candidateList={candidateInfoForListDTOs} />
-            ) : (
+          {whichTable === 0 ? (
+            <>
+              <CheckboxDiv>
+                <CheckboxFilters
+                  header="Status"
+                  filtersList={statusesList}
+                  isChecked={isChecked}
+                  setIsChecked={setIsChecked}
+                />
+                <CheckboxFilters
+                  header="Stage"
+                  filtersList={stageList}
+                  isChecked={isChecked}
+                  setIsChecked={setIsChecked}
+                />
+              </CheckboxDiv>
+              <div style={{ width: "100%" }}>
+                <CandidatesTableHeader title="Candidates" />
+
+                <CustomTable candidateList={candidateInfoForListDTOs} />
+              </div>
+            </>
+          ) : (
+            <div style={{ width: "100%" }}>
+              <CandidatesTableHeader title="Candidates" />
               <CustomKanbanDiv>
                 <KanbanTable />
               </CustomKanbanDiv>
-            )}
-          </div>
+            </div>
+          )}
         </CustomDiv>
       )}
     </>
