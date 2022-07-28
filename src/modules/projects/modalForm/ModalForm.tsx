@@ -52,6 +52,10 @@ function ModalForm() {
     setDescription(data.data.description);
   };
 
+  const editProjectId = async () => {
+    const data = await ProjectsSerivce.recruitmentHttpPost(`Edit/${id}`, postData);
+  };
+
   useEffect(() => {
     getProjectId();
   }, []);
