@@ -17,12 +17,6 @@ type CandidatePost = {
   };
 };
 
-type CandidateUpdate = {
-  candidateId: number;
-  status?: string;
-  stage?: string;
-};
-
 const client = axios.create({
   baseURL: "https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/",
   withCredentials: true,
@@ -32,7 +26,7 @@ const candidateHttpPost = (endpoint: string, postData: CandidatePost) => {
   return client.post(`${endpoint}`, postData).then((response) => response.data);
 };
 
-const candidateUpdatePost = (endpoint: string, postData: CandidateUpdate) => {
+const candidateUpdatePost = (endpoint: string, postData: FormData) => {
   return client.post(`${endpoint}`, postData).then((response) => response.data);
 };
 
