@@ -1,34 +1,35 @@
 import * as React from "react";
-import CheckboxRow from "./CheckboxRow";
+import { CustomForm } from "./CheckboxRowStyles";
 import { StyledHeading } from "./CheckboxStyles";
 import { CustomFormGroup } from "./CheckboxStyles";
+import Checkbox from "@mui/material/Checkbox";
 
 interface CheckboxValue {
   header: string;
-  filtersList: string[];
-  isChecked: boolean;
-  setIsChecked: React.Dispatch<React.SetStateAction<boolean>>;
+  checkbox: any;
+  dispatch: React.Dispatch<any>;
 }
 
-const CheckboxFilters: React.FC<CheckboxValue> = ({
+const CheckboxFilters: React.FunctionComponent<CheckboxValue> = ({
   header,
-  filtersList,
-  isChecked,
-  setIsChecked,
+  checkbox,
+  dispatch,
 }) => {
-  const [checked, setChecked] = React.useState(isChecked);
-
-  const handleOnClick = (value: boolean) => {
-    setChecked(value);
-    setIsChecked(value);
+  const handleOnClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(event.currentTarget.id);
   };
 
-  const listOfCheckbox = filtersList.map((value: string, id: number) => (
-    <CheckboxRow
-      key={id}
-      isChecked={checked}
-      handleOnClick={handleOnClick}
-      label={value}
+  const listOfCheckbox = checkbox.map((item: any) => (
+    <CustomForm
+      key={item.id}
+      control={
+        <Checkbox
+          id={item.id}
+          checked={item.isChecked}
+          onChange={handleOnClick}
+        />
+      }
+      label={item.title}
     />
   ));
 

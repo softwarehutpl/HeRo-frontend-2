@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import CheckboxFilters from '../common/components/checkboxFilters/CheckboxFilters';
-import ProjectsTableHaeder from './headerProjects/HeaderProjects';
-import { CustomDiv } from './ProjectsStyles';
-import { Link } from 'react-router-dom';
-import { EditDataButton } from './editdatabutton/EditDataButton';
-import ProjectsSerivce from '../common/Api/Projects.serivce';
-// import UserService from "../common/Api/User.service";
+import React, { useEffect, useReducer, useState } from "react";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import CheckboxFilters from "../common/components/checkboxFilters/CheckboxFilters";
+import ProjectsTableHaeder from "./headerProjects/HeaderProjects";
+import { CustomDiv } from "./ProjectsStyles";
+import { Link } from "react-router-dom";
+import { EditDataButton } from "./editdatabutton/EditDataButton";
+import ProjectsSerivce from "../common/Api/Projects.serivce";
 
 interface Project {
   id: number;
@@ -20,41 +19,43 @@ interface Project {
   fullName: string;
 }
 
-// interface UserInterface {
-//   id?: number;
-//   fullName?: string;
-//   email?: string;
-//   userStatus?: string;
-//   roleName?: string;
-// }
-let indexOfRecruitment: number;
-
 const columns: GridColDef[] = [
-  { field: 'name', headerName: 'Name', width: 200 },
-  { field: 'creator', headerName: 'Creator', width: 200 },
+  { field: "name", headerName: "Name", width: 200 },
+  { field: "creator", headerName: "Creator", width: 200 },
   {
-    field: 'beginningDate',
-    headerName: 'Frome',
-    type: 'dateTime',
+    field: "beginningDate",
+    headerName: "Frome",
+    type: "dateTime",
     width: 250,
     valueGetter: ({ value }) => new Date(value),
   },
   {
-    field: 'endingDate',
-    headerName: 'To',
-    type: 'dateTime',
+    field: "endingDate",
+    headerName: "To",
+    type: "dateTime",
     width: 250,
     valueGetter: ({ value }) => value && new Date(value),
   },
-  { field: 'candidateCount', headerName: 'Resume', width: 120 },
+  {
+    field: "candidateCount",
+    headerName: "Resume",
+    width: 120,
+    renderCell: (params) => {
+      return (
+        <Link to={`/candidates?id=${params.row.id}`}>
+          {params.row.candidateCount}
+        </Link>
+      );
+    },
+  },
 
   {
-    field: 'hiredCount',
-    headerName: 'Hired',
+    field: "hiredCount",
+    headerName: "Hired",
     width: 120,
-    renderCell: params => {
+    renderCell: (params) => {
       return (
-        <Link to={`/candidates?id=${params.row.id}&status=IN_PROCESSING`} onClick={() => console.log('działa')}>
+        <Link to={`/candidates?id=${params.row.id}&status=HIRED`}>
           {params.row.hiredCount}
         </Link>
       );
@@ -62,11 +63,11 @@ const columns: GridColDef[] = [
   },
 
   {
-    field: 'edit',
-    headerName: '',
+    field: "edit",
+    headerName: "",
     width: 120,
     sortable: false,
-    renderCell: params => {
+    renderCell: (params) => {
       return (
         <Link to={`?id=${params.row.id}`}>
           <EditDataButton index={params.row.id} />
@@ -83,46 +84,82 @@ const postData = {
   },
 };
 
-const statusesList = ['Open', 'Closed'];
+interface CheckboxList {
+  id: number;
+  title: string;
+  isChecked: boolean;
+}
+
+type Action = {
+  id: number;
+  type: "IsChecked";
+};
+
+const initialCheckboxList: CheckboxList[] = [
+  {
+    id: 1,
+    title: "Open",
+    isChecked: true,
+  },
+  {
+    id: 2,
+    title: "Close",
+    isChecked: true,
+  },
+];
+
+const reducer = (state: CheckboxList[], action: Action) => {
+  switch (action.type) {
+    case "IsChecked":
+      return state.map((checked: CheckboxList) => {
+        if (checked.id == action.id) {
+          return { ...checked, isChecked: !checked.isChecked };
+        } else {
+          return checked;
+        }
+      });
+    default:
+      return state;
+  }
+};
 
 export default function Projects() {
   const [recruitmentDTOs, setRecruitmentDTOs] = useState<Project[]>([]);
-  // const [getRecruiters, setGetRecruiters] = useState<UserInterface[]>([]);
-  const [isChecked, setIsChecked] = useState<boolean>(true);
+
+  const [checkbox, dispatch] = useReducer(reducer, initialCheckboxList);
 
   const recruitmentDTOsData = async () => {
-    const response = await ProjectsSerivce.recruitmentHttpPost('GetList', postData);
+    const response = await ProjectsSerivce.recruitmentHttpPost(
+      "GetList",
+      postData
+    );
     setRecruitmentDTOs(response.data.recruitmentDTOs);
-    indexOfRecruitment = response.data.recruitmentDTOs;
   };
 
   useEffect(() => {
     recruitmentDTOsData();
   }, []);
 
-  // console.log(recruitmentDTOs);
-
-  // console.log(`getRecruiters ${getRecruiters.map((i) => i.id)}`);
-
-  // console.log(`recruitmentDTOs ${recruitmentDTOs.map((i) => i.recruiterId)}`);
-  // creatorData = recruitmentDTOs.map((item) =>
-  //   getRecruiters.filter((i) => item.recruiterId === i.id)
-  // );
-
-  // console.log(creatorData);
-  // console.log(
-  //   recruitmentDTOs.map((item) =>
-  //     getRecruiters.filter((i) => item.recruiterId === i.id)
-  //   )
-  // );
+  const handleComplete = (checkbox: any) => {
+    dispatch({ type: "IsChecked", id: checkbox });
+  };
 
   return (
     <CustomDiv>
-      <CheckboxFilters header="Status" filtersList={statusesList} isChecked={isChecked} setIsChecked={setIsChecked} />
-      <div style={{ width: '100%' }}>
+      <CheckboxFilters
+        header="Projects"
+        checkbox={checkbox}
+        dispatch={handleComplete}
+      />
+      <div style={{ width: "100%" }}>
         <ProjectsTableHaeder title="Projects" />
-        <div style={{ height: 400, width: '100%' }}>
-          <DataGrid rows={recruitmentDTOs} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />
+        <div style={{ height: 400, width: "100%" }}>
+          <DataGrid
+            rows={recruitmentDTOs}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+          />
         </div>
       </div>
     </CustomDiv>
