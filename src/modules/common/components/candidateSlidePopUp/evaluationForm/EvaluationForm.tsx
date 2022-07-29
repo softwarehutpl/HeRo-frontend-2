@@ -23,7 +23,6 @@ interface FormProps {
 
 export function EvaluationForm({ closeModal }: FormProps) {
   const [time, setTime] = useState("");
-  const [password, setPassword] = useState("");
   const [step, setStep] = React.useState("");
 
   const [value, setValue] = React.useState("");
@@ -35,9 +34,7 @@ export function EvaluationForm({ closeModal }: FormProps) {
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    console.log("Email:");
-    // You should see email and password in console.
-    // ..code to submit form to backend here...
+    closeModal();
   }
 
   const handleChange = (event: any) => {
@@ -49,7 +46,6 @@ export function EvaluationForm({ closeModal }: FormProps) {
   };
 
   const handleDate = (e: any) => {
-    console.log(e.target.value);
     setTime(e.target.value);
   };
 
@@ -104,7 +100,9 @@ export function EvaluationForm({ closeModal }: FormProps) {
           <SlideButton variant="contained" onClick={closeModal}>
             Cancel
           </SlideButton>
-          <SlideButton variant="contained">Save</SlideButton>
+          <SlideButton variant="contained" type="submit">
+            Save
+          </SlideButton>
         </ButtonsWrapper>
       </CustomForm>
     </ModalWrapper>
