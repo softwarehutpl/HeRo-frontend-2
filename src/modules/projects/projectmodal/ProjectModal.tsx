@@ -45,7 +45,7 @@ export const ProjectModal: React.FC<StatusInterface> = ({ status, setstatus, nam
             <Typography id="modal-modal-title" variant="h6" component="h2">
               {name}
             </Typography>
-            <ModalForm />
+            <ModalForm popupName={name} />
           </Box>
         </Modal>
       )}

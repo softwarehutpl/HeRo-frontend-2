@@ -78,7 +78,7 @@ const columns: GridColDef[] = [
 
 const postData = {
   paging: {
-    pageSize: 105,
+    pageSize: 100,
     pageNumber: 1,
   },
 };

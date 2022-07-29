@@ -1,13 +1,18 @@
 import { FormControlUnstyled } from '@mui/base';
 import { FormInputWrapper, Input, Label } from './ModalFormStyles';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FormControlLabel, Switch, Typography } from '@mui/material';
 import Skills from '../skills/Skills';
 import { CustomFormButton, CustomTextArea, TextAreaWrapper } from '../ProjectsStyles';
 import ProjectsSerivce from '../../common/Api/Projects.serivce';
 import { useSearchParams } from 'react-router-dom';
+import Moment from 'moment';
 
-function ModalForm() {
+interface ModalProps {
+  popupName: string;
+}
+
+const ModalForm: React.FC<ModalProps> = ({ popupName }) => {
   const [name, setName] = useState<string>('');
   const [seniority, setSeniority] = useState<string>('');
   const [beginningDate, setBeginningDate] = useState<string>('');
@@ -20,6 +25,8 @@ function ModalForm() {
 
   const [searchParams] = useSearchParams();
   const id = searchParams.get('id') || undefined;
+  const formRef = useRef<any>(null);
+  console.log(id);
 
   const postData = {
     name,
@@ -28,8 +35,9 @@ function ModalForm() {
     description,
     localization,
     seniority,
-    isPublic,
+    isPublic: true,
     recruiterId: 1,
+    recruitmentPosition: 'Test',
     Skills: [
       {
         skillId: 1,
@@ -38,30 +46,39 @@ function ModalForm() {
     ],
   };
 
+  const test = { ...postData, beginningDate: Moment(beginningDate).format(), endingDate: Moment(endingDate).format() };
+  console.log(test);
+
   const sendProject = async () => {
-    const data = await ProjectsSerivce.recruitmentHttpPost('Create', postData);
+    const data = await ProjectsSerivce.recruitmentHttpPost('Create', test);
   };
 
   const getProjectId = async () => {
     const data = await ProjectsSerivce.recruitmentHttpGet(`Get/${id}`);
     setName(data.data.name);
     setSeniority(data.data.seniority);
-    setBeginningDate(data.data.beginningDate.toString());
-    setEndingDate(data.data.endingDate);
+    setBeginningDate(Moment(data.data.beginningDate).format('YYYY-MM-DD'));
+    setEndingDate(Moment(data.data.endingDate).format('YYYY-MM-DD'));
     setLocalization(data.data.localization);
     setDescription(data.data.description);
   };
 
   const editProjectId = async () => {
-    const data = await ProjectsSerivce.recruitmentHttpPost(`Edit/${id}`, postData);
+    const data = await ProjectsSerivce.recruitmentHttpPost(`Edit/${id}`, test);
   };
 
   useEffect(() => {
     getProjectId();
   }, []);
 
-  function handleOnSubmit(e: any) {
-    sendProject();
+  console.log(popupName);
+
+  function handleOnSubmit() {
+    if (popupName === 'Edit project') {
+      editProjectId();
+    } else if (popupName === 'Add Project') {
+      sendProject();
+    }
   }
 
   function handleNameOnChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -77,34 +94,24 @@ function ModalForm() {
   function handleDateFromOnChange(event: React.ChangeEvent<HTMLInputElement>) {
     event.preventDefault();
     setBeginningDate(event.target.value);
-    console.log(beginningDate);
   }
   function handleDatetoOnChange(event: React.ChangeEvent<HTMLInputElement>) {
     event.preventDefault();
     setEndingDate(event.target.value);
-    console.log(endingDate);
   }
 
   function handleLocationOnChange(event: React.ChangeEvent<HTMLInputElement>) {
     event.preventDefault();
     setLocalization(event.target.value);
-    console.log(localization);
   }
 
   function handleIsPublicOnChange(event: React.ChangeEvent<HTMLInputElement>) {
     event.preventDefault();
     setIsPublic(event.target.checked);
-    console.log(isPublic);
-  }
-
-  function handleDescriptionOnChange(event: React.KeyboardEvent<HTMLInputElement>) {
-    event.preventDefault();
-    setDescription(event.target.value);
-    console.log(description);
   }
 
   return (
-    <form onSubmit={handleOnSubmit}>
+    <form ref={formRef} onSubmit={handleOnSubmit}>
       <FormControlUnstyled value={name} required>
         <Input placeholder="Project name" onChange={handleNameOnChange} />
       </FormControlUnstyled>
@@ -112,11 +119,11 @@ function ModalForm() {
         <Input placeholder="Seniority" onChange={handleSeniorityOnChange} />
       </FormControlUnstyled>
       <FormInputWrapper>
-        <FormControlUnstyled value={beginningDate} style={{ flexBasis: '45%' }} required>
+        <FormControlUnstyled value={beginningDate} style={{ flexBasis: '45%' }}>
           <Label>From</Label>
           <Input placeholder="From" type="date" onChange={handleDateFromOnChange} />
         </FormControlUnstyled>
-        <FormControlUnstyled value={endingDate} style={{ flexBasis: '45%' }} required>
+        <FormControlUnstyled value={endingDate} style={{ flexBasis: '45%' }}>
           <Label>To</Label>
           <Input placeholder="To" type="date" onChange={handleDatetoOnChange} />
         </FormControlUnstyled>
@@ -132,9 +139,16 @@ function ModalForm() {
       <TextAreaWrapper>
         <CustomTextArea value={description} onChange={e => setDescription(e.target.value)} />
       </TextAreaWrapper>
-      <CustomFormButton type="submit">Save</CustomFormButton>
+      <CustomFormButton
+        onClick={e => {
+          formRef.current.submit();
+        }}
+        type="submit"
+      >
+        Save
+      </CustomFormButton>
     </form>
   );
-}
+};
 
 export default ModalForm;
