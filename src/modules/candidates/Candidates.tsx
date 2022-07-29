@@ -7,7 +7,7 @@ import { CustomKanbanDiv } from "../common/components/kanban/KanbanTableStyles";
 import KanbanTable from "../common/components/kanban/KanbanTable";
 import CandidatesService from "../common/Api/Candidates.service";
 import { CustomTable } from "./table/CustomTable";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 interface Candidates {
   id: number;
@@ -213,8 +213,8 @@ function Candidates() {
               <CustomKanbanDiv>
                 <KanbanTable />
               </CustomKanbanDiv>
-            )}
-          </div>
+            </div>
+          )}
         </CustomDiv>
       )}
     </>
