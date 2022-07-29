@@ -133,7 +133,7 @@ function KanbanTable() {
       if (["NEW", "DROPPED_OUT", "HIRED"].includes(destinationColumn)) {
         bodyFormData.append("candidateId", updatedUser.id.toString());
         bodyFormData.append("status", destinationColumn.toString());
-        bodyFormData.append("stage", "");
+        bodyFormData.append("stage", ".");
         CandidatesSerivce.candidateUpdatePost("Edit", bodyFormData).then(() => {
           setUpdatedUser(null);
         });
