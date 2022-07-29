@@ -155,10 +155,11 @@ function Candidates() {
     setcandidateInfoForListDTOs(responseData.data.candidateInfoForListDTOs);
   };
 
-  if (checkboxStatus[0].isChecked) {
-    const urlParams = searchParams.append("status", "New");
-    console.log(urlParams);
-  }
+  // if (checkboxStatus[0].isChecked) {
+  //   const urlParams = searchParams.append("status", "New");
+  //   console.log(urlParams);
+  // }
+
   useEffect(() => {
     candidateData(id, status);
   }, [id, status]);
@@ -168,26 +169,26 @@ function Candidates() {
   //   console.log(urlParams);
   // }
 
-  const newAskData = {
-    status: [checkboxStatus[3].title],
-    paging: {
-      pageSize: 104,
-      pageNumber: 1,
-    },
-  };
+  // const newAskData = {
+  //   status: [checkboxStatus[3].title],
+  //   paging: {
+  //     pageSize: 104,
+  //     pageNumber: 1,
+  //   },
+  // };
 
-  const testNew = async () => {
-    const updateData = await CandidatesService.candidateHttpPost(
-      "GetList",
-      newAskData
-    );
-    console.log(updateData);
-  };
+  // const testNew = async () => {
+  //   const updateData = await CandidatesService.candidateHttpPost(
+  //     "GetList",
+  //     newAskData
+  //   );
+  //   console.log(updateData);
+  // };
 
-  useEffect(() => {
-    // console.log(`zmiana checkboxa new ${checkboxStatus[0]}`);
-    testNew();
-  }, [checkboxStatus[0]]);
+  // useEffect(() => {
+  //   // console.log(`zmiana checkboxa new ${checkboxStatus[0]}`);
+  //   testNew();
+  // }, [checkboxStatus[0]]);
 
   return (
     <>
@@ -213,8 +214,8 @@ function Candidates() {
               <CustomKanbanDiv>
                 <KanbanTable />
               </CustomKanbanDiv>
-            </div>
-          )}
+            )}
+          </div>
         </CustomDiv>
       )}
     </>
