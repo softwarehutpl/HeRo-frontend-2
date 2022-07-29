@@ -1,5 +1,5 @@
-import React from 'react';
-import Slide from '@mui/material/Slide';
+import React from "react";
+import Slide from "@mui/material/Slide";
 import {
   ContentWrapper,
   Content,
@@ -12,12 +12,18 @@ import {
   HistoryWrapper,
   CustomTypography,
   HistoryContent,
-} from './SlidePopUpStyles';
-import CustomAvatar from '../avatars/CustomAvatar';
-import { useNavigate } from 'react-router-dom';
-import { Entry } from './evaluationEntry/EvaluationEntry';
-import { EvaluationContent, EvaluationWrapper } from './evaluationEntry/EvaluationEntryStyles';
-import SeeProfile from '../../../profile/seeProfile/SeeProfile';
+  ModalBox,
+} from "./SlidePopUpStyles";
+import CustomAvatar from "../avatars/CustomAvatar";
+import { useNavigate } from "react-router-dom";
+import { Entry } from "./evaluationEntry/EvaluationEntry";
+import {
+  EvaluationContent,
+  EvaluationWrapper,
+} from "./evaluationEntry/EvaluationEntryStyles";
+import SeeProfile from "../../../profile/seeProfile/SeeProfile";
+import { EvaluationForm } from "./evaluationForm/EvaluationForm";
+import Modal from "@mui/material/Modal";
 
 interface CandidateSlideProps {
   isChecked: boolean;
@@ -26,8 +32,17 @@ interface CandidateSlideProps {
   close: () => void;
 }
 
-export function CandidateSlide({ isChecked, candidateName, candidateid, close }: CandidateSlideProps): JSX.Element {
+export function CandidateSlide({
+  isChecked,
+  candidateName,
+  candidateid,
+  close,
+}: CandidateSlideProps): JSX.Element {
   const navigate = useNavigate();
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <Slide direction="left" in={isChecked} mountOnEnter unmountOnExit>
       <ContentWrapper>
@@ -42,9 +57,11 @@ export function CandidateSlide({ isChecked, candidateName, candidateid, close }:
             </CustomIconButton>
           </SlideHeader>
           <SlideNavbar>
-            <SlideButton variant="contained">Add Evaluation</SlideButton>
+            <SlideButton variant="contained" onClick={handleOpen}>
+              Add Evaluation
+            </SlideButton>
             {/* <SlideButton variant="contained"> */}
-              <SeeProfile id={candidateid} />
+            <SeeProfile id={candidateid} />
             {/* </SlideButton> */}
           </SlideNavbar>
           <HistoryWrapper>
@@ -60,6 +77,16 @@ export function CandidateSlide({ isChecked, candidateName, candidateid, close }:
             </HistoryContent>
           </HistoryWrapper>
         </Content>
+        <Modal
+          open={open}
+          // onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <ModalBox>
+            <EvaluationForm closeModal={handleClose} />
+          </ModalBox>
+        </Modal>
       </ContentWrapper>
     </Slide>
   );
