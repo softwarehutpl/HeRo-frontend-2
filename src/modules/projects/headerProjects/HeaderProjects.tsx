@@ -1,11 +1,11 @@
 import React from 'react';
-import { Box, Modal, Typography, TypographyTypeMap } from '@mui/material';
+import { TypographyTypeMap } from '@mui/material';
 import { HeaderBox } from '../../common/components/tableHeader/TableHeaderStyles';
 import { HeaderDiv } from './HeaderProjectsStyles';
 import { HeaderTypography } from '../../common/components/tableHeader/TableHeaderStyles';
 import { HeaderIconButton, CandidateDisplayType } from '../../common/components/headerTableIconButton/IconButton';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
-import ModalForm from '../modalForm/ModalForm';
+import { ProjectModal } from '../projectmodal/ProjectModal';
 
 interface TextProps {
   title: string;
@@ -30,7 +30,6 @@ const style = {
 export default function ProjectsTableHaeder({ title, component = 'div' }: React.PropsWithChildren<TextProps>) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   return (
     <HeaderBox>
@@ -41,19 +40,7 @@ export default function ProjectsTableHaeder({ title, component = 'div' }: React.
         <HeaderIconButton active onClick={handleOpen} type={CandidateDisplayType.PLUS}>
           <AddBoxOutlinedIcon />
         </HeaderIconButton>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Add project
-            </Typography>
-            <ModalForm />
-          </Box>
-        </Modal>
+        <ProjectModal status={open} setstatus={setOpen} name={'Add Project'} />
       </HeaderDiv>
     </HeaderBox>
   );

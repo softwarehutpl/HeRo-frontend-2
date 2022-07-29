@@ -1,6 +1,8 @@
 import { Box, Modal, Typography } from '@mui/material';
 import React from 'react';
+import { Link, Navigate } from 'react-router-dom';
 import ModalForm from '../modalForm/ModalForm';
+import { useNavigate } from 'react-router-dom';
 
 const style = {
   position: 'absolute',
@@ -19,26 +21,34 @@ const style = {
 interface StatusInterface {
   status: boolean;
   setstatus: React.Dispatch<React.SetStateAction<boolean>>;
+  name: string;
 }
 
-export const ProjectModal: React.FC<StatusInterface> = ({ status, setstatus }) => {
-  const handleClose = () => setstatus(false);
+export const ProjectModal: React.FC<StatusInterface> = ({ status, setstatus, name }) => {
+  const history = useNavigate();
+  const handleClose = (e: any) => {
+    e.preventDefault();
+    setstatus(false);
+    history('/projects', { replace: true });
+  };
 
   return (
     <div>
-      <Modal
-        open={status}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Edit project
-          </Typography>
-          <ModalForm />
-        </Box>
-      </Modal>
+      {status && (
+        <Modal
+          open={status}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              {name}
+            </Typography>
+            <ModalForm popupName={name} />
+          </Box>
+        </Modal>
+      )}
     </div>
   );
 };

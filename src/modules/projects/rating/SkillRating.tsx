@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 
 export default function SkillRating() {
   const [value, setValue] = React.useState<number | null>(0);
+  console.log('Ustawilem value na: ', value);
 
   return (
     <Box
