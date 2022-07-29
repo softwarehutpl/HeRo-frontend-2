@@ -194,28 +194,33 @@ function Candidates() {
     <>
       {candidateInfoForListDTOs && (
         <CustomDiv>
-          <CheckboxDiv>
-            <CheckboxFilters
-              header="Status"
-              checkbox={checkboxStatus}
-              dispatch={handleComplete}
-            />
-            <CheckboxFilters
-              header="Stage"
-              checkbox={checkboxStage}
-              dispatch={handleCompleteStage}
-            />
-          </CheckboxDiv>
-          <div style={{ width: "100%" }}>
-            <CandidatesTableHeader title="Candidates" />
-            {whichTable === 0 ? (
-              <CustomTable candidateList={candidateInfoForListDTOs} />
-            ) : (
+          {whichTable === 0 ? (
+            <>
+              <CheckboxDiv>
+                <CheckboxFilters
+                  header="Status"
+                  checkbox={checkboxStatus}
+                  dispatch={handleComplete}
+                />
+                <CheckboxFilters
+                  header="Stage"
+                  checkbox={checkboxStage}
+                  dispatch={handleCompleteStage}
+                />
+              </CheckboxDiv>
+              <div style={{ width: "100%" }}>
+                <CandidatesTableHeader title="Candidates" />
+                <CustomTable candidateList={candidateInfoForListDTOs} />
+              </div>
+            </>
+          ) : (
+            <div style={{ width: "100%" }}>
+              <CandidatesTableHeader title="Candidates" />
               <CustomKanbanDiv>
                 <KanbanTable />
               </CustomKanbanDiv>
-            )}
-          </div>
+            </div>
+          )}
         </CustomDiv>
       )}
     </>
